@@ -1,85 +1,67 @@
 package com.dhmusic.DHMusic.Entities.Account;
-import com.dhmusic.DHMusic.Entities.Content.Playlist;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
-public abstract class Account implements AccountOperation,AccountObject {
 
-    private String id;
-    protected String username;
-    protected String password;
-    protected String email;
+import java.util.Random;
+import java.util.Scanner;
 
-    private List<Playlist>playlists;
-    public boolean isPlaying;
-    public boolean isStopping;
-    public boolean isSkipping;
-    public boolean isPausing;
-    public boolean isRepeating;
-    public boolean isShuffling;
-    public boolean isAdding;
-    public boolean isRemoving;
-    public boolean isShuffle;
-    public boolean isLiking;
-    public boolean isDisliking;
-    public boolean isSearching;
-    public boolean hasRightsToAddSong;
-    public boolean hasRightsToAddPlaylist;
+public abstract class Account {
 
-    public Account(String username, String password, String email){
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.id = UUID.randomUUID().toString();
-        this.playlists = new ArrayList<>();
-        this.isPlaying = true;
-        this.isStopping = true;
-        this.isSkipping = true;
-        this.isPausing = true;
-        this.isRepeating = true;
-        this.hasRightsToAddSong = true;
-        this.hasRightsToAddPlaylist = true;
+    String id;
+    String username;
+    String password;
+    String email;
+    String creationDate;
+
+    boolean loggedIn; //verificare se utile o meno
+    boolean verificateEmail;
+    String codeVerificate;
+
+    Scanner scanner= new Scanner(System.in);
+
+    public Account(String username, String email,String password){
+        this.username=username;
+        this.email=email;
+        this.password=password;
+    }
+    public String setUsername(){
+      return  this.username= scanner.nextLine();
     }
 
-    @Override
-    public String getId() {
-        return id;
+    // TODO: 14/02/2023  check if the password has the necessary criteria
+    public String setPassword(){
+       return this.password= scanner.nextLine();
     }
 
-    @Override
-    public String getUsername() {
-        return username;
+    // TODO: 14/02/2023  check if the email has the necessary criteria
+    public void setEmail(){
+        String characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        StringBuilder sb = new StringBuilder(6);
+        Random random= new Random();
+        for (int i = 0; i < 6; i++) {
+            sb.append(characters.charAt(random.nextInt(characters.length())));
+        }
+        String code= sb.toString();
+
+        this.email= scanner.nextLine();
+        this.verificateEmail= false;
+        this.codeVerificate= code;
+        //send email with code.
     }
 
-    @Override
-    public String getPassword() {
-        return password;
-    }
 
-    @Override
-    public String getEmail() {
-        return email;
-    }
-
-    public List<Playlist> getPlaylists() {
-
-        return playlists;
-    }
-
-    @Override
-    public void createAccount() {
+    public void verificateEmail(){
+        String code= scanner.nextLine();
+        if (code.equals(codeVerificate)){
+            this.verificateEmail= true;
+            System.out.println("The email is \"Verificate\"");
+        } else {
+            System.out.println("The code is not correct");
+        }
 
     }
+    
 
-    @Override
-    public void deleteAccount() {
 
-    }
 
-    @Override
-    public void updateAccount() {
-
-    }
 }

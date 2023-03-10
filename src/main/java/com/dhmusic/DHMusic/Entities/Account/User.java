@@ -1,120 +1,96 @@
 package com.dhmusic.DHMusic.Entities.Account;
 
-import Music.Playlist;
 
-import java.util.Date;
-import java.util.List;
+import com.dhmusic.DHMusic.Entities.exception.AccountExceptions;
+import org.mindrot.jbcrypt.BCrypt;
+
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 public class User extends Account {
 
-    private String name;
-    private String surname;
-    private Date dataBorn;
-    private String gender;
-    private String nationality;
-    private String address;
-    private String city;
-    private String country;
+    String name;
+    String surname;
+    String dateOfBirth;
+    String gender;
+    String nationality;
+    int isAdmin; //chiedere per il boolean su db
 
-
-    public User(String username, String password, String email, boolean isPlaying,boolean isStopping,boolean isSkipping,
-                boolean isPausing,boolean isRepeating ) {
-        super(username, password, email);
-        this.setName(name);
-        this.setSurname(surname);
-        this.setDataBorn(dataBorn);
-        this.setGender(gender);
-        this.setNationality(nationality);
-        this.setAddress(address);
-        this.setCity(city);
-        this.setCountry(country);
-
+    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, int isAdmin){
+            super(username, email, password);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime now = LocalDateTime.now();
+            this.creationDate = dtf.format(now);
+            this.name = name;
+            this.surname = surname;
+            this.dateOfBirth = dateOfBirth;
+            this.gender = gender;
+            this.nationality = nationality;
+            this.isAdmin = isAdmin;
+            try{
+                if(!isValidPassword(password)){
+                    throw new AccountExceptions();
+                }else{
+                    this.password=password;
+                }
+                if(!isValidEmail(email)){
+                    throw new AccountExceptions();
+                }else{
+                    this.email=email;
+                }
+            }catch(AccountExceptions e){
+                System.out.println("Email o password non valida");
+            }
     }
 
+    private boolean isValidPassword(String password){
+        //controlla se è lunghezza almeno 8
+        if(password.length()<8){
+            return false;
+        }
 
-    public String getName() {
-        return name;
+        //controlla la presenza di un simbolo speciale
+        if(!password.matches(".*[!@#$%^&*()].*")){
+            return false;
+        }
+
+        //controlla la presenza di una lettera maiuscola
+        if(!password.matches(".*[A-Z].*")){
+            return false;
+        }
+        //controlla la presenza di un numero
+        if(!password.matches(".*\\d.*")){
+            return false;
+        }
+        return true;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    private boolean isValidEmail(String email){
+        // Controlla la sintassi dell'email
+        if (!email.matches("\\b[\\w.%-]+@[\\w.-]+\\.[a-zA-Z]{2,}\\b")) {
+            return false;
+        }
+        // Controlla la validità del dominio
+        String[] parts = email.split("@");
+        String domain = parts[1];
+        try {
+            InetAddress.getByName(domain);
+        } catch (UnknownHostException ex) {
+            return false;
+        }
+        // L'email è valida
+        return true;
     }
 
-    public String getSurname() {
-        return surname;
+    public String hashPassword(){
+        String salt = BCrypt.gensalt();
+        return BCrypt.hashpw(this.password,salt);
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public boolean checkPassword(String password, String hashedPassword){
+        return BCrypt.checkpw(password,hashedPassword);
     }
-
-    public Date getDataBorn() {
-        return dataBorn;
-    }
-
-    public void setDataBorn(Date dataBorn) {
-        this.dataBorn = dataBorn;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public String getNationality() {
-        return nationality;
-    }
-
-    public void setNationality(String nationality) {
-        this.nationality = nationality;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getCity() {
-        return city;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
-    }
-
-    @Override
-    public List<Playlist> getPlaylists() {
-        return super.getPlaylists();
-    }
-
-    @Override
-    public void createAccount() {
-        super.createAccount();
-    }
-
-    @Override
-    public void deleteAccount() {
-        super.deleteAccount();
-    }
-
-    @Override
-    public void updateAccount() {
-        super.updateAccount();
-    }
-
 }

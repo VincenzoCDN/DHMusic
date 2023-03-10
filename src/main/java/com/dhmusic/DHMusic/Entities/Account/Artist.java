@@ -1,37 +1,38 @@
 package com.dhmusic.DHMusic.Entities.Account;
 
-import Music.Album;
-import Music.GenreMusical;
-import Music.Song;
 
-import javax.xml.crypto.Data;
-import java.util.ArrayList;
+
+import com.dhmusic.DHMusic.Entities.content.Album;
+import com.dhmusic.DHMusic.Entities.content.Song;
+
 import java.util.List;
-import java.util.UUID;
 
-public class Artist{
+public class Artist extends User {
 
-    private String id;
-    private String nameArtist;
-    private GenreMusical genre;
-    private Data carrierStartYear;
-    private int numTracks;
-    private  int numAlbum;
-    private String nationality;
-    private List<Album>albums;
-    private List<Song>tracks;
+    String artistName;
+    String bio;
+    List<Album> albumsOfArtist;
+    List<Song> songOfArtist;
+    int follower;
+    List<User> usersFollowers;
+
+    public Artist(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, int isAdmin) {
+        super(username, email, password, name, surname, dateOfBirth, gender, nationality, isAdmin);
+    }
 
 
-    public Artist(String nameArtist,GenreMusical genre,Data carrierStartYear,
-                  int numTracks, int numAlbum, String nationality) {
-        this.nameArtist = nameArtist;
-        this.genre = genre;
-        this.carrierStartYear = carrierStartYear;
-        this.numTracks = numTracks;
-        this.numAlbum = numAlbum;
-        this.nationality = nationality;
-        this.albums = new ArrayList<>();
-        this.tracks = new ArrayList<>();
-        this.id = UUID.randomUUID().toString();
+    public String setBio(){
+        String b= scanner.nextLine();
+        return this.bio=b;
+    }
+
+    public int addFollower(){
+        //this.usersFollowers.add(User);
+        return this.follower++;
+    }
+
+    public int removeFollower(){
+      //  this.usersFollowers.remove(User);
+        return this.follower--;
     }
 }
