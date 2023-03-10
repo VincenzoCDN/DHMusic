@@ -1,6 +1,5 @@
 package com.dhmusic.DHMusic.Entities.Account;
-
-import Music.Playlist;
+import com.dhmusic.DHMusic.Entities.Content.Playlist;
 
 import java.util.ArrayList;
 import java.util.List;
