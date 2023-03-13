@@ -5,7 +5,7 @@ package com.dhmusic.DHMusic.Entities.Account;
 import java.util.Random;
 import java.util.Scanner;
 
-public abstract class Account {
+public class Account {
 
     String id;
     String username;
@@ -59,6 +59,15 @@ public abstract class Account {
             System.out.println("The code is not correct");
         }
 
+    }
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", password=" + password + '\'' +
+                ", email=" + email +
+                '}';
     }
     
 
