@@ -3,10 +3,12 @@ package com.dhmusic.DHMusic.Entities.content;
 
 
 import com.dhmusic.DHMusic.Entities.Account.User;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.Date;
 import java.util.List;
 
+@EntityScan("com.playlist")
 public class Playlist implements Content{
     private String idPlaylist;
     private String title;

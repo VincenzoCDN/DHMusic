@@ -2,9 +2,11 @@ package com.dhmusic.DHMusic.Entities.content;
 
 
 import com.dhmusic.DHMusic.Entities.Account.Artist;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.util.Date;
 
+@EntityScan("com.song")
 public class Song implements Content{
     private String idSong;
     private String title;

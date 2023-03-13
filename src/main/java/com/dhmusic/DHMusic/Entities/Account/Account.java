@@ -2,9 +2,12 @@ package com.dhmusic.DHMusic.Entities.Account;
 
 
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+
 import java.util.Random;
 import java.util.Scanner;
 
+@EntityScan
 public abstract class Account {
 
     String id;

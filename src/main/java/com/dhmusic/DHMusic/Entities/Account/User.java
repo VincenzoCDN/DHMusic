@@ -3,13 +3,14 @@ package com.dhmusic.DHMusic.Entities.Account;
 
 import com.dhmusic.DHMusic.Entities.exception.AccountExceptions;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+@EntityScan
 public class User extends Account {
 
     String name;
@@ -19,7 +20,7 @@ public class User extends Account {
     String nationality;
     int isAdmin; //chiedere per il boolean su db
 
-    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, int isAdmin){
+    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality ,int isAdmin){
             super(username, email, password);
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime now = LocalDateTime.now();
