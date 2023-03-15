@@ -1,7 +1,7 @@
-package com.dhmusic.DHMusic.Entities.content;
+package com.dhmusic.DHMusic.Entities.content.entities;
 
 
-import com.dhmusic.DHMusic.Entities.Account.Artist;
+import com.dhmusic.DHMusic.Entities.account.entities.Artist;
 
 import java.util.Date;
 

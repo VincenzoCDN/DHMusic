@@ -1,6 +1,6 @@
 package com.dhmusic.DHMusic.Controllers;
 
-import com.dhmusic.DHMusic.Entities.Account.User;
+import com.dhmusic.DHMusic.Entities.account.entities.User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

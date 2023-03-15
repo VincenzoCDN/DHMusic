@@ -1,29 +1,29 @@
-package com.dhmusic.DHMusic.Entities.content;
+package com.dhmusic.DHMusic.Entities.content.entities;
 
 
 
-
-import com.dhmusic.DHMusic.Entities.Account.Artist;
+import com.dhmusic.DHMusic.Entities.account.entities.User;
 
 import java.util.Date;
 import java.util.List;
 
-public class Album implements Content{
-    private String idAlbum;
+public class Playlist implements Content{
+    private String idPlaylist;
     private String title;
-    private Artist artist;
+    private User creator;
     private List<Song> songsOfAlbum;
     private Date publicationDate;
 
-    public Album(){
+    public Playlist() {
 
     }
-    public String getIdAlbum() {
-        return idAlbum;
+
+    public String getIdPlaylist() {
+        return idPlaylist;
     }
 
-    public void setIdAlbum(String idAlbum) {
-        this.idAlbum = idAlbum;
+    public void setIdPlaylist(String idPlaylist) {
+        this.idPlaylist = idPlaylist;
     }
 
     public String getTitle() {
@@ -34,12 +34,12 @@ public class Album implements Content{
         this.title = title;
     }
 
-    public Artist getArtist() {
-        return artist;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setArtist(Artist artist) {
-        this.artist = artist;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 
     public List<Song> getSongsOfAlbum() {
@@ -58,8 +58,7 @@ public class Album implements Content{
         this.publicationDate = publicationDate;
     }
 
-    protected static void playAlbum(Album album) {
+    protected static void playPlaylist(Playlist playlist) {
 
-        System.out.println("ciao");
     }
 }
