@@ -1,11 +1,16 @@
-package com.dhmusic.DHMusic.Controllers;
+package com.dhmusic.DHMusic.Controllers.account.controllers;
 
-import com.dhmusic.DHMusic.Entities.account.entities.User;
+import com.dhmusic.DHMusic.entities.account.entities.User;
+import com.dhmusic.DHMusic.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
+    @Autowired
+    UserService userService;
 
     //inserisce un nuovo user nel database
     @PostMapping("/create-user")

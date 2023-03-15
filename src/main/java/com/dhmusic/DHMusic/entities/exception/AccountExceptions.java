@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.Entities.exception;
+package com.dhmusic.DHMusic.entities.exception;
 
 public class AccountExceptions extends Exception{
 

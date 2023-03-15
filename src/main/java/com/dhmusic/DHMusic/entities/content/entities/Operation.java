@@ -1,8 +1,7 @@
-package com.dhmusic.DHMusic.Entities.content.entities;
+package com.dhmusic.DHMusic.entities.content.entities;
 
 
-import static com.dhmusic.DHMusic.Entities.content.entities.Album.playAlbum;
-import static com.dhmusic.DHMusic.Entities.content.entities.Song.playSong;
+import static com.dhmusic.DHMusic.entities.content.entities.Song.playSong;
 
 public class Operation<T> {
 
@@ -12,7 +11,7 @@ public class Operation<T> {
         } else if (item instanceof Playlist) {
             Playlist.playPlaylist((Playlist) item);
         } else if (item instanceof Album) {
-            playAlbum((Album) item);
+            Album.playAlbum((Album) item);
         } else {
             System.out.println("Item not supported");
         }

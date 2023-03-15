@@ -1,15 +1,18 @@
-package com.dhmusic.DHMusic.Entities.account.entities;
+package com.dhmusic.DHMusic.entities.account.entities;
 
 
-import com.dhmusic.DHMusic.Entities.exception.AccountExceptions;
-import com.dhmusic.DHMusic.Entities.services.UserService;
+import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
+import com.dhmusic.DHMusic.services.UserService;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
-
+@Entity
+@Table(name = "users")
 public class User extends Account {
 
     @Autowired

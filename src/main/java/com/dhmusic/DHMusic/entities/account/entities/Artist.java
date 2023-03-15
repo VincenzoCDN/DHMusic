@@ -1,17 +1,29 @@
-package com.dhmusic.DHMusic.Entities.account.entities;
+package com.dhmusic.DHMusic.entities.account.entities;
 
 
 
-import com.dhmusic.DHMusic.Entities.content.entities.Album;
-import com.dhmusic.DHMusic.Entities.content.entities.Song;
+import com.dhmusic.DHMusic.entities.content.entities.Album;
+import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
 
 import java.util.List;
-
+@Entity
+@Table(name = "artists")
 public class Artist extends User {
     private String bio;
+    @OneToMany(mappedBy = "mArtists")
+    @JsonIgnore
     private List<Album> albumsOfArtist;
+    @OneToMany(mappedBy = "mArtists")
+    @JsonIgnore
     private List<Song> songOfArtist;
     private int follower;
+    @OneToMany(mappedBy = "mArtists")
+    @JsonIgnore
     private List<User> usersFollowers;
 
     public Artist(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, String bio, int isAdmin) {

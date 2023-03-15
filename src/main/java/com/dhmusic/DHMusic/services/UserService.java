@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.Entities.services;
+package com.dhmusic.DHMusic.services;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
