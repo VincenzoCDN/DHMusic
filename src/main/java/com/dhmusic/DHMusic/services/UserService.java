@@ -1,17 +1,46 @@
 package com.dhmusic.DHMusic.services;
 
-import org.hibernate.annotations.JdbcType;
+import com.dhmusic.DHMusic.entities.account.entities.User;
+import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class UserService {
 
+//    @Autowired
+//    private UserRepository userRepository;
+    private final List<User> userList = new ArrayList<>();
+    public void createUser(User newUser) throws AccountExceptions {
+        if (!isValidUser(newUser)) {
+            throw new AccountExceptions("Dati utente non validi");
+        }
+        userList.add(newUser);
+       // User savedUser = userRepository.save(newUser);
+    }
 
+    public List<User> getAllUsers() {
+        return new ArrayList<>(userList);
+    }
+    public boolean isValidUser(User user){
+        if (user.getUsername() == null || user.getUsername().isEmpty() ||
+                user.getEmail() == null || user.getEmail().isEmpty() ||
+                user.getPassword() == null || user.getPassword().isEmpty() ||
+                user.getName() == null || user.getName().isEmpty() ||
+                user.getSurname() == null || user.getSurname().isEmpty() ||
+                user.getDateOfBirth() == null || user.getDateOfBirth().isEmpty() ||
+                user.getGender() == null || user.getGender().isEmpty() ||
+                user.getNationality() == null || user.getNationality().isEmpty()) {
+            return false;
+        }
+        return true;
+    }
     public boolean isValidPassword(String password){
         //controlla se è lunghezza almeno 8
         if(password.length()<8){

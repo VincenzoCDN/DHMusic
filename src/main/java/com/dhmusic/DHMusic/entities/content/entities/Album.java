@@ -4,23 +4,18 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+
 
 import java.util.Date;
 import java.util.List;
-@Entity
-@Table(name = "albums")
+
 public class Album implements Content{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private String idAlbum;
     private String title;
-    @ManyToOne
-    @JoinColumn(name = "artist_names")
+
     private Artist artist;
-    @OneToMany(mappedBy = "albumOfSong")
-    @JsonIgnore // a cosa serve? provate a toglierla e vedere cosa succede
+
     private List<Song> songsOfAlbum;
     private Date publicationDate;
 

@@ -3,7 +3,7 @@ package com.dhmusic.DHMusic.entities.exception;
 public class AccountExceptions extends Exception{
 
 
-   public AccountExceptions() {
+   public AccountExceptions(String error) {
     }
 }
 

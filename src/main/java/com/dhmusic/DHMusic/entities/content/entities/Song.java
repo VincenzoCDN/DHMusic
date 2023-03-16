@@ -2,23 +2,19 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
-import jakarta.persistence.*;
+
 
 import java.util.Date;
-@Entity
-@Table(name = "songs")
+
 public class Song implements Content{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private String idSong;
     private String title;
     private float length;
     private Date publicationDate;
-    @ManyToOne
-    @JoinColumn(name = "artist_songs")
+
     private Artist artistOfSong;
-    @ManyToOne
-    @JoinColumn(name = "album_songs")
+
     private Album albumOfSong;
 
     public Song(){
