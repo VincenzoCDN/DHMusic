@@ -1,5 +1,6 @@
 package com.dhmusic.DHMusic.services;
 
+import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,19 @@ public class SongService {
     }
 
     public void deleteSong (Song song){
+        // bisogna mettere eccezione se utente è admin?
         songRepository.delete(song);
+    }
+
+    public Song updateSong(Song song){
+        Song existSong = songRepository.findSongById(song.getIdSong()); //TODO ragionare
+        if (existSong == null){
+            return null;
+        }else{
+            existSong.setTitle(song.getTitle());
+            existSong.setArtistOfSong(song.getArtistOfSong());
+        }
+        return songRepository.save(existSong);
     }
 
 }
