@@ -1,11 +1,11 @@
 package com.dhmusic.DHMusic.services;
 
-import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-//@Service
+@Service
 public class SongService {
 
     @Autowired
@@ -15,12 +15,11 @@ public class SongService {
         this.songRepository = songRepository;
     }
 
-    public Song addSong(String title, Artist artist, String genre, float duration){ // discutere genere
-        Song newSong = new Song();
-        newSong.setTitle(title);
-        newSong.setArtistOfSong(artist);
-        newSong.setLength(duration);
-        return newSong;
+    public Song addSong(Song song){
+        if (song.getTitle() == null || song.getArtistOfSong() == null ) {
+            throw new IllegalArgumentException("The title and the artisgitt are mandatory fields to insert!");
+        }
+        return songRepository.save(song);
     }
 
 }

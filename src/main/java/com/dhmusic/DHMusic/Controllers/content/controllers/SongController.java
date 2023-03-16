@@ -1,17 +1,26 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
+import com.dhmusic.DHMusic.services.SongService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/songs")
 public class SongController {
-    
-    //inserisce un nuovo Song nel database
-    @PostMapping("/create-Song")
-    public Song createSong(@RequestBody Song newSong){
-        //logica di creazione dell'Song
-        return newSong;
+
+    @Autowired
+    private SongService songService; // per accesso al database
+    @Autowired
+    private SongRepository songRepository;
+
+    public SongController(SongService songService){
+        this.songService=songService;
+    }
+    @PostMapping("/create-song")
+    public Song addSong(@RequestBody Song song){
+        return songRepository.save(song);
     }
 
     //elimina un Song nel database
