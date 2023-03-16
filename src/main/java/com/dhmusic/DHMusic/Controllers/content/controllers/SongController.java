@@ -12,15 +12,13 @@ public class SongController {
 
     @Autowired
     private SongService songService; // per accesso al database
-    @Autowired
-    private SongRepository songRepository;
 
     public SongController(SongService songService){
         this.songService=songService;
     }
     @PostMapping("/create-song")
     public Song addSong(@RequestBody Song song){
-        return songRepository.save(song);
+        return songService.addSong(song);
     }
 
     //elimina un Song nel database
