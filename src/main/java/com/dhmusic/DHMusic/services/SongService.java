@@ -17,9 +17,13 @@ public class SongService {
 
     public Song addSong(Song song){
         if (song.getTitle() == null || song.getArtistOfSong() == null ) {
-            throw new IllegalArgumentException("The title and the artisgitt are mandatory fields to insert!");
+            throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
         return songRepository.save(song);
+    }
+
+    public void deleteSong (Song song){
+        songRepository.delete(song);
     }
 
 }
