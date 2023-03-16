@@ -9,6 +9,7 @@ import jakarta.persistence.Id;
 
 import java.util.Random;
 import java.util.Scanner;
+
 @Entity
 public abstract class Account {
     @Id

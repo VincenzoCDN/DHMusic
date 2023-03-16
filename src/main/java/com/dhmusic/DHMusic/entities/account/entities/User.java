@@ -3,12 +3,15 @@ package com.dhmusic.DHMusic.entities.account.entities;
 
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.dhmusic.DHMusic.services.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 
 @Entity
@@ -22,6 +25,10 @@ public class User extends Account {
     private String dateOfBirth;
     private String gender;
     private String nationality;
+
+    @OneToMany(mappedBy = "usersFollowers")
+    @JsonIgnore
+    private List<Artist> followedArtists;
     private int isAdmin; //chiedere per il boolean su db
 
     public User(){

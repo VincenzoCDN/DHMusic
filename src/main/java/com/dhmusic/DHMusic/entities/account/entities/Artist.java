@@ -15,14 +15,14 @@ import java.util.List;
 @Table(name = "artists")
 public class Artist extends User {
     private String bio;
-    @OneToMany(mappedBy = "mArtists")
+    @OneToMany(mappedBy = "artist")
     @JsonIgnore
     private List<Album> albumsOfArtist;
-    @OneToMany(mappedBy = "mArtists")
+    @OneToMany(mappedBy = "artistOfSong")
     @JsonIgnore
     private List<Song> songOfArtist;
     private int follower;
-    @OneToMany(mappedBy = "mArtists")
+    @OneToMany
     @JsonIgnore
     private List<User> usersFollowers;
 

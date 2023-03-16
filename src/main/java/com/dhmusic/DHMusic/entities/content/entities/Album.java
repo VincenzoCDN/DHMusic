@@ -19,7 +19,7 @@ public class Album implements Content{
     @ManyToOne
     @JoinColumn(name = "artist_names")
     private Artist artist;
-    @OneToMany(mappedBy = "mAlbums")
+    @OneToMany(mappedBy = "albumOfSong")
     @JsonIgnore // a cosa serve? provate a toglierla e vedere cosa succede
     private List<Song> songsOfAlbum;
     private Date publicationDate;
