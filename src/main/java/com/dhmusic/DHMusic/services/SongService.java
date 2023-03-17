@@ -16,10 +16,11 @@ public class SongService {
     }
 
     public Song addSong(Song song){
-       /* Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()) //TODO
-                && songRepository.findSongByArtist(song.setArtistOfSong());
-
-        */
+        Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()); //TODO
+              //  && songRepository.findSongByArtist(song.getArtistOfSong());
+        if (existSong != null){
+            throw new RuntimeException("Song exist!");
+        }
         if (song.getTitle() == null || song.getArtistOfSong() == null ) {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }

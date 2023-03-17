@@ -14,6 +14,7 @@ public class Song implements Content{
     private String title;
     private float length;
     private Date publicationDate;
+    private boolean isPublic;
     @ManyToOne
     @JoinColumn(name = "artist_songs")
     private Artist artistOfSong;
