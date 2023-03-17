@@ -1,6 +1,5 @@
 package com.dhmusic.DHMusic.services;
 
-import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +16,10 @@ public class SongService {
     }
 
     public Song addSong(Song song){
+       /* Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()) //TODO
+                && songRepository.findSongByArtist(song.setArtistOfSong());
+
+        */
         if (song.getTitle() == null || song.getArtistOfSong() == null ) {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
@@ -29,9 +32,10 @@ public class SongService {
     }
 
     public Song updateSong(Song song){
-        Song existSong = (Song) songRepository.findSongById(song.getIdSong()); //TODO ragionare
+        Song existSong = (Song) songRepository.findSongById(song.getIdSong());
         if (existSong == null){
-            return null;
+            throw new RuntimeException("Song not exist");
+            //return null;
         }else{
             existSong.setTitle(song.getTitle());
             existSong.setArtistOfSong(song.getArtistOfSong());

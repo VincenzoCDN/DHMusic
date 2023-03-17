@@ -73,7 +73,4 @@ public class Song implements Content{
         this.albumOfSong = albumOfSong;
     }
 
-    protected static void playSong(Song song) {
-        System.out.println("we");
-    }
 }
