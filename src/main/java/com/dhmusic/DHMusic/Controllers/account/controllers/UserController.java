@@ -19,6 +19,7 @@ public class UserController {
     @PostMapping("/create-user")
     public void createUser(@RequestBody User newUser) {
         try {
+
             userService.createUser(newUser);
         }catch(AccountExceptions e){
             System.out.println(e.getMessage());
