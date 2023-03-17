@@ -33,12 +33,15 @@ public class SongController {
     }
 
     //Aggiorna un Song nel database
-    @PutMapping("/update-Song")
+   /* @PutMapping("/update-Song")
     public ResponseEntity<Song> updateSong(@PathVariable Long id,@RequestBody Song songDetail){
         //logica di aggiornamento dell'Song (usando solo questo metodo
         //oppure farne uno per singolo attributo tipo (/update-Song-name), (/update-Song-surname)
 
+
     }
+
+    */
 
     //Seleziona gli Song nel database
     @GetMapping("/get-all-Songs")

@@ -29,7 +29,7 @@ public class SongService {
     }
 
     public Song updateSong(Song song){
-        Song existSong = songRepository.findSongById(song.getIdSong()); //TODO ragionare
+        Song existSong = (Song) songRepository.findSongById(song.getIdSong()); //TODO ragionare
         if (existSong == null){
             return null;
         }else{
