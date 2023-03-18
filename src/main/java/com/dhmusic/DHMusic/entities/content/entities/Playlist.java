@@ -3,13 +3,18 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.User;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
-
+@Entity
+@Table(name = "playlists")
 public class Playlist implements Content{
+    @Id
     private String idPlaylist;
     private String title;
+    @ManyToOne
+    @JoinColumn(name = "creator_id")
     private User creator;
     private List<Song> songsOfAlbum;
     private Date publicationDate;

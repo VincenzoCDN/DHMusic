@@ -33,8 +33,14 @@ public class User extends Account {
     boolean isAdmin1;
 
     public User(){
+
+    }
+
+    /*public User(){
         super();
     }
+
+     */
     public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, int isAdmin) {
         super(username, email, password);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

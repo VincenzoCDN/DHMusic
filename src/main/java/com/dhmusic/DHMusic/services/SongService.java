@@ -7,8 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.util.Scanner;
-
 @Service
 public class SongService {
 
@@ -20,16 +18,6 @@ public class SongService {
     }
 
     public Song addSong(@RequestBody Song song){
-        Scanner scanner = new Scanner(System.in);
-        try {
-            System.out.println("Enter song title:");
-            String title = scanner.nextLine();
-
-            System.out.println("Enter artist name:");
-            String artist = scanner.nextLine();
-
-            System.out.println("Enter album name:");
-            String album = scanner.nextLine();
 
         Song existSong = (Song) songRepository.findSongByTitle(song.getTitle());
               //  && songRepository.findSongByArtist(song.getArtistOfSong());
@@ -40,20 +28,14 @@ public class SongService {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
         Song newSong = new Song();
-
         return songRepository.save(song);
-    }catch (Exception e){
-            System.out.println("An error has occurred:"+ e.getMessage());
-            return null;
-        }finally {
-            scanner.close();
-        }
+
         }
 
     public void deleteSong (@RequestBody Song song) {
         User user = new User();
         try{
-        Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()); //mettere indice
+        Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()); //mettere indice?
         if (existSong == null) {
             throw new RuntimeException("Song not exist!");
         }
@@ -70,13 +52,16 @@ public class SongService {
     }
 
 
-    public Song updateSong(@RequestBody Song song){
+    public Song updateSong(String id, @RequestBody Song song){
         Song existSong = (Song) songRepository.findSongById(song.getIdSong()); // id string o long?
         if (existSong == null){
             throw new RuntimeException("Song not exist");
         }else{
             existSong.setTitle(song.getTitle());
             existSong.setArtistOfSong(song.getArtistOfSong());
+            existSong.setAlbumOfSong(song.getAlbumOfSong());
+            existSong.setAlbumOfSong(song.getAlbumOfSong());
+            //TODO GENERE
         }
         return songRepository.save(existSong);
     }

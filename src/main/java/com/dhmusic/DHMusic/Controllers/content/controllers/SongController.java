@@ -5,7 +5,6 @@ import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,15 +47,14 @@ public class SongController {
 
 
     //Aggiorna un Song nel database
-   /* @PutMapping("/update-Song")
+   @PutMapping("/update-Song")
     public ResponseEntity<Song> updateSong(@PathVariable String id,@RequestBody Song songDetail){
-        //logica di aggiornamento dell'Song (usando solo questo metodo
-        //oppure farne uno per singolo attributo tipo (/update-Song-name), (/update-Song-surname)
+        Song updateSong = songService.updateSong(id,songDetail);
+        return ResponseEntity.ok().body(updateSong);
 
 
     }
 
-    */
 
     //Seleziona gli Song nel database
     @GetMapping("/get-all-Songs")

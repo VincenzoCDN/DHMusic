@@ -26,6 +26,10 @@ public class Artist extends User {
     @JsonIgnore
     private List<User> usersFollowers;
 
+    public Artist(){
+
+    }
+
     public Artist(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, String bio, int isAdmin) {
         super(username, email, password, name, surname, dateOfBirth, gender, nationality, isAdmin);
         this.bio = bio;
