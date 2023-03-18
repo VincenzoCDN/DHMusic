@@ -15,6 +15,7 @@ public class Song implements Content{
     private float length;
     private Date publicationDate;
     private boolean isPublic;
+
     @ManyToOne
     @JoinColumn(name = "artist_songs")
     private Artist artistOfSong;
@@ -30,8 +31,10 @@ public class Song implements Content{
         return idSong;
     }
 
-    public void setIdSong(String idSong) {
+    public void setIdSong(String idSong, boolean isPublic) {
         this.idSong = idSong;
+        this.isPublic = isPublic; //???
+
     }
 
     public String getTitle() {
@@ -72,6 +75,9 @@ public class Song implements Content{
 
     public void setAlbumOfSong(Album albumOfSong) {
         this.albumOfSong = albumOfSong;
+    }
+    static void playSong(Song item){
+        System.out.println("we");
     }
 
 }
