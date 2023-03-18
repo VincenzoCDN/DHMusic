@@ -52,6 +52,7 @@ public class SongService {
 
     public void deleteSong (@RequestBody Song song) {
         User user = new User();
+        try{
         Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()); //mettere indice
         if (existSong == null) {
             throw new RuntimeException("Song not exist!");
@@ -63,8 +64,10 @@ public class SongService {
         } else {
             throw new RuntimeException("You don't have permission to delete this song");
         }
+    }catch (Exception e){
+            System.out.println("An error has occurred:"+ e.getMessage());
+        }
     }
-
 
 
     public Song updateSong(@RequestBody Song song){
