@@ -5,6 +5,7 @@ import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.Scanner;
 
@@ -18,7 +19,7 @@ public class SongService {
         this.songRepository = songRepository;
     }
 
-    public Song addSong(Song song){
+    public Song addSong(@RequestBody Song song){
         Scanner scanner = new Scanner(System.in);
         try {
             System.out.println("Enter song title:");
@@ -49,7 +50,7 @@ public class SongService {
         }
         }
 
-    public void deleteSong (Song song) {
+    public void deleteSong (@RequestBody Song song) {
         User user = new User();
         Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()); //mettere indice
         if (existSong == null) {
@@ -66,7 +67,7 @@ public class SongService {
 
 
 
-    public Song updateSong(Song song){
+    public Song updateSong(@RequestBody Song song){
         Song existSong = (Song) songRepository.findSongById(song.getIdSong()); // id string o long?
         if (existSong == null){
             throw new RuntimeException("Song not exist");
