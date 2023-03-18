@@ -30,6 +30,7 @@ public class User extends Account {
     @JsonIgnore
     private List<Artist> followedArtists;
     private int isAdmin; //chiedere per il boolean su db
+    boolean isAdmin1;
 
     public User(){
         super();
@@ -109,5 +110,12 @@ public class User extends Account {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
+    public boolean isAdmin1(){
+        return isAdmin1;
+    }
+    public void setAdmin1(boolean isAdmin1){
+        this.isAdmin1 = isAdmin1;
+    }
 }
+
 

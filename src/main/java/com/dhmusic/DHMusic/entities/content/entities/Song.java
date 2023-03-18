@@ -76,6 +76,15 @@ public class Song implements Content{
     public void setAlbumOfSong(Album albumOfSong) {
         this.albumOfSong = albumOfSong;
     }
+
+    public boolean isPublic(){
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
     static void playSong(Song item){
         System.out.println("we");
     }

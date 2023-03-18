@@ -25,12 +25,14 @@ public class SongController {
     }
 
     //elimina un Song nel database
-    @DeleteMapping("/delete-song")
+    /*@DeleteMapping("/delete-song")
     public ResponseEntity<Void> deleteSong(@RequestBody Song song){
         songService.deleteSong(song);
         return ResponseEntity.status(HttpStatus.OK).build();
 
     }
+
+     */
 
     //Aggiorna un Song nel database
    /* @PutMapping("/update-Song")

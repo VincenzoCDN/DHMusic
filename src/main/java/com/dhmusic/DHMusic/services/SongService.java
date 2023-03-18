@@ -1,5 +1,6 @@
 package com.dhmusic.DHMusic.services;
 
+import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,14 +49,18 @@ public class SongService {
         }
         }
 
-    public void deleteSong (Song song){
+    public void deleteSong (Song song) {
+        User user = new User();
         Song existSong = (Song) songRepository.findSongByTitle(song.getTitle()); //mettere indice
-        if (existSong == null){
+        if (existSong == null) {
             throw new RuntimeException("Song not exist!");
         }
-        //if() // TODO se la canzone è pubblica e l'utente è admin, cancella
-        songRepository.delete(song);
+        if (existSong.isPublic() && user.isAdmin1() == true) // TODO se la canzone è pubblica e l'utente è admin, cancella
+            songRepository.delete(song);
+        //TODO mettere eccezioni
     }
+
+
 
     public Song updateSong(Song song){
         Song existSong = (Song) songRepository.findSongById(song.getIdSong()); // id string o long?
