@@ -55,9 +55,13 @@ public class SongService {
         if (existSong == null) {
             throw new RuntimeException("Song not exist!");
         }
-        if (existSong.isPublic() && user.isAdmin1() == true) // TODO se la canzone è pubblica e l'utente è admin, cancella
+        if (existSong.isPublic() && user.isAdmin1()
+                || !existSong.isPublic() && !user.isAdmin1()
+        || !existSong.isPublic()&& user.isAdmin1()) { // da vedere
             songRepository.delete(song);
-        //TODO mettere eccezioni
+        } else {
+            throw new RuntimeException("You don't have permission to delete this song");
+        }
     }
 
 
@@ -66,7 +70,6 @@ public class SongService {
         Song existSong = (Song) songRepository.findSongById(song.getIdSong()); // id string o long?
         if (existSong == null){
             throw new RuntimeException("Song not exist");
-            //return null;
         }else{
             existSong.setTitle(song.getTitle());
             existSong.setArtistOfSong(song.getArtistOfSong());
