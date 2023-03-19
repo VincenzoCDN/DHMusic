@@ -10,7 +10,7 @@ import java.util.Date;
 public class Song implements Content{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idSong;
+    private Long idSong;
     private String title;
     private float length;
     private Date publicationDate;
@@ -27,11 +27,11 @@ public class Song implements Content{
 
     }
 
-    public String getIdSong() {
+    public Long getIdSong() {
         return idSong;
     }
 
-    public void setIdSong(String idSong, boolean isPublic) {
+    public void setIdSong(Long idSong, boolean isPublic) {
         this.idSong = idSong;
         this.isPublic = isPublic; //???
 
