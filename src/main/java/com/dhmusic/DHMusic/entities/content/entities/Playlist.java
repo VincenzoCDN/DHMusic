@@ -10,10 +10,10 @@ import java.util.List;
 
 @Entity
 @Table(name="playlists")
-public class Playlist implements Content{
+public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idPlaylist;
+    private Long id;
     private String title;
     @ManyToOne
     @JoinColumn(name="user_id")
@@ -28,12 +28,12 @@ public class Playlist implements Content{
 
     }
 
-    public String getIdPlaylist() {
-        return idPlaylist;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdPlaylist(String idPlaylist) {
-        this.idPlaylist = idPlaylist;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {

@@ -17,6 +17,9 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String artistName;
+
     private String bio;
 
     @OneToMany(mappedBy = "artist")
@@ -36,7 +39,8 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String bio, int follower, User user) {
+    public Artist(String artistName,String bio, int follower, User user) {
+        this.artistName = artistName;
         this.bio = bio;
         this.follower = follower;
         this.user = user;
@@ -44,6 +48,14 @@ public class Artist {
 
     public Long getId() {
         return id;
+    }
+
+    public String getArtistName() {
+        return artistName;
+    }
+
+    public void setArtistName(String artistName) {
+        this.artistName = artistName;
     }
 
     public void setId(Long id) {

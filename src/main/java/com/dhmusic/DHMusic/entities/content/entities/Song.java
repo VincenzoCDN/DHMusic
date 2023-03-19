@@ -10,11 +10,11 @@ import java.util.List;
 
 @Entity
 @Table(name="songs")
-public class Song implements Content{
+public class Song {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idSong;
+    private Long id;
     private String title;
     private float length;
     private Date publicationDate;
@@ -33,12 +33,20 @@ public class Song implements Content{
 
     }
 
-    public String getIdSong() {
-        return idSong;
+    public Long getId() {
+        return id;
     }
 
-    public void setIdSong(String idSong) {
-        this.idSong = idSong;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Playlist> getPlaylistOfSong() {
+        return playlistOfSong;
+    }
+
+    public void setPlaylistOfSong(List<Playlist> playlistOfSong) {
+        this.playlistOfSong = playlistOfSong;
     }
 
     public String getTitle() {

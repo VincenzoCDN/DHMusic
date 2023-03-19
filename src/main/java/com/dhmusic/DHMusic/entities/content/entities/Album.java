@@ -6,18 +6,17 @@ package com.dhmusic.DHMusic.entities.content.entities;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.websocket.OnMessage;
 
 
 import java.util.Date;
 import java.util.List;
 @Entity
 @Table(name = "albums")
-public class Album implements Content{
+public class Album {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String idAlbum;
+    private Long id;
     private String title;
     @ManyToOne
     @JoinColumn(name= "artist_id")
@@ -30,12 +29,13 @@ public class Album implements Content{
     public Album(){
 
     }
-    public String getIdAlbum() {
-        return idAlbum;
+
+    public Long getId() {
+        return id;
     }
 
-    public void setIdAlbum(String idAlbum) {
-        this.idAlbum = idAlbum;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getTitle() {
