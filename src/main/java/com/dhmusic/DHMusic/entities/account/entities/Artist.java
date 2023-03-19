@@ -39,10 +39,9 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String artistName,String bio, int follower, User user) {
+    public Artist(String artistName,String bio, User user) {
         this.artistName = artistName;
         this.bio = bio;
-        this.follower = follower;
         this.user = user;
     }
 

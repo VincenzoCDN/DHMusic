@@ -1,45 +1,62 @@
 package com.dhmusic.DHMusic.Controllers.account.controllers;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.services.ArtistService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/artists")
 public class ArtistController {
 
+    @Autowired
+    ArtistService artistService; //istanzio ArtistServer
+
     //inserisce un nuovo artista nel database
     @PostMapping("/create-artist")
-    public Artist createArtist(@RequestBody Artist newArtist){
-        //logica di creazione dell'artist
-        return newArtist;
+    public void createArtist(@RequestBody Artist newArtist){
+        try {
+            artistService.createArtist(newArtist);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     //elimina un artista nel database
-    @DeleteMapping("/delete-artist")
-    public void deleteArtist(@RequestBody Artist newArtist){
-        //logica di rimozione dell'artist
+    @DeleteMapping("/delete-artist/{id}")
+    public void deleteArtist(@PathVariable Long id){
+        artistService.deleteArtist(id);
     }
 
     //Aggiorna un artista nel database
-    @PutMapping("/update-artist")
-    public Artist updateArtist(@RequestBody Artist newArtist){
-        //logica di aggiornamento dell'artist (usando solo questo metodo
-        //oppure farne uno per singolo attributo tipo (/update-artist-name), (/update-artist-surname)
-        return newArtist;
+    @PutMapping("/update-artist/{id}")
+    public Artist updateArtist(@PathVariable Long id,@RequestBody Artist newArtist) throws Exception {
+
+        return artistService.updateArtist(newArtist);
     }
 
     //Seleziona gli artisti nel database
     @GetMapping("/get-all-artists")
-    public Artist getAllArtist(){
-        //logica di restituzione degli artist
-        return null;
+    public List<Artist> getAllArtist(){
+
+        return  artistService.getAllArtist();
     }
 
     //Seleziona un artista nel database
     @GetMapping("/get-artist-by-id")
-    public Artist getArtistById(){
-        //logica di restituzione dell artist tramite id
-        return null;
+    public Optional<Artist> getArtistById(@RequestParam Long id){
+
+        return artistService.getArtistById(id);
     }
 
+    /*@GetMapping("/get-user-followers")
+    public List<User> getFollowers(@RequestParam Artist artist){
+        return artistService.getUsersFollowers(artist);
+    }
+
+     */
 }
+
