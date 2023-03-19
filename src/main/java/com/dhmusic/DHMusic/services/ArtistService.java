@@ -43,16 +43,26 @@ public class ArtistService {
         }
         return existingArtist.getUsersFollowers();
     }
-
      */
-
-
 
     public List<Artist> getAllArtist(){
         return artistRepository.findAll();
     }
 
-    public Optional<Artist> getArtistById(Long id){
+    public boolean isValidId(Long id)  {
+        boolean exists = artistRepository.existsById(id);
+        if (exists == false) {
+            return false;
+        }
+        return true;
+
+
+    }
+
+    public Optional<Artist> getArtistById(Long id) throws Exception {
+        if(isValidId(id) == false){
+            throw new Exception("l'id dell'artista non esiste");
+        }
         return artistRepository.findById(id);
     }
 

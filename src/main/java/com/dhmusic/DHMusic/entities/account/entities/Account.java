@@ -16,6 +16,7 @@ public abstract class Account {
     @Column(unique = true)
     private String email;
     private String creationDate;
+
     private boolean loggedIn; //verificare se utile o meno
     private boolean verificateEmail;
     private String codeVerificate;
