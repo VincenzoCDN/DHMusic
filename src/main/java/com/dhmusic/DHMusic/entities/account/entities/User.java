@@ -1,7 +1,10 @@
 package com.dhmusic.DHMusic.entities.account.entities;
 
 
+import com.dhmusic.DHMusic.entities.content.entities.Playlist;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -9,14 +12,23 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
-
+@Entity
+@Table(name = "users")
 public class User extends Account {
     private String name;
     private String surname;
     private String dateOfBirth;
     private String gender;
     private String nationality;
+    @ManyToMany(mappedBy = "usersFollowers")
     private List<Artist> followedArtists;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    private Artist artist;
+    @OneToMany(mappedBy = "creator")
+    @JsonIgnore
+    private List<Playlist> playlistOfUser;
     private int isAdmin; //chiedere per il boolean su db
 
     public User(){

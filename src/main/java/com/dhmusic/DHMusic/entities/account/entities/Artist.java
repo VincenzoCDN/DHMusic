@@ -4,31 +4,98 @@ package com.dhmusic.DHMusic.entities.account.entities;
 
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 
 
 import java.util.List;
 
-public class Artist extends User {
+@Entity
+@Table(name = "artists")
+public class Artist {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String bio;
 
+    @OneToMany(mappedBy = "artist")
+    @JsonIgnore
     private List<Album> albumsOfArtist;
 
+    @OneToMany(mappedBy = "artistOfSong")
+    @JsonIgnore
     private List<Song> songOfArtist;
     private int follower;
-
+    @OneToOne(mappedBy = "artist")
+    private User user;
+    @ManyToMany
+    @JoinTable(name="followers", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="artist_id"))
     private List<User> usersFollowers;
 
-    public Artist(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, String bio, int isAdmin) {
-        super(username, email, password, name, surname, dateOfBirth, gender, nationality);
+    public Artist() {
+    }
+
+    public Artist(String bio, int follower, User user) {
+        this.bio = bio;
+        this.follower = follower;
+        this.user = user;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
         this.bio = bio;
     }
 
-    public String getBio(){
-        return this.bio;
+    public List<Album> getAlbumsOfArtist() {
+        return albumsOfArtist;
     }
-    public void setBio(String bio){
-        this.bio = bio;
+
+    public void setAlbumsOfArtist(List<Album> albumsOfArtist) {
+        this.albumsOfArtist = albumsOfArtist;
+    }
+
+    public List<Song> getSongOfArtist() {
+        return songOfArtist;
+    }
+
+    public void setSongOfArtist(List<Song> songOfArtist) {
+        this.songOfArtist = songOfArtist;
+    }
+
+    public int getFollower() {
+        return follower;
+    }
+
+    public void setFollower(int follower) {
+        this.follower = follower;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<User> getUsersFollowers() {
+        return usersFollowers;
+    }
+
+    public void setUsersFollowers(List<User> usersFollowers) {
+        this.usersFollowers = usersFollowers;
     }
 
     public int addFollower(){

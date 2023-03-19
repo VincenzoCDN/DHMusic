@@ -2,21 +2,33 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import jakarta.persistence.*;
 
 
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name="songs")
 public class Song implements Content{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String idSong;
     private String title;
     private float length;
     private Date publicationDate;
 
+    @ManyToOne
+    @JoinColumn(name= "artist_id")
     private Artist artistOfSong;
 
+    @ManyToOne
+    @JoinColumn(name = "album_id")
     private Album albumOfSong;
 
+    @ManyToMany(mappedBy = "songsOfPlaylist")
+    private List<Playlist> playlistOfSong;
     public Song(){
 
     }

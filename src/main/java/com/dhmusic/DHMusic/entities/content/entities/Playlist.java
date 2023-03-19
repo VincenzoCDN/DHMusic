@@ -3,15 +3,25 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.User;
+import jakarta.persistence.*;
 
 import java.util.Date;
 import java.util.List;
 
+@Entity
+@Table(name="playlists")
 public class Playlist implements Content{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String idPlaylist;
     private String title;
+    @ManyToOne
+    @JoinColumn(name="user_id")
     private User creator;
-    private List<Song> songsOfAlbum;
+    @ManyToMany
+    @JoinTable(name = "playlist_song",joinColumns = @JoinColumn(name = "song_id"),
+            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    private List<Song> songsOfPlaylist;
     private Date publicationDate;
 
     public Playlist() {
@@ -42,12 +52,12 @@ public class Playlist implements Content{
         this.creator = creator;
     }
 
-    public List<Song> getSongsOfAlbum() {
-        return songsOfAlbum;
+    public List<Song> getSongsOfPlaylist() {
+        return songsOfPlaylist;
     }
 
-    public void setSongsOfAlbum(List<Song> songsOfAlbum) {
-        this.songsOfAlbum = songsOfAlbum;
+    public void setSongsOfPlaylist(List<Song> songsOfPlaylist) {
+        this.songsOfPlaylist = songsOfPlaylist;
     }
 
     public Date getPublicationDate() {

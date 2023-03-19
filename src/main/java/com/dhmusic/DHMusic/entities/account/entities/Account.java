@@ -1,15 +1,19 @@
 package com.dhmusic.DHMusic.entities.account.entities;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import jakarta.persistence.*;
+
+
 import java.util.Random;
 import java.util.Scanner;
 
-
+@MappedSuperclass
 public abstract class Account {
 
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String username;
     private String password;
+    @Column(unique = true)
     private String email;
     private String creationDate;
     private boolean loggedIn; //verificare se utile o meno
@@ -26,12 +30,11 @@ public abstract class Account {
     }
 
 
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
