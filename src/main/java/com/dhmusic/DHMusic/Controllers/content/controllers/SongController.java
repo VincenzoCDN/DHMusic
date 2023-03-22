@@ -24,50 +24,33 @@ public class SongController {
         this.songService=songService;
         this.songRepository = songRepository;
     }
+    //---------------------------------------------------------------------------------------
     @PostMapping("/create-song")
     public Song addSong(@RequestBody Song song){
         return songService.addSong(song);
     }
+    //---------------------------------------------------------------------------------------
     @GetMapping
     public List<Song> getSongs(){
         return songRepository.findAll();
     }
+    //---------------------------------------------------------------------------------------
     @GetMapping("/{id}")
     public Optional<Song> getUsersId(@PathVariable String id){
         return songRepository.findById(Integer.valueOf(id));
     }
-
+    //---------------------------------------------------------------------------------------
     //elimina un Song nel database
     @DeleteMapping("/delete-song")
     public ResponseEntity<Void> deleteSong(@RequestBody Song song){
         songService.deleteSong(song);
         return ResponseEntity.status(HttpStatus.OK).build();
-
     }
-
-
+    //---------------------------------------------------------------------------------------
     //Aggiorna un Song nel database
    @PutMapping("/update-Song")
     public ResponseEntity<Song> updateSong(@PathVariable String id,@RequestBody Song songDetail){
         Song updateSong = songService.updateSong(id,songDetail);
         return ResponseEntity.ok().body(updateSong);
-
-
     }
-
-
-    //Seleziona gli Song nel database
-    @GetMapping("/get-all-Songs")
-    public Song getAllSong(){
-        //logica di restituzione degli Song
-        return null;
-    }
-
-    //Seleziona un Song nel database
-    @GetMapping("/get-Song-by-id")
-    public Song getSongById(){
-        //logica di restituzione dell Song tramite id
-        return null;
-    }
-
 }
