@@ -19,6 +19,8 @@ public class Song {
     private float length;
     private Date publicationDate;
 
+    private boolean isPublic;
+
     @ManyToOne
     @JoinColumn(name= "artist_id")
     private Artist artistOfSong;
@@ -89,7 +91,16 @@ public class Song {
         this.albumOfSong = albumOfSong;
     }
 
-    protected static void playSong(Song song) {
+    public boolean isPublic(){
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    static void playSong(Song item){
         System.out.println("we");
     }
+
 }

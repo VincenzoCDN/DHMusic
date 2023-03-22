@@ -31,11 +31,12 @@ public class User extends Account {
     @JsonIgnore
     private List<Playlist> playlistOfUser;
     private int isAdmin; //chiedere per il boolean su db
+    boolean isAdmin1;
 
     public User(){
         super();
     }
-    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality) {
+    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, int isAdmin) {
         super(username, email, password);
         this.name = name;
         this.surname = surname;
@@ -148,6 +149,12 @@ public class User extends Account {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
+    public boolean isAdmin1(){
+        return isAdmin1;
+    }
+    public void setAdmin1(boolean isAdmin1){
+        this.isAdmin1 = isAdmin1;
+    }
 
     public List<Artist> getFollowedArtists() {
         return followedArtists;
@@ -157,4 +164,5 @@ public class User extends Account {
         this.followedArtists = followedArtists;
     }
 }
+
 
