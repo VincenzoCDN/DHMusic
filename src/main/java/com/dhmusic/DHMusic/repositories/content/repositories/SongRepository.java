@@ -9,14 +9,15 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface SongRepository extends JpaRepository<Song,Integer> {
+public interface SongRepository extends JpaRepository<Song,Long> {
 
     List<Song> findSongByTitle(String title);
 
-    List<Song> findSongByArtist(Artist artist);
+    List<Song> findSongByArtistOfSong(Artist artist);
 
     List<Song> findSongByGenre(String genre); //TODO
     List<Song> findSongById(Long id);
-    List<Song>findSongByAlbum (Album album);
+    List<Song> findSongByAlbumOfSong(Album album);
 
 }
+

@@ -19,6 +19,7 @@ public class Song {
     private float length;
     private Date publicationDate;
 
+    private String genre;
     private boolean isPublic;
 
     @ManyToOne
@@ -99,8 +100,11 @@ public class Song {
         isPublic = aPublic;
     }
 
-    static void playSong(Song item){
-        System.out.println("we");
+    public String getGenre() {
+        return genre;
     }
 
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
 }

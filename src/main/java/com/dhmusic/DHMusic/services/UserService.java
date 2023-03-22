@@ -17,10 +17,10 @@ public class UserService {
         if (!isValidUser(newUser)) {
             throw new AccountExceptions("Dati utente non validi");
         }
-        User user = new User(newUser.getUsername(),newUser.getEmail(),hashPassword(newUser.getPassword()),
+        /*User user = new User(newUser.getUsername(),newUser.getEmail(),hashPassword(newUser.getPassword()),
                 newUser.getName(),newUser.getSurname(),newUser.getDateOfBirth(),
-                newUser.getGender(),newUser.getNationality());
-        userList.add(user);
+                newUser.getGender(),newUser.getNationality());*/
+        userList.add(newUser);
        // User savedUser = userRepository.save(newUser);
     }
 

@@ -17,9 +17,6 @@ public class SongService {
     @Autowired
     private SongRepository songRepository; // per accesso al database
 
-    public SongService(SongRepository songRepository) {
-        this.songRepository = songRepository;
-    }
     //---------------------------------------------------------------------------------------
     public Song addSong(@RequestBody Song song) {
 
@@ -56,7 +53,7 @@ public class SongService {
     }
     //---------------------------------------------------------------------------------------
     public Song updateSong(String id, @RequestBody Song song) {
-        Song existSong = songRepository.findSongById(Long.valueOf(song.getIdSong())).get(0); // id string o long?
+        Song existSong = songRepository.findSongById(song.getId()).get(0); // id string o long?
         if (existSong == null) {
             throw new RuntimeException("Song not exist");
         } else {
@@ -73,7 +70,7 @@ public class SongService {
         String title = song.getTitle();
         Album album = song.getAlbumOfSong();
         Artist artist = song.getArtistOfSong();
-        Long id = Long.valueOf(song.getIdSong());
+        Long id = song.getId();
         //TODO genre
         if (title == null && artist == null) {  //da ragionare
             throw new IllegalArgumentException("At least one search parameter is required");
@@ -82,11 +79,11 @@ public class SongService {
             return songRepository.findSongByTitle(title);
         }
         if (album != null) {
-            return songRepository.findSongByAlbum(album);
+            return songRepository.findSongByAlbumOfSong(album);
         }
-        if (artist != null) {
-            return songRepository.findSongByArtist(artist);
-        }
+//        if (artist != null) {
+//            return songRepository.findSongByArtist(artist);
+//        }
         if (id != null) {
             return songRepository.findSongById(id);
 
