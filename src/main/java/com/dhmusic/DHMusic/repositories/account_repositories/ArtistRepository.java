@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.repository.account_repository;
+package com.dhmusic.DHMusic.repositories.account_repositories;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import org.springframework.data.jpa.repository.JpaRepository;

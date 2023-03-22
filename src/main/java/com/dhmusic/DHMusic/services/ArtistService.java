@@ -1,7 +1,7 @@
 package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
-import com.dhmusic.DHMusic.repository.account_repository.ArtistRepository;
+import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,7 +21,15 @@ public class ArtistService {
         artistRepository.save(artist);
     }
 
-    public Artist updateArtist(Artist artist) throws Exception {
+    public Artist updateArtist(Long id,Artist artist) throws Exception {
+
+        if(!artistRepository.existsById(id)){
+            throw new Exception("artist inesistente");
+        }
+        return artistRepository.save(artist);
+    }
+
+    /*public Artist updateArtist(Artist artist) throws Exception {
         Artist existingArtist = artistRepository.findByArtistName(artist.getArtistName());
         if(existingArtist == null){
             throw new Exception("artist inesistente");
@@ -30,7 +38,7 @@ public class ArtistService {
         existingArtist.setAlbumsOfArtist(artist.getAlbumsOfArtist());
         existingArtist.setSongOfArtist(artist.getSongOfArtist());
         return artistRepository.save(existingArtist);
-    }
+    } */
 
     public void deleteArtist(Long id){
         artistRepository.deleteById(id);
