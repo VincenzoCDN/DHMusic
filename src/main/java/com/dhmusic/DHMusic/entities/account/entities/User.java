@@ -25,6 +25,7 @@ public class User extends Account {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "artist_id", referencedColumnName = "id")
+
     private Artist artist;
     @OneToMany(mappedBy = "creator")
     @JsonIgnore
