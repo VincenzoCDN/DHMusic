@@ -46,6 +46,7 @@ public class ArtistController {
     @PutMapping("/update-artist/{id}")
     public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody Artist newArtist){
         try {
+
             newArtist = artistService.updateArtist(id,newArtist);
             return ResponseEntity.ok().body(newArtist);
         } catch (Exception e) {

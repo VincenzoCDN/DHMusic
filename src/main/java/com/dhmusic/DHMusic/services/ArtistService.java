@@ -26,6 +26,7 @@ public class ArtistService {
         if(!artistRepository.existsById(id)){
             throw new Exception("artist inesistente");
         }
+        artist.setId(id);
         return artistRepository.save(artist);
     }
 
@@ -63,8 +64,6 @@ public class ArtistService {
             return false;
         }
         return true;
-
-
     }
 
     public Optional<Artist> getArtistById(Long id) throws Exception {
