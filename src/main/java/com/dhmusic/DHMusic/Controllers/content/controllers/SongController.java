@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,15 +17,9 @@ public class SongController {
 
     @Autowired
     private SongService songService; // per accesso al database
+    private SongRepository songRepository;
 
-//    @Autowired
-//    private final SongRepository songRepository;
 
-//    public SongController(SongService songService,
-//                          SongRepository songRepository){
-//        this.songService=songService;
-//        this.songRepository = songRepository;
-//    }
     //---------------------------------------------------------------------------------------
     @PostMapping("/create-song")
     public Song addSong(@RequestBody Song song){
@@ -33,18 +28,18 @@ public class SongController {
     //---------------------------------------------------------------------------------------
     @GetMapping
     public List<Song> getSongs(){
-//        return songRepository.findAll();
-        return null;
+      return songRepository.findAll();
+
     }
     //---------------------------------------------------------------------------------------
-    @GetMapping("/{id}")
-    public Optional<Song> getUsersId(@PathVariable String id){
-//        return songRepository.findById(Integer.valueOf(id));
-        return null;
+    //mostrare la singola canzone
+    @GetMapping("/get")
+    public Song getSongId( @PathVariable long id){
+       return songRepository.findSongById(id);
     }
     //---------------------------------------------------------------------------------------
     //elimina un Song nel database
-    @DeleteMapping("/delete-song")
+    @DeleteMapping("/delete")
     public ResponseEntity<Void> deleteSong(@RequestBody Song song){
         songService.deleteSong(song);
         return ResponseEntity.status(HttpStatus.OK).build();
@@ -56,4 +51,11 @@ public class SongController {
         Song updateSong = songService.updateSong(id,songDetail);
         return ResponseEntity.ok().body(updateSong);
     }
+
+   /*@GetMapping("/get")
+    public Song getSongId( @PathVariable Song title){
+        return songService.searchSong(title);
+    }
+
+    */
 }

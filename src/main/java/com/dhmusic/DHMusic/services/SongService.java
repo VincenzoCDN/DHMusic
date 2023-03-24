@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -17,10 +18,11 @@ public class SongService {
     @Autowired
     private SongRepository songRepository; // per accesso al database
 
+
     //---------------------------------------------------------------------------------------
     public Song addSong(@RequestBody Song song) {
 
-        Song existSong = songRepository.findSongByTitle(song.getTitle()).get(0);
+        /*Song existSong = songRepository.findSongByTitle(song.getTitle()).get(1);
         //  && songRepository.findSongByArtist(song.getArtistOfSong());
         if (existSong != null) {
             throw new RuntimeException("Song exist!");
@@ -28,7 +30,8 @@ public class SongService {
         if (song.getTitle() == null || song.getArtistOfSong() == null) {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
-        Song newSong = new Song();
+
+       */
         return songRepository.save(song);
 
     }
@@ -36,7 +39,7 @@ public class SongService {
     public void deleteSong(@RequestBody Song song) {
         User user = new User();
         try {
-            Song existSong = songRepository.findSongByTitle(song.getTitle()).get(0); //mettere indice?
+            Song existSong = songRepository.findSongByTitle(song.getTitle()); //mettere indice?
             if (existSong == null) {
                 throw new RuntimeException("Song not exist!");
             }
@@ -53,7 +56,7 @@ public class SongService {
     }
     //---------------------------------------------------------------------------------------
     public Song updateSong(String id, @RequestBody Song song) {
-        Song existSong = songRepository.findSongById(song.getId()).get(0); // id string o long?
+        Song existSong = songRepository.findSongById(song.getId()); // id string o long?
         if (existSong == null) {
             throw new RuntimeException("Song not exist");
         } else {
@@ -66,13 +69,13 @@ public class SongService {
         return songRepository.save(existSong);
     }
     //---------------------------------------------------------------------------------------
-    public List<Song> searchSong(Song song) {
+    public Song searchSong(Song song) {
         String title = song.getTitle();
         Album album = song.getAlbumOfSong();
         Artist artist = song.getArtistOfSong();
         Long id = song.getId();
         //TODO genre
-        if (title == null && artist == null) {  //da ragionare
+        /*if (title == null && artist == null) {  //da ragionare
             throw new IllegalArgumentException("At least one search parameter is required");
         }
         if (title != null) {
@@ -86,9 +89,12 @@ public class SongService {
 //        }
         if (id != null) {
             return songRepository.findSongById(id);
+            }
+       */
 
-        }
-        return null; // da vedere
+        return songRepository.findSongByTitle(title); // da vedere
 
     }
+
+
 }
