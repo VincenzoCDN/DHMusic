@@ -28,7 +28,6 @@ public class Album {
 
     private boolean isPublic;
 
-    private List<Artist> artistList;
 
 
 
@@ -90,11 +89,5 @@ public class Album {
         isPublic = aPublic;
     }
 
-    public List<Artist> getArtistList() {
-        return artistList;
-    }
 
-    public void setArtistList(List<Artist> artistList) {
-        this.artistList = artistList;
-    }
 }

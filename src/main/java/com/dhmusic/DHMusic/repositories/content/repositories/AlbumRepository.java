@@ -10,10 +10,10 @@ public interface AlbumRepository  extends JpaRepository<Album,Long> {
 
 
 
-    public Album findAlbumByTitle (String title);
-
-    public Album findAlbumById(long id);
+    public Album findByAlbumTitle (String title);
 
 
-    Album findByAlbumTitle(String title);
+
+
+
 }

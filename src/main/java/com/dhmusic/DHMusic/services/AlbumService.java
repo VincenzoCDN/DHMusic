@@ -1,7 +1,5 @@
 package com.dhmusic.DHMusic.services;
 
-
-import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.repositories.content.repositories.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +47,7 @@ public class AlbumService{
     }
 
       public Album updateAlbum(Album album) throws Exception {
-        Album newAlbum = albumRepository.findAlbumByTitle(album.getTitle());
+        Album newAlbum = albumRepository.findByAlbumTitle(album.getTitle());
         if(newAlbum == null){
             throw new Exception("Album not found");
         }
@@ -63,12 +61,12 @@ public class AlbumService{
     }
 
     public String changePublic(Album album)  {
-       Album newAlbum = albumRepository.findAlbumById(album.getId());
-         if (newAlbum.isPublic() == false) {
-             newAlbum.setPublic(true);
+       isValidId(album.getId());
+         if (album.isPublic() == false) {
+             album.setPublic(true);
             return "The Album is now public!";
         } else {
-             newAlbum.setPublic(false);
+             album.setPublic(false);
              return "The Album is not public!";
         }
 
