@@ -26,6 +26,12 @@ public class Album {
     private List<Song> songsOfAlbum;
     private Date publicationDate;
 
+    private boolean isPublic;
+
+    private List<Artist> artistList;
+
+
+
     public Album(){
 
     }
@@ -73,5 +79,22 @@ public class Album {
     protected static void playAlbum(Album album) {
 
         System.out.println("ciao");
+    }
+
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+    public List<Artist> getArtistList() {
+        return artistList;
+    }
+
+    public void setArtistList(List<Artist> artistList) {
+        this.artistList = artistList;
     }
 }

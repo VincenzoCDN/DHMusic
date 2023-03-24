@@ -24,6 +24,9 @@ public class Playlist {
     private List<Song> songsOfPlaylist;
     private Date publicationDate;
 
+
+
+
     public Playlist() {
 
     }
@@ -71,4 +74,6 @@ public class Playlist {
     protected static void playPlaylist(Playlist playlist) {
 
     }
+
+
 }
