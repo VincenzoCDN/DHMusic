@@ -21,11 +21,13 @@ public class SongController {
 
 
     //---------------------------------------------------------------------------------------
+    //aggiunge nuova canzone
     @PostMapping("/create")
     public Song addSong(@RequestBody Song song){   //funziona
         return songService.addSong(song);
     }
     //---------------------------------------------------------------------------------------
+    //mostra la lista delle canzoni
     @GetMapping
     public List<Song> getSongs(){           //Funziona
       return songRepository.findAll();
