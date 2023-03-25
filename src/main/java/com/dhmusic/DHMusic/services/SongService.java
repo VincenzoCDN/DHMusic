@@ -7,6 +7,8 @@ import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
@@ -20,7 +22,7 @@ public class SongService {
 
 
     //---------------------------------------------------------------------------------------
-    public Song addSong(@RequestBody Song song) {
+    public Song addSong(Song song) {
 
         /*Song existSong = songRepository.findSongByTitle(song.getTitle()).get(1);
         //  && songRepository.findSongByArtist(song.getArtistOfSong());
@@ -30,13 +32,12 @@ public class SongService {
         if (song.getTitle() == null || song.getArtistOfSong() == null) {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
-
-       */
+*/
         return songRepository.save(song);
 
     }
     //---------------------------------------------------------------------------------------
-    public void deleteSong(@RequestBody Song song) {
+    /*public void deleteSong(@RequestBody Song song) {
         User user = new User();
         try {
             Song existSong = songRepository.findSongByTitle(song.getTitle()); //mettere indice?
@@ -54,8 +55,12 @@ public class SongService {
             System.out.println("An error has occurred:" + e.getMessage());
         }
     }
+
+     */
+
+
     //---------------------------------------------------------------------------------------
-    public Song updateSong(String id, @RequestBody Song song) {
+    public Song updateSong(Song song) {
         Song existSong = songRepository.findSongById(song.getId()); // id string o long?
         if (existSong == null) {
             throw new RuntimeException("Song not exist");
@@ -64,7 +69,7 @@ public class SongService {
             existSong.setArtistOfSong(song.getArtistOfSong());
             existSong.setAlbumOfSong(song.getAlbumOfSong());
             existSong.setAlbumOfSong(song.getAlbumOfSong());
-            //TODO genre
+            existSong.setGenre(song.getGenre());
         }
         return songRepository.save(existSong);
     }
@@ -74,7 +79,7 @@ public class SongService {
         Album album = song.getAlbumOfSong();
         Artist artist = song.getArtistOfSong();
         Long id = song.getId();
-        //TODO genre
+        String genre = song.getGenre();
         /*if (title == null && artist == null) {  //da ragionare
             throw new IllegalArgumentException("At least one search parameter is required");
         }
@@ -95,6 +100,19 @@ public class SongService {
         return songRepository.findSongByTitle(title); // da vedere
 
     }
+    //-----------------------------------------------------------------------
+    public void deleteSong(Long id) {                              //OK
+         Song existSong = songRepository.findSongById(id);
+         if(existSong != null) {
+             songRepository.delete(existSong);
+         }else{
+             throw new RuntimeException("Song not exist!");
+         }
+
+    }
+
+
+
 
 
 }
