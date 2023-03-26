@@ -1,18 +1,11 @@
 package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
-import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class SongService {
@@ -70,8 +63,8 @@ public class SongService {
             existSong.setAlbumOfSong(song.getAlbumOfSong());
             existSong.setAlbumOfSong(song.getAlbumOfSong());
             existSong.setGenre(song.getGenre());
+            return songRepository.save(existSong);
         }
-        return songRepository.save(existSong);
     }
     //---------------------------------------------------------------------------------------
     public Song searchSong(Song song) {

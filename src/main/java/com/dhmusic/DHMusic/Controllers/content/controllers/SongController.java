@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/songs")
@@ -53,7 +53,7 @@ public class SongController {
     }
     //---------------------------------------------------------------------------------------
     //Aggiorna un Song nel database
-    @PutMapping("/update/{id}")                                     //TODO perchè non funziona
+    @PutMapping("/update/{id}")                                     //funziona se inserisco nel body "id"
     public Song updateSong (@PathVariable Long id, @RequestBody Song song) {
         return songService.updateSong(song);
     }
