@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Album;
+import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.services.AlbumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,6 +59,32 @@ public class AlbumController {
         return newAlbum;
     }
 
+    @PutMapping("/update-title-album")
+    public ResponseEntity<Object> updateAlbumTitile(@RequestBody Album newAlbum){
+      try {
+          albumService.updateTitile(newAlbum);
+          return ResponseEntity.accepted().build();
+
+      } catch (Exception e) {
+          e.printStackTrace();
+          return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
+      }
+
+    }
+
+    @PutMapping("/update-artist-album")
+    public ResponseEntity<Object> updateAlbumArtist(@RequestBody Album newAlbum){
+        try {
+            albumService.updateArtist(newAlbum);
+            return ResponseEntity.accepted().build();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
+        }
+
+    }
+
     //Seleziona gli Album nel database
     @GetMapping("/get-all-albums")
     public ResponseEntity getAllAlbum(){
@@ -81,5 +108,17 @@ public class AlbumController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
+
+
+    /*@PutMapping("/album-add-music")
+    public ResponseEntity addMusic(Song song, Album album){
+        try{
+            Optional<Album> album = albumService.getAlbumById(al);
+            return ResponseEntity.ok(album);
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }*/
 
 }

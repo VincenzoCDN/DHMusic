@@ -1,12 +1,12 @@
 package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.content.entities.Album;
+import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.AlbumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class AlbumService{
@@ -32,6 +32,14 @@ public class AlbumService{
         if (album == null) {
             throw new Exception("the album is empty");
         }
+        if (album.getTitle() == null) {
+            throw new Exception("the album need a Title");
+        }
+        if (album.getArtist() == null) {
+            throw new Exception("the album need a Artist");
+        }
+        //TODO
+      // album.setPublicationDate();
         albumRepository.save(album);
 
     }
@@ -46,8 +54,8 @@ public class AlbumService{
         return albumRepository.save(album);
     }
 
-    /*public Album updateAlbum(Album album, long id) throws Exception {
-        Album newAlbum = albumRepository.findByAlbumTitle(album.getTitle());
+   /* public Album updateAlbum(Album album) throws Exception {
+        Album newAlbum = (Album) albumRepository.findAllById(Collections.singleton(album.getId()));
         if(newAlbum == null){
             throw new Exception("Album not found");
         }
@@ -56,37 +64,38 @@ public class AlbumService{
         return albumRepository.save(newAlbum);
     }*/
 
+
+    public Album updateTitile(Album album) throws Exception {
+        Album newAlbum;
+        newAlbum = (Album) albumRepository.findAllById(Collections.singleton(album.getId()));
+        if(newAlbum == null){
+            throw new Exception("Album not found");
+        }
+        albumRepository.deleteById(album.getId());
+        return albumRepository.save(newAlbum);
+    }
+
+    public Album updateArtist(Album album) throws Exception {
+
+
+        Album newAlbum;
+        newAlbum = (Album) albumRepository.findAllById(Collections.singleton(album.getId()));
+
+        if(newAlbum == null){
+            throw new Exception("Album not found");
+        }
+
+
+        albumRepository.deleteById(album.getId());
+        newAlbum= album;
+        return albumRepository.save(newAlbum);
+    }
+
+
     public void deleteAlbum(Long id){
         albumRepository.deleteById(id);
     }
 
-    public String changePublic(Album album)  {
-        isValidId(album.getId());
-        if (album.isPublic() == false) {
-            album.setPublic(true);
-            return "The Album is now public!";
-        } else {
-            album.setPublic(false);
-            return "The Album is not public!";
-        }
-
-
-    }
-
-    /*
-    public String addArtist(Album album){
-
-        Album newAlbum = albumRepository.findAlbumById(album.getId());
-
-    }
-
-
-
-   public String editArtist(Album album)
-    Album newAlbum = albumRepository.findAlbumById(album.getId());
-
-    }
-    */
 
     public List<Album> getAllAlbum(){
         return albumRepository.findAll();
@@ -98,5 +107,13 @@ public class AlbumService{
         }
         return albumRepository.findById(id);
     }
+
+   /* public List<Song> addSongsInTheAlbum(Song song, Album album) throws Exception {
+        if(!albumRepository.existsById(album.getId())){
+            throw new Exception("Album not found");
+        }
+     return albumReposito
+    }*/
+
 
 }
