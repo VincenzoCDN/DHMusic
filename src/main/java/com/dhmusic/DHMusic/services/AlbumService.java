@@ -46,28 +46,28 @@ public class AlbumService{
         return albumRepository.save(album);
     }
 
-      public Album updateAlbum(Album album) throws Exception {
+    /*public Album updateAlbum(Album album, long id) throws Exception {
         Album newAlbum = albumRepository.findByAlbumTitle(album.getTitle());
         if(newAlbum == null){
             throw new Exception("Album not found");
         }
-          newAlbum.setTitle(album.getTitle());
+        newAlbum.setTitle(album.getTitle());
 
-            return albumRepository.save(newAlbum);
-    }
+        return albumRepository.save(newAlbum);
+    }*/
 
     public void deleteAlbum(Long id){
         albumRepository.deleteById(id);
     }
 
     public String changePublic(Album album)  {
-       isValidId(album.getId());
-         if (album.isPublic() == false) {
-             album.setPublic(true);
+        isValidId(album.getId());
+        if (album.isPublic() == false) {
+            album.setPublic(true);
             return "The Album is now public!";
         } else {
-             album.setPublic(false);
-             return "The Album is not public!";
+            album.setPublic(false);
+            return "The Album is not public!";
         }
 
 

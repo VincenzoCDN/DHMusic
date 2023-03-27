@@ -10,7 +10,7 @@ public interface AlbumRepository  extends JpaRepository<Album,Long> {
 
 
 
-    public Album findByAlbumTitle (String title);
+  //  public Album findByAlbumTitle (String title);
 
 
 
