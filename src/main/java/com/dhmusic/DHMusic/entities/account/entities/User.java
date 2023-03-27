@@ -15,7 +15,9 @@ import java.util.List;
 @Entity
 @Table(name = "users")
 public class User extends Account {
+    @Column(nullable = false,length = 45)
     private String name;
+    @Column(nullable = false,length = 45)
     private String surname;
     private String dateOfBirth;
     private String gender;
@@ -25,25 +27,24 @@ public class User extends Account {
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "artist_id", referencedColumnName = "id")
-
     private Artist artist;
     @OneToMany(mappedBy = "creator")
     @JsonIgnore
     private List<Playlist> playlistOfUser;
+
+    @Column(columnDefinition = "int default '0'",nullable = false)
     private int isAdmin; //chiedere per il boolean su db
-    boolean isAdmin1;
 
     public User(){
         super();
     }
-    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, int isAdmin) {
+    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality) {
         super(username, email, password);
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.nationality = nationality;
-        this.isAdmin = 1;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
         this.setCreationDate(dtf.format(now));
@@ -149,12 +150,6 @@ public class User extends Account {
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
-    public boolean isAdmin1(){
-        return isAdmin1;
-    }
-    public void setAdmin1(boolean isAdmin1){
-        this.isAdmin1 = isAdmin1;
-    }
 
     public List<Artist> getFollowedArtists() {
         return followedArtists;
@@ -162,6 +157,22 @@ public class User extends Account {
 
     public void setFollowedArtists(List<Artist> followedArtists) {
         this.followedArtists = followedArtists;
+    }
+
+    public Artist getArtist() {
+        return artist;
+    }
+
+    public void setArtist(Artist artist) {
+        this.artist = artist;
+    }
+
+    public List<Playlist> getPlaylistOfUser() {
+        return playlistOfUser;
+    }
+
+    public void setPlaylistOfUser(List<Playlist> playlistOfUser) {
+        this.playlistOfUser = playlistOfUser;
     }
 }
 

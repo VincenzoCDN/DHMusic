@@ -40,13 +40,13 @@ public class SongService {
             if (existSong == null) {
                 throw new RuntimeException("Song not exist!");
             }
-            if (existSong.isPublic() && user.isAdmin1()
-                    || !existSong.isPublic() && !user.isAdmin1()
-                    || !existSong.isPublic() && user.isAdmin1()) { // da vedere
-                songRepository.delete(song);
-            } else {
-                throw new RuntimeException("You don't have permission to delete this song");
-            }
+//            if (existSong.isPublic() && user.isAdmin1()
+//                    || !existSong.isPublic() && !user.isAdmin1()
+//                    || !existSong.isPublic() && user.isAdmin1()) { // da vedere
+//                songRepository.delete(song);
+//            } else {
+//                throw new RuntimeException("You don't have permission to delete this song");
+//            }
         } catch (Exception e) {
             System.out.println("An error has occurred:" + e.getMessage());
         }
