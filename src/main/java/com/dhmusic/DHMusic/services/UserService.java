@@ -2,7 +2,10 @@ package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
+import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
+import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
@@ -12,20 +15,55 @@ import java.util.List;
 @Service
 public class UserService {
 
-    private final List<User> userList = new ArrayList<>();
-    public void createUser(User newUser) throws AccountExceptions {
+    @Autowired
+    private UserRepository userRepository;
+
+    public User createUser(User newUser) throws AccountExceptions {
         if (!isValidUser(newUser)) {
             throw new AccountExceptions("Dati utente non validi");
         }
-        /*User user = new User(newUser.getUsername(),newUser.getEmail(),hashPassword(newUser.getPassword()),
-                newUser.getName(),newUser.getSurname(),newUser.getDateOfBirth(),
-                newUser.getGender(),newUser.getNationality());*/
-        userList.add(newUser);
-       // User savedUser = userRepository.save(newUser);
+        String rawPsw = newUser.getPassword();
+        String hashPsw = hashPassword(rawPsw);
+        newUser.setPassword(hashPsw);
+        User user = new User(
+                newUser.getUsername(),
+                newUser.getEmail(),
+                newUser.getPassword(),
+                newUser.getName(),
+                newUser.getSurname(),
+                newUser.getDateOfBirth(),
+                newUser.getGender(),
+                newUser.getNationality()
+        );
+        return userRepository.saveAndFlush(user);
     }
 
+    public User getUserbyId(Long id){
+        return userRepository.existsById(id)
+                ? userRepository.getById(id)
+                : new User();
+    }
     public List<User> getAllUsers() {
-        return new ArrayList<>(userList);
+        return userRepository.findAll();
+    }
+
+    public void deleteSingleUser(Long id, HttpServletResponse response){
+        if (userRepository.existsById(id))
+            userRepository.deleteById(id);
+        else
+            response.setStatus(409);
+    }
+
+    public User updateUser(Long id, String name){
+        User user;
+        if (userRepository.existsById(id)){
+            user = userRepository.getById(id);
+            user.setName(name);
+            user = userRepository.saveAndFlush(user);
+        }else{
+            user = new User();
+        }
+        return user;
     }
     public boolean isValidUser(User user){
         if (user.getUsername() == null || user.getUsername().isEmpty() ||
@@ -48,4 +86,5 @@ public class UserService {
     public static boolean checkPassword(String password, String hashedPassword){
         return BCrypt.checkpw(password,hashedPassword);
     }
+
 }
