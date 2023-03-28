@@ -11,10 +11,13 @@ public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false,unique = true,length = 20)
     private String username;
+    @Column(nullable = false,unique = true, length=200)
     private String password;
-    @Column(unique = true)
+    @Column(unique = true, length = 45)
     private String email;
+
     private String creationDate;
 
     private boolean loggedIn; //verificare se utile o meno

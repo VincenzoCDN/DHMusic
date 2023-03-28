@@ -26,9 +26,16 @@ public class Album {
     private List<Song> songsOfAlbum;
     private Date publicationDate;
 
+    private boolean isPublic;
+
+
+
+
+
     public Album(){
 
     }
+
 
     public Long getId() {
         return id;
@@ -74,4 +81,15 @@ public class Album {
 
         System.out.println("ciao");
     }
+
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+
 }
