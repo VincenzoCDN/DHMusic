@@ -3,14 +3,15 @@ package com.dhmusic.DHMusic.services;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
+
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
+import javax.servlet.http.HttpServletResponse;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -38,11 +39,18 @@ public class UserService {
         return userRepository.saveAndFlush(user);
     }
 
-    public User getUserbyId(Long id){
+    public Optional<User> getUserbyId(Long id){
+        if(!userRepository.existsById(id)){
+            return null;
+        }
+        return userRepository.findById(id);
+    }
+
+    /*public User getUserbyId(Long id){
         return userRepository.existsById(id)
                 ? userRepository.getById(id)
                 : new User();
-    }
+    }*/
     public List<User> getAllUsers() {
         return userRepository.findAll();
     }

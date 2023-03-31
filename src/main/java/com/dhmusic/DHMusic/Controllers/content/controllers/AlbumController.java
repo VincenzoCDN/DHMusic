@@ -18,13 +18,6 @@ public class AlbumController {
     @Autowired
     AlbumService albumService;
 
-
-
-
-
-
-
-
     //inserisce un nuovo Album nel database
     @PostMapping("/create-album")
     public ResponseEntity createAlbum(@RequestBody Album album){
@@ -69,7 +62,6 @@ public class AlbumController {
           e.printStackTrace();
           return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
       }
-
     }
 
     @PutMapping("/update-artist-album")
@@ -82,7 +74,6 @@ public class AlbumController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
         }
-
     }
 
     //Seleziona gli Album nel database
@@ -108,7 +99,6 @@ public class AlbumController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
-
 
     /*@PutMapping("/album-add-music")
     public ResponseEntity addMusic(Song song, Album album){

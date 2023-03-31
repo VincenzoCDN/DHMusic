@@ -14,7 +14,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/artists")
 public class ArtistController {
-
     @Autowired
     ArtistService artistService; //istanzio ArtistServer
 

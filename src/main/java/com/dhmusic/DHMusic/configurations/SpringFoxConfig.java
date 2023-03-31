@@ -37,10 +37,10 @@ public class SpringFoxConfig {
                 .build().apiInfo(apiInfo)
                 .tags(
                         new Tag("default-controller", "The main initial controller for all the API features"),
-                        new Tag("Artist-controller", "Controller dedicated just to API > Artist"),
-                        new Tag("User-controller", "Controller dedicated just to API > User"),
-                        new Tag("Album-controller", "Controller dedicated just to API > Album"),
-                        new Tag("Song-controller", "Controller dedicated just to API > Song")
+                        new Tag("artist-controller", "Controller dedicated just to API > Artist"),
+                        new Tag("user-controller", "Controller dedicated just to API > User"),
+                        new Tag("album-controller", "Controller dedicated just to API > Album"),
+                        new Tag("song-controller", "Controller dedicated just to API > Song")
                 );
     }
 }
