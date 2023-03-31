@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.services;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.repositories.content.repositories.AlbumRepository;
+import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,8 @@ public class AlbumService{
 
     @Autowired
     private AlbumRepository albumRepository;
+    @Autowired
+    private SongRepository songRepository;
 
 
 
@@ -29,15 +32,12 @@ public class AlbumService{
 
 
     public void createAlbum(Album album) throws Exception {
-        if (album == null) {
-            throw new Exception("the album is empty");
-        }
-        if (album.getTitle() == null) {
+               if (album.getTitle() == null) {
             throw new Exception("the album need a Title");
         }
-        if (album.getArtist() == null) {
-            throw new Exception("the album need a Artist");
-        }
+       // if (album.getArtist() == null) {
+     //       throw new Exception("the album need a Artist");
+       // }
         //TODO
       // album.setPublicationDate();
         albumRepository.save(album);
@@ -108,12 +108,21 @@ public class AlbumService{
         return albumRepository.findById(id);
     }
 
-   /* public List<Song> addSongsInTheAlbum(Song song, Album album) throws Exception {
-        if(!albumRepository.existsById(album.getId())){
+    public String addSongsInTheAlbum(long idSong, long idAlbum) throws Exception {
+        if(!albumRepository.existsById(idAlbum)){
             throw new Exception("Album not found");
         }
-     return albumReposito
-    }*/
+        if(!songRepository.existsById(idSong)){
+            throw new Exception("Song not found");
+        }
+        Album existingAlbum= albumRepository.findAlbumById(idAlbum);
+        Song existSong = songRepository.findSongById(idSong);
+
+        existSong.setAlbumOfSong(existingAlbum);
+        albumRepository.save(existingAlbum);
+        return existSong.getTitle() + " is add in the Album " +  existingAlbum.getTitle();
+
+    }
 
 
 }

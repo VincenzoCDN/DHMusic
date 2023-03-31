@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.services;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.repositories.content.repositories.AlbumRepository;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,8 @@ public class SongService {
 
     @Autowired
     private SongRepository songRepository; // per accesso al database
+    @Autowired
+    private AlbumRepository albumRepository;
 
 
     //---------------------------------------------------------------------------------------
@@ -86,6 +89,18 @@ public class SongService {
         //insert conditions       TODO
       songRepository.deleteAll();
         }
+    //-----------------------------------------------------------------------
+
+
+
+
+
+
+
+
 
 }
+
+
+
 

@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.Controllers.content.controllers;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.services.AlbumService;
+import com.dhmusic.DHMusic.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class AlbumController {
 
     @Autowired
     AlbumService albumService;
+
+    @Autowired
+    SongService songService;
 
 
 
@@ -102,23 +106,23 @@ public class AlbumController {
     public ResponseEntity getAlbumById(@PathVariable Long id){
         try{
             Optional<Album> album = albumService.getAlbumById(id);
-            return ResponseEntity.ok(album);
+            return ResponseEntity.ok(albumService);
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
+    @PutMapping("/add-music-in-the-album")
+    public ResponseEntity addMusic(@RequestParam long idSong, @RequestParam long idAlbum) {
+        try {
 
-    /*@PutMapping("/album-add-music")
-    public ResponseEntity addMusic(Song song, Album album){
-        try{
-            Optional<Album> album = albumService.getAlbumById(al);
-            return ResponseEntity.ok(album);
-        }catch (Exception e){
+            albumService.addSongsInTheAlbum(idSong, idAlbum);
+            return ResponseEntity.ok(albumService.getAlbumById(idAlbum));
+        } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
         }
-    }*/
+    }
 
 }
