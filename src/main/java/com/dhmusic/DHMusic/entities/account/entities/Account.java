@@ -1,7 +1,8 @@
 package com.dhmusic.DHMusic.entities.account.entities;
-import jakarta.persistence.*;
 
 
+
+import javax.persistence.*;
 import java.util.Random;
 import java.util.Scanner;
 

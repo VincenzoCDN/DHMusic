@@ -5,9 +5,9 @@ package com.dhmusic.DHMusic.entities.account.entities;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
 
+import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "artists")

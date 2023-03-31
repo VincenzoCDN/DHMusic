@@ -4,8 +4,9 @@ package com.dhmusic.DHMusic.entities.account.entities;
 import com.dhmusic.DHMusic.entities.content.entities.Playlist;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
 
+
+import javax.persistence.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.time.LocalDateTime;
