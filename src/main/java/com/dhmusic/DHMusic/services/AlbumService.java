@@ -35,9 +35,9 @@ public class AlbumService{
                if (album.getTitle() == null) {
             throw new Exception("the album need a Title");
         }
-       // if (album.getArtist() == null) {
-     //       throw new Exception("the album need a Artist");
-       // }
+       if (album.getArtist() == null) {
+            throw new Exception("the album need a Artist");
+        }
         //TODO
       // album.setPublicationDate();
         albumRepository.save(album);
