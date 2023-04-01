@@ -28,7 +28,7 @@ public class ArtistService {
             throw new Exception("artist inesistente");
         }
         artist.setId(id);
-        return artistRepository.save(artist);
+        return artistRepository.saveAndFlush(artist);
     }
 
     /*public Artist updateArtist(Artist artist) throws Exception {

@@ -1,5 +1,6 @@
 package com.dhmusic.DHMusic.services;
 
+import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
@@ -46,7 +47,7 @@ public class UserService {
         return userRepository.findById(id);
     }
 
-    /*public User getUserbyId(Long id){
+    /*public User getUserbyId(Long id){               // non funzionava cosi l'ho cambiato
         return userRepository.existsById(id)
                 ? userRepository.getById(id)
                 : new User();
@@ -61,6 +62,7 @@ public class UserService {
         else
             response.setStatus(409);
     }
+
 
     public User updateUser(Long id, String name){
         User user;
