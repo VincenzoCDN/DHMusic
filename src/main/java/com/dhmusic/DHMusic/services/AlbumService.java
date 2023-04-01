@@ -103,9 +103,27 @@ public class AlbumService{
 
     public Optional<Album> getAlbumById(Long id) throws Exception {
         if(!isValidId(id)){
-            throw new Exception("The id is not found!");
+            throw new Exception("The Album is not found!");
         }
+
         return albumRepository.findById(id);
+    }
+
+    public List<Song> getSongByAlbumId(Long id)throws Exception {
+        if (!isValidId(id)) {
+            throw new Exception("The Album is not found!");
+        }
+
+        return songRepository.findSongByalbumOfSong(albumRepository.findAlbumById(id));
+    }
+
+    public List<Song> getSongByAlbumTitle(String title) throws Exception {
+        Album albumNew= albumRepository.findByTitle(title);
+        if (albumNew == null) {
+            throw new Exception("The Title Album is not found!");
+        }
+
+         return  songRepository.findSongByalbumOfSong(albumRepository.findAlbumById(albumNew.getId()));
     }
 
     public String addSongsInTheAlbum(long idSong, long idAlbum) throws Exception {

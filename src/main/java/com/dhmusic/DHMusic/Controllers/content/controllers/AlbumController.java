@@ -4,6 +4,7 @@ import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.services.AlbumService;
 import com.dhmusic.DHMusic.services.SongService;
+import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,7 +30,8 @@ public class AlbumController {
 
 
 
-    //inserisce un nuovo Album nel database
+    //---------------------------------------------------------------------------------------
+    //Crea un Album nel database
     @PostMapping("/create-album")
     public ResponseEntity createAlbum(@RequestBody Album album){
         try {
@@ -41,7 +43,9 @@ public class AlbumController {
         }
     }
 
-    //elimina un Album nel database
+    //---------------------------------------------------------------------------------------
+    //Elimina un Song nel database
+
     @DeleteMapping("/delete-album/{id}")
     public ResponseEntity deleteAlbum(@RequestBody Long id){
         try {
@@ -53,7 +57,9 @@ public class AlbumController {
         }
     }
 
-    //Aggiorna un Album nel database
+    //---------------------------------------------------------------------------------------
+    //                              Aggiorna il Database:
+    //Update Generale
     @PutMapping("/update-album")
     public Album updateAlbum(@RequestBody Album newAlbum){
         //logica di aggiornamento dell'Album (usando solo questo metodo
@@ -62,7 +68,8 @@ public class AlbumController {
         // L ho lasciato cosi perché penso sia meglio per ogni attributo.
         return newAlbum;
     }
-
+    //---------------------------------------------------------------------------------------
+    //Update the Title
     @PutMapping("/update-title-album")
     public ResponseEntity<Object> updateAlbumTitile(@RequestBody Album newAlbum){
       try {
@@ -75,7 +82,8 @@ public class AlbumController {
       }
 
     }
-
+    //---------------------------------------------------------------------------------------
+    //Update the Artist(s)
     @PutMapping("/update-artist-album")
     public ResponseEntity<Object> updateAlbumArtist(@RequestBody Album newAlbum){
         try {
@@ -89,7 +97,9 @@ public class AlbumController {
 
     }
 
-    //Seleziona gli Album nel database
+    //---------------------------------------------------------------------------------------
+    //                          Found Albums in the database:
+    //All Album (No songs)
     @GetMapping("/get-all-albums")
     public ResponseEntity getAllAlbum(){
         try {
@@ -101,18 +111,41 @@ public class AlbumController {
         }
     }
 
-    //Seleziona un Album nel database
+    //---------------------------------------------------------------------------------------
+    //By Id
     @GetMapping("/get-album-by-id")
-    public ResponseEntity getAlbumById(@PathVariable Long id){
+    public ResponseEntity getAlbumById(@RequestParam long id){
         try{
             Optional<Album> album = albumService.getAlbumById(id);
-            return ResponseEntity.ok(albumService);
+            List<Song> song= albumService.getSongByAlbumId(id);
+
+            return ResponseEntity.ok(song);
+
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
     }
 
+    //---------------------------------------------------------------------------------------
+    //By Tittle
+    @GetMapping("/get-album-by-title")
+    public ResponseEntity getAlbumByTitle(@RequestParam String title){
+        try{
+
+            List<Song> song= albumService.getSongByAlbumTitle(title);
+
+            return ResponseEntity.ok(song);
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+    //---------------------------------------------------------------------------------------
+    //                                 Add Song in the Album
+    // Add by: Id song + Id Album
     @PutMapping("/add-music-in-the-album")
     public ResponseEntity addMusic(@RequestParam long idSong, @RequestParam long idAlbum) {
         try {
