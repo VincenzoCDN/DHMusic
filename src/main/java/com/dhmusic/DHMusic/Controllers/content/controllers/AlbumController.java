@@ -32,7 +32,7 @@ public class AlbumController {
 
     //elimina un Album nel database
     @DeleteMapping("/delete-album/{id}")
-    public ResponseEntity deleteAlbum(@RequestBody Long id){
+    public ResponseEntity deleteAlbum(@RequestParam Long id){
         try {
            albumService.deleteAlbum(id);
             return ResponseEntity.accepted().build();
@@ -89,7 +89,7 @@ public class AlbumController {
     }
 
     //Seleziona un Album nel database
-    @GetMapping("/get-album-by-id")
+    @GetMapping("/get-album-by-id/{id}")
     public ResponseEntity getAlbumById(@PathVariable Long id){
         try{
             Optional<Album> album = albumService.getAlbumById(id);
