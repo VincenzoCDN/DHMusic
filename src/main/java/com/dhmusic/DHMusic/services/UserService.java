@@ -1,10 +1,15 @@
 package com.dhmusic.DHMusic.services;
 
+import com.dhmusic.DHMusic.email.EmailService;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.mapper.UserMapper;
+import com.dhmusic.DHMusic.entities.content.entities.Album;
+import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.cache.spi.support.CollectionReadOnlyAccess;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+import java.util.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
@@ -24,11 +30,16 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public ResponseEntity<?> createUser(UserDTO newUser) {
         if (!isValidUser(newUser) || !isValidEmail(newUser.getEmail()) || !isValidPassword(newUser.getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User());
         }
         User user = userMapper.toArtist(newUser);
+        newUser.setVerificationCode(generateCode());
+        emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
         return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
     }
 
@@ -109,4 +120,44 @@ public class UserService {
         return true;
     }
 
+    public String generateCode(){
+        String alphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
+        String[] alphaArray= alphaNumericStr.split("");
+        List<String> tempList= new ArrayList<>();
+        for (int i=0; i <= 6; i++){
+            Random random= new Random();
+            int n = random.nextInt(alphaNumericStr.length()-1);
+            String s = alphaArray[n];
+            tempList.add(s);
+        }
+        String code= tempList.toString().replaceAll(",","").replaceAll("[^\\w\\s]", "").replaceAll(" ", "");
+
+        return code;
+
+    }
+
+    public String verificareAccount(long id, String code){
+        if(!userRepository.existsById(id)){
+            return "Account not found";
+        }
+
+
+        User existingUser= userRepository.findUserById(id);
+
+        if (existingUser.isVerificateEmail()== true){
+            return "The mail is already authenticated";
+        }
+
+      if(Objects.equals(existingUser.getVerificationCode(), code)) {
+          existingUser.setVerificateEmail(true);
+          userRepository.save(existingUser);
+          return "The code is correct. \nYour Account is validate now!";
+
+      } else {
+          return "the code is not correct.\nPlease check end try again.";
+      }
+
+
+
+    }
 }

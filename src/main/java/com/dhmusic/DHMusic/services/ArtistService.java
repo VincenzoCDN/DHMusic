@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,14 +46,14 @@ public class ArtistService {
         artistRepository.deleteById(id);
     }
 
-    /*public List<User> getUsersFollowers(Artist artist){
-        Artist existingArtist = artistRepository.findByArtistName(artist.getName());
+    public List<User> getUsersFollowers(String artistName){
+        Artist existingArtist = artistRepository.findByArtistName(artistName);
         if( existingArtist == null){
             return null;
         }
         return existingArtist.getUsersFollowers();
     }
-     */
+
 
     public List<Artist> getAllArtist(){
         return artistRepository.findAll();

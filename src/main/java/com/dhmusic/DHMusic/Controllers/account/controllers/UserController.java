@@ -6,6 +6,7 @@ import com.dhmusic.DHMusic.services.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,4 +48,18 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    @PutMapping("/verificate_code/{id}")
+    public ResponseEntity verificateUser(@PathVariable Long id, @RequestParam String code){
+
+        try {
+
+            return ResponseEntity.accepted().body(userService.verificareAccount(id, code));
+
+    }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+
+
+    }
+}
 }

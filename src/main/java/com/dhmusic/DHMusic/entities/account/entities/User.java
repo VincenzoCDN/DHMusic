@@ -35,6 +35,8 @@ public class User extends Account {
     @Column(columnDefinition = "int default '0'",nullable = false)
     private int isAdmin; //chiedere per il boolean su db
 
+    private String verificationCode;
+
     public User(){
         super();
     }
@@ -112,6 +114,18 @@ public class User extends Account {
         this.playlistOfUser = playlistOfUser;
     }
 
+
+    //---------------------
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    //--------------------
 }
 
 

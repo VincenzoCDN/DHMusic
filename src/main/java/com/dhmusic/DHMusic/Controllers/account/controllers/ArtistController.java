@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.account.controllers;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,10 +81,10 @@ public class ArtistController {
 
     }
 
-    /*@GetMapping("/get-user-followers")
-    public List<User> getFollowers(@RequestParam Artist artist){
-        return artistService.getUsersFollowers(artist);
+    @GetMapping("/get-user-followers")
+    public List<User> getFollowers(@RequestParam String artistName){
+
+        return artistService.getUsersFollowers(artistName);
     }
-     */
 }
 
