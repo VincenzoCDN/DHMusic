@@ -54,4 +54,18 @@ public class UserController {
         return userService.getUserbyId(id);
     }
 
+    @PutMapping("/verificate_code/{id}")
+    public ResponseEntity verificateUser(@PathVariable Long id, @RequestParam String code){
+        try {
+        userService.verificareAccount(id, code);
+
+        return ResponseEntity.accepted().body("The code is correct. \nYour Account is validate now!");
+
+    }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+
+
+    }
+}
 }

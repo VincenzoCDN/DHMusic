@@ -35,16 +35,22 @@ public class User extends Account {
     @Column(columnDefinition = "int default '0'",nullable = false)
     private int isAdmin; //chiedere per il boolean su db
 
+
+
+
+    private String verificationCode;
+
     public User(){
         super();
     }
-    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality) {
+    public User(String username, String email, String password, String name, String surname, String dateOfBirth, String gender, String nationality, String verificateCode) {
         super(username, email, password);
         this.name = name;
         this.surname = surname;
         this.dateOfBirth = dateOfBirth;
         this.gender = gender;
         this.nationality = nationality;
+        this.verificationCode= verificateCode;
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDateTime now = LocalDateTime.now();
         this.setCreationDate(dtf.format(now));
@@ -174,6 +180,19 @@ public class User extends Account {
     public void setPlaylistOfUser(List<Playlist> playlistOfUser) {
         this.playlistOfUser = playlistOfUser;
     }
+
+
+    //---------------------
+
+    public String getVerificationCode() {
+        return verificationCode;
+    }
+
+    public void setVerificationCode(String verificationCode) {
+        this.verificationCode = verificationCode;
+    }
+
+    //--------------------
 }
 
 

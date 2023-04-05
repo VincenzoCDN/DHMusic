@@ -1,22 +1,28 @@
 package com.dhmusic.DHMusic.services;
 
+import com.dhmusic.DHMusic.email.EmailService;
 import com.dhmusic.DHMusic.entities.account.entities.User;
+import com.dhmusic.DHMusic.entities.content.entities.Album;
+import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
+import org.hibernate.cache.spi.support.CollectionReadOnlyAccess;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private EmailService emailService;
 
     public User createUser(User newUser) throws AccountExceptions {
         if (!isValidUser(newUser)) {
@@ -25,6 +31,9 @@ public class UserService {
         String rawPsw = newUser.getPassword();
         String hashPsw = hashPassword(rawPsw);
         newUser.setPassword(hashPsw);
+
+        newUser.setVerificationCode(generateCode());
+
         User user = new User(
                 newUser.getUsername(),
                 newUser.getEmail(),
@@ -33,8 +42,17 @@ public class UserService {
                 newUser.getSurname(),
                 newUser.getDateOfBirth(),
                 newUser.getGender(),
-                newUser.getNationality()
+                newUser.getNationality(),
+                newUser.getVerificationCode()
         );
+
+            userRepository.saveAndFlush(user);
+
+            User tempUser= userRepository.findByEmail(newUser.getEmail());
+
+            emailService.sendCreateCode(tempUser.getEmail(), tempUser.getVerificationCode());
+
+
         return userRepository.saveAndFlush(user);
     }
 
@@ -87,4 +105,39 @@ public class UserService {
         return BCrypt.checkpw(password,hashedPassword);
     }
 
+    public String generateCode(){
+        String alphaNumericStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvxyz0123456789";
+        String[] alphaArray= alphaNumericStr.split("");
+        List<String> tempList= new ArrayList<>();
+        for (int i=0; i <= 6; i++){
+            Random random= new Random();
+            int n = random.nextInt(alphaNumericStr.length()-1);
+            String s = alphaArray[n];
+            tempList.add(s);
+        }
+        String code= tempList.toString().replaceAll(",","").replaceAll("[^\\w\\s]", "").replaceAll(" ", "");
+
+        return code;
+
+    }
+
+    public String verificareAccount(long id, String code){
+        if(!userRepository.existsById(id)){
+            return "Account not found";
+        }
+
+        User existingUser= userRepository.findUserById(id);
+
+      if(Objects.equals(existingUser.getVerificationCode(), code)) {
+          existingUser.setVerificateEmail(true);
+          userRepository.save(existingUser);
+          return "The code is correct. \nYour Account is validate now!";
+
+      } else {
+          return "the code is not correct.\nPlease check end try again.";
+      }
+
+
+
+    }
 }
