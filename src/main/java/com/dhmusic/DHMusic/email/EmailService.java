@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.email;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -15,11 +16,14 @@ public class EmailService {
  //   @Autowired
    // private UserService userService;
 
+    @Value("${spring.mail.username}")
+    String email1;
+
     public void sendTo(String email, String title, String text) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
         message.setSubject(title);
-        message.setFrom("dhmusicstreamingsong@gmail.com");
+        message.setFrom(email1);
         message.setText(text);
         javaMailSender.send(message);
     }
