@@ -4,23 +4,19 @@ import com.dhmusic.DHMusic.email.EmailService;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.mapper.UserMapper;
-import com.dhmusic.DHMusic.entities.content.entities.Album;
-import com.dhmusic.DHMusic.entities.content.entities.Song;
-import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
-import org.hibernate.cache.spi.support.CollectionReadOnlyAccess;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-
-import java.util.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
+import java.util.Random;
 
 @Service
 public class UserService {
@@ -35,10 +31,10 @@ public class UserService {
 
     public ResponseEntity<?> createUser(UserDTO newUser) {
         if (!isValidUser(newUser) || !isValidEmail(newUser.getEmail()) || !isValidPassword(newUser.getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new User());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid data");
         }
         User user = userMapper.toArtist(newUser);
-        newUser.setVerificationCode(generateCode());
+        user.setVerificationCode(generateCode());
         emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
         return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
     }
@@ -144,7 +140,7 @@ public class UserService {
 
         User existingUser= userRepository.findUserById(id);
 
-        if (existingUser.isVerificateEmail()== true){
+        if (existingUser.isVerificateEmail()){
             return "The mail is already authenticated";
         }
 
@@ -160,4 +156,5 @@ public class UserService {
 
 
     }
+
 }

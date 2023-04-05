@@ -21,7 +21,6 @@ public abstract class Account {
     private String creationDate;
 
     private boolean verificateEmail;
-    private String codeVerificate;
 
     public Account() {
 
@@ -75,12 +74,5 @@ public abstract class Account {
         this.verificateEmail = verificateEmail;
     }
 
-    public String getCodeVerificate() {
-        return codeVerificate;
-    }
-
-    public void setCodeVerificate(String codeVerificate) {
-        this.codeVerificate = codeVerificate;
-    }
 
 }

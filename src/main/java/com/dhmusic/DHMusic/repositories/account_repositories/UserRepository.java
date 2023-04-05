@@ -1,7 +1,6 @@
 package com.dhmusic.DHMusic.repositories.account_repositories;
 
 import com.dhmusic.DHMusic.entities.account.entities.User;
-import com.dhmusic.DHMusic.entities.content.entities.Album;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
