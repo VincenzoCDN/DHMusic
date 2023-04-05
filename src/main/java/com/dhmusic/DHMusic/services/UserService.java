@@ -126,7 +126,12 @@ public class UserService {
             return "Account not found";
         }
 
+
         User existingUser= userRepository.findUserById(id);
+
+        if (existingUser.isVerificateEmail()== true){
+            return "The mail is already authenticated";
+        }
 
       if(Objects.equals(existingUser.getVerificationCode(), code)) {
           existingUser.setVerificateEmail(true);

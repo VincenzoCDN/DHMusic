@@ -56,10 +56,10 @@ public class UserController {
 
     @PutMapping("/verificate_code/{id}")
     public ResponseEntity verificateUser(@PathVariable Long id, @RequestParam String code){
-        try {
-        userService.verificareAccount(id, code);
 
-        return ResponseEntity.accepted().body("The code is correct. \nYour Account is validate now!");
+        try {
+
+            return ResponseEntity.accepted().body(userService.verificareAccount(id, code));
 
     }catch (Exception e) {
             e.printStackTrace();
