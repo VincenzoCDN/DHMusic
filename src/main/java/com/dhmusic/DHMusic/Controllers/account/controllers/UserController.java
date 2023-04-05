@@ -1,10 +1,11 @@
 package com.dhmusic.DHMusic.Controllers.account.controllers;
 
 import com.dhmusic.DHMusic.entities.account.entities.User;
-import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
+import com.dhmusic.DHMusic.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.services.UserService;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,12 +19,8 @@ public class UserController {
 
     //inserisce un nuovo user nel database
     @PostMapping("/create-user")
-    public void createUser(@RequestBody User newUser) {
-        try {
-            userService.createUser(newUser);
-        }catch(AccountExceptions e){
-            System.out.println(e.getMessage());
-        }
+    public ResponseEntity<?> createUser(@RequestBody UserDTO newUser) {
+            return userService.createUser(newUser);
     }
 
     //elimina un user nel database
@@ -34,8 +31,8 @@ public class UserController {
 
     //Aggiorna un User nel database
     @PutMapping("/update-user/{id}")
-    public User updateUser(@PathVariable Long id, @RequestParam String name){
-        return userService.updateUser(id, name);
+    public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO updateUser){
+        return userService.updateUser(id, updateUser);
     }
 
     //Seleziona gli User nel database
@@ -46,8 +43,8 @@ public class UserController {
 
     //Seleziona un User nel database
     @GetMapping("/get-user/{id}")
-    public User getUserById(@PathVariable Long id){
-        return userService.getUserbyId(id);
+    public ResponseEntity<?> getUserById(@PathVariable Long id){
+        return userService.getUserById(id);
     }
 
 }

@@ -8,8 +8,6 @@ import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User,Long> {
-    User saveAndFlush(User newUser);
-
     List<User> findAll();
 
     boolean existsById(Long id);
