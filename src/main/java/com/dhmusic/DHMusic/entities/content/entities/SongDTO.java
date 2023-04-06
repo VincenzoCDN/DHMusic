@@ -1,9 +1,5 @@
 package com.dhmusic.DHMusic.entities.content.entities;
 
-import com.dhmusic.DHMusic.entities.account.entities.Artist;
-
-import java.util.Date;
-import java.util.List;
 
 public class SongDTO {
 
