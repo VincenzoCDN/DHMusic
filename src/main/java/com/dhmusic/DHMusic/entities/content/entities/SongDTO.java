@@ -3,8 +3,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 public class SongDTO {
 
-    private Long id;
-    private String title;
+   private String title;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
 
