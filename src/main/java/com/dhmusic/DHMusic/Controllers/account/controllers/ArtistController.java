@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.account.controllers;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.entities.account.entities.ArtistDTO;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.services.ArtistService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,10 @@ public class ArtistController {
 
     //inserisce un nuovo artista nel database
     @PostMapping("/create-artist")
-    public ResponseEntity createArtist(@RequestBody Artist newArtist){
+    public ResponseEntity createArtist(@RequestBody ArtistDTO artistDTO){
         try {
-            artistService.createArtist(newArtist);
-            return ResponseEntity.ok(newArtist);
+            artistService.createArtist(artistDTO);
+            return ResponseEntity.ok(artistDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
@@ -39,22 +40,22 @@ public class ArtistController {
             return ResponseEntity.accepted().build();
         }catch (Exception e){
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     //Aggiorna un artista nel database
     @PutMapping("/update-artist/{id}")
-    public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody Artist newArtist){
+    public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody ArtistDTO newArtist){
         try {
-
-            newArtist = artistService.updateArtist(id,newArtist);
+            artistService.updateArtist(id,newArtist);
             return ResponseEntity.ok().body(newArtist);
         } catch (Exception e) {
            e.printStackTrace();
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 
     //Seleziona gli artisti nel database
     @GetMapping("/get-all-artists")

@@ -30,7 +30,8 @@ public class Artist {
     @JsonIgnore
     private List<Song> songOfArtist;
     private int follower;
-    @OneToOne(mappedBy = "artist")
+    @OneToOne()
+    @JoinColumn(name = "user_id", referencedColumnName = "id",nullable = false)
     private User user;
     @ManyToMany
     @JoinTable(name="followers", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="artist_id"))
@@ -39,11 +40,12 @@ public class Artist {
     public Artist() {
     }
 
-    public Artist(String artistName,String bio, User user) {
+    /*public Artist(String artistName,String bio, User user) {
         this.artistName = artistName;
         this.bio = bio;
         this.user = user;
     }
+     */
 
     public Long getId() {
         return id;

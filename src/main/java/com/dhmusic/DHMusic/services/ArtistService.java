@@ -1,7 +1,9 @@
 package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.entities.account.entities.ArtistDTO;
 import com.dhmusic.DHMusic.entities.account.entities.User;
+import com.dhmusic.DHMusic.mapper.ArtistMapper;
 import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,32 +17,32 @@ public class ArtistService {
     @Autowired
     private ArtistRepository artistRepository;
 
-    public void createArtist(Artist artist) throws Exception{
-        if(artist == null){
+    @Autowired
+    ArtistMapper artistMapper;
+
+
+    public void createArtist(ArtistDTO artistDTO) throws Exception{
+        if(artistDTO == null){
             throw new Exception("you didn't put the artist");
         }
+        Artist artist = artistMapper.toArtist(artistDTO);
         artistRepository.save(artist);
     }
 
-    public Artist updateArtist(Long id,Artist artist) throws Exception {
+    public Artist updateArtist(Long id,ArtistDTO artistEditDTO) throws Exception {
 
         if(!artistRepository.existsById(id)){
             throw new Exception("artist inesistente");
         }
-        artist.setId(id);
-        return artistRepository.save(artist);
+
+
+        artistEditDTO.setId(id);
+        artistEditDTO.setArtistName(artistEditDTO.getArtistName());
+        artistEditDTO.setBio(artistEditDTO.getBio());
+
+        return artistRepository.save(artistMapper.toArtistEdit(artistEditDTO));
     }
 
-    /*public Artist updateArtist(Artist artist) throws Exception {
-        Artist existingArtist = artistRepository.findByArtistName(artist.getArtistName());
-        if(existingArtist == null){
-            throw new Exception("artist inesistente");
-        }
-        existingArtist.setBio(artist.getBio());
-        existingArtist.setAlbumsOfArtist(artist.getAlbumsOfArtist());
-        existingArtist.setSongOfArtist(artist.getSongOfArtist());
-        return artistRepository.save(existingArtist);
-    } */
 
     public void deleteArtist(Long id){
         artistRepository.deleteById(id);
@@ -73,6 +75,5 @@ public class ArtistService {
         }
         return artistRepository.findById(id);
     }
-
 }
 

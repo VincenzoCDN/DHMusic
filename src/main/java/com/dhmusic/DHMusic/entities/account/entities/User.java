@@ -25,8 +25,7 @@ public class User extends Account {
     @ManyToMany(mappedBy = "usersFollowers")
     private List<Artist> followedArtists;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
     private Artist artist;
     @OneToMany(mappedBy = "creator")
     @JsonIgnore
