@@ -4,6 +4,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 public class SongDTO {
 
    private String title;
+   private String genre;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
 
@@ -33,5 +34,13 @@ public class SongDTO {
 
     public void setIdAlbumOfSong(Long idAlbumOfSong) {
         this.idAlbumOfSong = idAlbumOfSong;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
     }
 }
