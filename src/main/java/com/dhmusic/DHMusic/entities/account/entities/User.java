@@ -26,6 +26,7 @@ public class User extends Account {
     private List<Artist> followedArtists;
 
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
+    @JsonIgnore
     private Artist artist;
     @OneToMany(mappedBy = "creator")
     @JsonIgnore
