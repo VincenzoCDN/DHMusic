@@ -4,9 +4,11 @@ package com.dhmusic.DHMusic.entities.content.entities;
 public class SongDTO {
 
    private String title;
+    private float length;
    private String genre;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
+    private boolean isPublic;
 
     public SongDTO(){
     }
@@ -42,5 +44,21 @@ public class SongDTO {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public float getLength() {
+        return length;
+    }
+
+    public void setLength(float length) {
+        this.length = length;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 }

@@ -3,13 +3,20 @@ package com.dhmusic.DHMusic.services;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
+import com.dhmusic.DHMusic.mapper.SongMapper;
 import com.dhmusic.DHMusic.repositories.content.repositories.AlbumRepository;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
 public class SongService {
+
+    @Autowired
+    private SongMapper songMapper;
 
     @Autowired
     private SongRepository songRepository; // per accesso al database
@@ -90,6 +97,16 @@ public class SongService {
       songRepository.deleteAll();
         }
     //-----------------------------------------------------------------------
+    public ResponseEntity<Song> addSong(SongDTO song) throws Exception {
+        Song existSong = songRepository.findSongByTitle(song.getTitle());
+        if (existSong != null) {
+            throw new RuntimeException("Song exist!");
+        }
+        if (song.getTitle() == null || song.getIdArtistOfSong() == null) {
+            throw new IllegalArgumentException("Mistake! Required fields are missing");
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(songRepository.save(songMapper.toSong(song)));
+
 
 
 
@@ -100,6 +117,7 @@ public class SongService {
 
 
 }
+    }
 
 
 

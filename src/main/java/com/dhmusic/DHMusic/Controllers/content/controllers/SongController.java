@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,14 @@ public class SongController {
     @PutMapping("/update/{id}")                                     //funziona se inserisco nel body "id"
     public Song updateSong(@PathVariable Long id, @RequestBody Song song) throws Exception {
         return songService.updateSong(song);
+    }
+    //---------------------------------------------------------------------------------------
+    //Aggiunge (uso DTO)
+
+    @PostMapping("/create-song")
+    public ResponseEntity<Song> createSong(@RequestBody SongDTO songDTO) throws Exception {
+        return songService.addSong(songDTO);
+
     }
 
 
