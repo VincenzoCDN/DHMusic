@@ -84,6 +84,14 @@ public class SongController {
         return songService.addSong(songDTO);
 
     }
+    //---------------------------------------------------------------------------------------
+    //Aggiorna un Song nel database DTO
+    @PutMapping("/update-song/{id}")
+    public ResponseEntity<?> updateSong(@PathVariable Long id, @RequestBody SongDTO song){
+        return songService.updateSong(id,song);
+    }
+    //---------------------------------------------------------------------------------------
+
 
 
 }

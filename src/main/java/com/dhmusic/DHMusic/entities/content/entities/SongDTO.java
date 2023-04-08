@@ -25,22 +25,6 @@ public class SongDTO {
         this.title = title;
     }
 
-    public Artist getIdArtistOfSong() {
-        return idArtistOfSong;
-    }
-
-    public void setIdArtistOfSong(Long idArtistOfSong) {
-        this.idArtistOfSong = idArtistOfSong;
-    }
-
-    public Album getIdAlbumOfSong() {
-        return idAlbumOfSong;
-    }
-
-    public void setIdAlbumOfSong(Long idAlbumOfSong) {
-        this.idAlbumOfSong = idAlbumOfSong;
-    }
-
     public String getGenre() {
         return genre;
     }
@@ -57,14 +41,6 @@ public class SongDTO {
         this.length = length;
     }
 
-    public boolean isPublic() {
-        return isPublic;
-    }
-
-    public void setIsPublic(boolean isAPublic) {
-        isPublic = isAPublic;
-    }
-
     public Long getId() {
         return id;
     }
@@ -72,4 +48,30 @@ public class SongDTO {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Long getIdArtistOfSong() {
+        return idArtistOfSong;
+    }
+
+    public void setIdArtistOfSong(Long idArtistOfSong) {
+        this.idArtistOfSong = idArtistOfSong;
+    }
+
+    public Long getIdAlbumOfSong() {
+        return idAlbumOfSong;
+    }
+
+    public void setIdAlbumOfSong(Long idAlbumOfSong) {
+        this.idAlbumOfSong = idAlbumOfSong;
+    }
+
+    public boolean isPublic() {
+        return isPublic;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
+    }
+
+
 }

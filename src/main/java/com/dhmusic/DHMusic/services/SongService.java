@@ -79,21 +79,27 @@ public class SongService {
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(songRepository.save(songMapper.toSong(song)));
     }
+
+
     //-----------------------------------------------------------------------
         //aggiorna la canzone DTO
-        public ResponseEntity<Song> updateSong(Long id,SongDTO updateSong) {
-            Song existSong = songRepository.findSongById(updateSong.getId()); // id string o long?
+       public ResponseEntity<?> updateSong(Long id,SongDTO updateSong) {
+            Song existSong = songRepository.findSongById(id); // id string o long?
             if (existSong == null) {
-               ResponseEntity.status(HttpStatus.NOT_FOUND).body("Song not found");
+               return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Song not found");
+            } else if (!existSong.getId().equals(updateSong.getId())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Song id does not match");
             } else {
                 existSong.setTitle(updateSong.getTitle());
-                existSong.setArtistOfSong(updateSong.getIdArtistOfSong());
-                existSong.setAlbumOfSong(updateSong.getIdAlbumOfSong());
                 existSong.setGenre(updateSong.getGenre());
+                existSong.setLength(updateSong.getLength());
                 songRepository.save(existSong);
+
             }
             return ResponseEntity.ok(existSong);
         }
+
+
 
 
 
