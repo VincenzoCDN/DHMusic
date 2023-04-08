@@ -10,7 +10,7 @@ public class ArtistDTO {
 
     private String bio;
 
-    private User userId;
+    private Long userId;
 
     public ArtistDTO() {
     }
@@ -39,11 +39,11 @@ public class ArtistDTO {
         this.bio = bio;
     }
 
-    public User getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(User userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 

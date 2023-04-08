@@ -29,7 +29,6 @@ public class ArtistController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
         }
-
     }
 
     //elimina un artista nel database
