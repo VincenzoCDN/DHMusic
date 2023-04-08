@@ -12,6 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SongService {
 
@@ -47,42 +49,12 @@ public class SongService {
             existSong.setTitle(song.getTitle());
             existSong.setArtistOfSong(song.getArtistOfSong());
             existSong.setAlbumOfSong(song.getAlbumOfSong());
-            existSong.setAlbumOfSong(song.getAlbumOfSong());
             existSong.setGenre(song.getGenre());
             return songRepository.save(existSong);
         }
     }
     //---------------------------------------------------------------------------------------
-    /*public Song searchSong(Song song) {
-        String title = song.getTitle();
-        Album album = song.getAlbumOfSong();
-        Artist artist = song.getArtistOfSong();
-        Long id = song.getId();
-        String genre = song.getGenre();
-        if (title == null && artist == null) {  //da ragionare
-            throw new IllegalArgumentException("At least one search parameter is required");
-        }
-        if (title != null) {
-            return songRepository.findSongByTitle(title);
-        }
-        if (album != null) {
-            return songRepository.findSongByAlbumOfSong(album);
-        }
-//        if (artist != null) {
-//            return songRepository.findSongByArtist(artist);
-//        }
-        if (id != null) {
-            return songRepository.findSongById(id);
-            }
 
-
-        return songRepository.findSongByTitle(title);
-
-    }
-
-     */
-
-    //-----------------------------------------------------------------------
     public void deleteSong(Long id) throws Exception {
          Song existSong = songRepository.findSongById(id);
          if(existSong != null) {
@@ -106,6 +78,22 @@ public class SongService {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
         return ResponseEntity.status(HttpStatus.CREATED).body(songRepository.save(songMapper.toSong(song)));
+    }
+    //-----------------------------------------------------------------------
+        //aggiorna la canzone DTO
+        public ResponseEntity<Song> updateSong(Long id,SongDTO updateSong) {
+            Song existSong = songRepository.findSongById(updateSong.getId()); // id string o long?
+            if (existSong == null) {
+               ResponseEntity.status(HttpStatus.NOT_FOUND).body("Song not found");
+            } else {
+                existSong.setTitle(updateSong.getTitle());
+                existSong.setArtistOfSong(updateSong.getIdArtistOfSong());
+                existSong.setAlbumOfSong(updateSong.getIdAlbumOfSong());
+                existSong.setGenre(updateSong.getGenre());
+                songRepository.save(existSong);
+            }
+            return ResponseEntity.ok(existSong);
+        }
 
 
 
@@ -117,7 +105,7 @@ public class SongService {
 
 
 }
-    }
+
 
 
 

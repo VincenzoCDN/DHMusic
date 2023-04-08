@@ -1,8 +1,11 @@
 package com.dhmusic.DHMusic.entities.content.entities;
 
 
+import com.dhmusic.DHMusic.entities.account.entities.Artist;
+
 public class SongDTO {
 
+   private Long id;
    private String title;
     private float length;
    private String genre;
@@ -22,7 +25,7 @@ public class SongDTO {
         this.title = title;
     }
 
-    public Long getIdArtistOfSong() {
+    public Artist getIdArtistOfSong() {
         return idArtistOfSong;
     }
 
@@ -30,7 +33,7 @@ public class SongDTO {
         this.idArtistOfSong = idArtistOfSong;
     }
 
-    public Long getIdAlbumOfSong() {
+    public Album getIdAlbumOfSong() {
         return idAlbumOfSong;
     }
 
@@ -58,7 +61,15 @@ public class SongDTO {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setIsPublic(boolean isAPublic) {
+        isPublic = isAPublic;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

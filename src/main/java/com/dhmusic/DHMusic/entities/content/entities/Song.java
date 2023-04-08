@@ -96,8 +96,8 @@ public class Song {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setIsPublic(boolean isPublic) {
+        isPublic = isPublic;
     }
 
     public String getGenre() {
