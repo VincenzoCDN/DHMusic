@@ -20,31 +20,51 @@ public class ArtistService {
     @Autowired
     ArtistMapper artistMapper;
 
+    public boolean existArtistName(ArtistDTO artistDTO){
+        boolean exist;
+        Artist artist = artistRepository.findByArtistName(artistDTO.getArtistName());
+        if (artist != null){
+            return exist = true;
+        }
+        return exist = false;
+    }
 
     public void createArtist(ArtistDTO artistDTO) throws Exception{
         if(artistDTO == null){
             throw new Exception("you didn't put the artist");
+        } else if (existArtistName(artistDTO) == true) {
+            throw new Exception("Exist artist");
         }
         Artist artist = artistMapper.toArtist(artistDTO);
         artistRepository.save(artist);
     }
 
     public Artist updateArtist(Long id,ArtistDTO artistEditDTO) throws Exception {
-
+        Artist existArtist = artistRepository.findArtistById(id);
         if(!artistRepository.existsById(id)){
-            throw new Exception("artist inesistente");
+            throw new Exception("the artist does not exist");
+
+        } else if (artistEditDTO.getBio() == null) {
+            existArtist.setArtistName(artistEditDTO.getArtistName());
+            return artistRepository.save(existArtist);
+
+        } else if (artistEditDTO.getArtistName() == null) {
+            existArtist.setBio(artistEditDTO.getBio());
+            return artistRepository.save(existArtist);
+
+        } else {
+            existArtist.setArtistName(artistEditDTO.getArtistName());
+            existArtist.setBio(artistEditDTO.getBio());
+
+            return artistRepository.save(existArtist);
         }
-
-
-        artistEditDTO.setId(id);
-        artistEditDTO.setArtistName(artistEditDTO.getArtistName());
-        artistEditDTO.setBio(artistEditDTO.getBio());
-
-        return artistRepository.save(artistMapper.toArtistEdit(artistEditDTO));
     }
 
 
-    public void deleteArtist(Long id){
+    public void deleteArtist(Long id) throws Exception {
+        if(!artistRepository.existsById(id)){
+            throw new Exception("the artist does not exist");
+        }
         artistRepository.deleteById(id);
     }
 
@@ -71,7 +91,7 @@ public class ArtistService {
 
     public Optional<Artist> getArtistById(Long id) throws Exception {
         if(isValidId(id) == false){
-            throw new Exception("l'id dell'artista non esiste");
+            throw new Exception("the artist does not exist");
         }
         return artistRepository.findById(id);
     }

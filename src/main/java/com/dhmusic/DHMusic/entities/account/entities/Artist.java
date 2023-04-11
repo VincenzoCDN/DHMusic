@@ -42,12 +42,6 @@ public class Artist {
     public Artist() {
     }
 
-    /*public Artist(String artistName,String bio, User user) {
-        this.artistName = artistName;
-        this.bio = bio;
-        this.user = user;
-    }
-     */
 
     public Long getId() {
         return id;

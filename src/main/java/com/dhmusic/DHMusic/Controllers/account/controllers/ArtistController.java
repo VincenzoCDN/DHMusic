@@ -27,7 +27,7 @@ public class ArtistController {
             return ResponseEntity.ok(artistDTO);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
@@ -82,9 +82,9 @@ public class ArtistController {
     }
 
     @GetMapping("/get-user-followers")
-    public List<User> getFollowers(@RequestParam String artistName){
-
-        return artistService.getUsersFollowers(artistName);
+    public ResponseEntity getFollowers(@RequestParam String artistName){
+        artistService.getUsersFollowers(artistName);
+        return ResponseEntity.ok(artistName);
     }
 }
 
