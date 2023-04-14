@@ -34,7 +34,7 @@ public class ArtistService {
             logger.error("exist artist");
             return exist = true;
         }
-        logger.error("not exist artist");
+        logger.info("not exist artist for creation new artist");
         return exist = false;
     }
 
@@ -45,7 +45,7 @@ public class ArtistService {
             logger.error("exist artist");
             return exist = true;
         }
-        logger.error("not exist artist");
+        logger.info("not exist artist");
         return exist = false;
     }
 
@@ -93,12 +93,12 @@ public class ArtistService {
         }
     }
 
-    @Transactional
     public void deleteArtist(Long id) throws Exception {
         if(!artistRepository.existsById(id)){
             logger.warn("Attempt to eliminate an artist who does not exist");
             throw new Exception("the artist does not exist");
         }
+        logger.info("delete artist "+id);
         artistRepository.deleteById(id);
     }
 
