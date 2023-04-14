@@ -4,6 +4,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
@@ -24,6 +25,7 @@ public class Album {
     @OneToMany(mappedBy = "albumOfSong")
     @JsonIgnore
     private List<Song> songsOfAlbum;
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date publicationDate;
 
     private boolean isPublic;
@@ -36,6 +38,14 @@ public class Album {
 
     }
 
+    public Album(String title, Artist artist, List<Song> songsOfAlbum, Date publicationDate, boolean isPublic) {
+
+        this.title = title;
+        this.artist = artist;
+        this.songsOfAlbum = songsOfAlbum;
+        this.publicationDate = publicationDate;
+        this.isPublic = isPublic;
+    }
 
     public Long getId() {
         return id;
@@ -89,6 +99,10 @@ public class Album {
 
     public void setPublic(boolean aPublic) {
         isPublic = aPublic;
+    }
+
+    public void addSong(Song song){
+        this.songsOfAlbum.add(song);
     }
 
 

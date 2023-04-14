@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Album;
+import com.dhmusic.DHMusic.entities.content.entities.AlbumDTO;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.services.AlbumService;
 import com.dhmusic.DHMusic.services.SongService;
@@ -33,10 +34,10 @@ public class AlbumController {
     //---------------------------------------------------------------------------------------
     //Crea un Album nel database
     @PostMapping("/create-album")
-    public ResponseEntity createAlbum(@RequestBody Album album){
+    public ResponseEntity createAlbum(@RequestBody AlbumDTO albumDTO){
         try {
-            albumService.createAlbum(album);
-            return ResponseEntity.ok(album);
+            albumService.createAlbum(albumDTO);
+            return ResponseEntity.ok(albumDTO);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
