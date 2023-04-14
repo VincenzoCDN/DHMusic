@@ -7,6 +7,7 @@ import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.mapper.ArtistMapper;
 import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 
+import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,7 +93,7 @@ public class ArtistService {
         }
     }
 
-
+    @Transactional
     public void deleteArtist(Long id) throws Exception {
         if(!artistRepository.existsById(id)){
             logger.warn("Attempt to eliminate an artist who does not exist");
