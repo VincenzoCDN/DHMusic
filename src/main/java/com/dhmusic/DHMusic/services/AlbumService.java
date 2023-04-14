@@ -133,12 +133,10 @@ public class AlbumService {
 
 
         for (Long idS : idSongs) {
-          /*  Album existingAlbum1 = songRepository.findSongById(idS).getAlbumOfSong();
-
-            if (existingAlbum1.getSongsOfAlbum() != null) {
+            if (songRepository.findSongById(idS).getAlbumOfSong() != null) {
                 throw new Exception("The song with id: " + idS + " has already assigned an album");
 
-            } else if (existingAlbum1== null){*/
+            } else if (songRepository.findSongById(idS).getAlbumOfSong() == null){
                 existingAlbum = albumRepository.findAlbumById(idAlbum);
                 if (existingAlbum.getSongsOfAlbum() == null) {
                     if (!songRepository.existsById(idS)) {
@@ -153,7 +151,7 @@ public class AlbumService {
                     albumRepository.save(existingAlbum);
                 }
             }
-      //  }
+       }
         return existSong.getTitle() + " is add in the Album " + existingAlbum.getTitle();
 
     }
