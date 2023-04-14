@@ -133,27 +133,29 @@ public class AlbumService {
 
 
         for (Long idS : idSongs) {
-            Album existingAlbum1 = songRepository.findSongById(idS).getAlbumOfSong();
+          /*  Album existingAlbum1 = songRepository.findSongById(idS).getAlbumOfSong();
 
             if (existingAlbum1.getSongsOfAlbum() != null) {
                 throw new Exception("The song with id: " + idS + " has already assigned an album");
 
-            }
-            existingAlbum= songRepository.findSongById(idS).getAlbumOfSong();
-            if (existingAlbum.getSongsOfAlbum() == null) {
-                if (!songRepository.existsById(idS)) {
-                    throw new Exception("Song not found");
-                }
-
-
+            } else if (existingAlbum1== null){*/
                 existingAlbum = albumRepository.findAlbumById(idAlbum);
-                existSong = songRepository.findSongById(idS);
+                if (existingAlbum.getSongsOfAlbum() == null) {
+                    if (!songRepository.existsById(idS)) {
+                        throw new Exception("Song not found");
+                    }
 
-                existSong.setAlbumOfSong(existingAlbum);
-                albumRepository.save(existingAlbum);
+
+                    existingAlbum = albumRepository.findAlbumById(idAlbum);
+                    existSong = songRepository.findSongById(idS);
+
+                    existSong.setAlbumOfSong(existingAlbum);
+                    albumRepository.save(existingAlbum);
+                }
             }
-        }
+      //  }
         return existSong.getTitle() + " is add in the Album " + existingAlbum.getTitle();
+
     }
 
 
