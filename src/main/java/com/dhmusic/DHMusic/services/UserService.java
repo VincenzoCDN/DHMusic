@@ -131,7 +131,8 @@ public class UserService {
         return code;
 
     }
-
+    //---------------------------------------------------------------------------------------
+    //Metodi di controllo Email:
     public String verificareAccount(long id, String code){
         if(!userRepository.existsById(id)){
             return "Account not found";
@@ -150,7 +151,7 @@ public class UserService {
           return "The code is correct. \nYour Account is validate now!";
 
       } else {
-          return "the code is not correct.\nPlease check end try again.";
+          return "The code is not correct.\nPlease check end try again.";
       }
 
 
