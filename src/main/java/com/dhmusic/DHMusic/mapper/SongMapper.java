@@ -52,7 +52,7 @@ public class SongMapper {
     dove "nomeArtista" e "nomeCanzone" sono i parametri da passare alla funzione
     per specificare l'artista e il titolo della canzone da aggiornare.
      */
-   public Song toSong(SongDTO songDTO){
+   /*public Song toSong(SongDTO songDTO){
        Song song = new Song();
        song.setTitle(songDTO.getTitle());
        song.setGenre(songDTO.getGenre());
@@ -65,6 +65,24 @@ public class SongMapper {
        songRepository.save(song);
        return song;
    }
+
+    */
+
+
+    public Song toSong(SongDTO songDTO){
+        Song song = new Song();
+        song.setTitle(songDTO.getTitle());
+        song.setGenre(songDTO.getGenre());
+        song.setLength(songDTO.getLength());
+        song.setIsPublic(songDTO.isPublic());
+        Artist artist = artistRepository.findArtistById(songDTO.getIdArtistOfSong());
+        song.setArtistOfSong(artist);
+        if (songDTO.getIdAlbumOfSong() != null) {
+            Album album = albumRepository.findAlbumById(songDTO.getIdAlbumOfSong());
+            song.setAlbumOfSong(album);
+            }
+        return song;
+    }
 
 
 

@@ -5,6 +5,7 @@ import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
 import com.dhmusic.DHMusic.mapper.SongMapper;
+import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 import com.dhmusic.DHMusic.repositories.content.repositories.AlbumRepository;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,8 @@ public class SongService {
     private SongRepository songRepository; // per accesso al database
     @Autowired
     private AlbumRepository albumRepository;
+    @Autowired
+    private ArtistRepository artistRepository;
 
 
     //---------------------------------------------------------------------------------------
@@ -93,6 +96,10 @@ public class SongService {
                 existSong.setTitle(updateSong.getTitle());
                 existSong.setGenre(updateSong.getGenre());
                 existSong.setLength(updateSong.getLength());
+                Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
+                existSong.setArtistOfSong(artist);
+                Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
+                existSong.setAlbumOfSong(album);
                 songRepository.save(existSong);
 
             }

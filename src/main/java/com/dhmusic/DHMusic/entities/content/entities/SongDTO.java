@@ -2,6 +2,9 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDateTime;
 
 public class SongDTO {
 
@@ -9,8 +12,10 @@ public class SongDTO {
    private String title;
     private float length;
    private String genre;
+   //private LocalDateTime publicationDate;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private boolean isPublic;
 
     public SongDTO(){
@@ -69,9 +74,17 @@ public class SongDTO {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 
+   /* public LocalDateTime getPublicationDate() {
+        return publicationDate;
+    }
 
+    public void setPublicationDate(LocalDateTime publicationDate) {
+        this.publicationDate = publicationDate;
+    }
+
+    */
 }
