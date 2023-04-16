@@ -1,8 +1,12 @@
 package com.dhmusic.DHMusic.Controllers.account.controllers;
 
+import com.dhmusic.DHMusic.DhMusicApplication;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.entities.account.entities.ArtistDTO;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.services.ArtistService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,17 +22,21 @@ public class ArtistController {
     @Autowired
     ArtistService artistService; //istanzio ArtistServer
 
+    Logger logger = LoggerFactory.getLogger(ArtistController.class);
+
     //inserisce un nuovo artista nel database
     @PostMapping("/create-artist")
-    public ResponseEntity createArtist(@RequestBody Artist newArtist){
+    public ResponseEntity createArtist(@RequestBody ArtistDTO artistDTO){
         try {
-            artistService.createArtist(newArtist);
-            return ResponseEntity.ok(newArtist);
+
+            artistService.createArtist(artistDTO);
+            logger.info("a new artist was created");
+            return ResponseEntity.ok(artistDTO);
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+            logger.error("there was an error in creating a new artist");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-
     }
 
     //elimina un artista nel database
@@ -36,34 +44,40 @@ public class ArtistController {
     public ResponseEntity deleteArtist(@PathVariable Long id){
         try {
             artistService.deleteArtist(id);
+            logger.info("one artist was eliminated");
             return ResponseEntity.accepted().build();
         }catch (Exception e){
+            logger.info("error in deleting the artist");
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_ACCEPTABLE).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
     //Aggiorna un artista nel database
     @PutMapping("/update-artist/{id}")
-    public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody Artist newArtist){
+    public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody ArtistDTO newArtist){
         try {
-
-            newArtist = artistService.updateArtist(id,newArtist);
+            artistService.updateArtist(id,newArtist);
+            logger.info("an artist has been modified");
             return ResponseEntity.ok().body(newArtist);
         } catch (Exception e) {
+            logger.error("error in the modification of the artist");
            e.printStackTrace();
            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
 
     //Seleziona gli artisti nel database
     @GetMapping("/get-all-artists")
     public ResponseEntity getAllArtist(){
         try {
             List<Artist> artist = artistService.getAllArtist();
+            logger.info("all artists were seen");
             return ResponseEntity.ok(artist);
         }catch (Exception e){
             e.printStackTrace();
+            logger.error("error get all artist");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
@@ -73,8 +87,10 @@ public class ArtistController {
     public ResponseEntity getArtistById(@PathVariable Long id){
         try{
             Optional<Artist> artist = artistService.getArtistById(id);
+            logger.info("the artists were seen");
             return ResponseEntity.ok(artist);
         }catch (Exception e){
+            logger.error("error in the artist's vision");
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
@@ -82,9 +98,16 @@ public class ArtistController {
     }
 
     @GetMapping("/get-user-followers")
-    public List<User> getFollowers(@RequestParam String artistName){
+    public ResponseEntity getFollowers(@RequestParam Long id){
+        try {
+            artistService.getUsersFollowers(id);
+            logger.info("all followers of " +id+ " have been seen\"");
+            return ResponseEntity.ok(id);
+        } catch (Exception e) {
+            logger.error("artist not found");
+            throw new RuntimeException(e);
+        }
 
-        return artistService.getUsersFollowers(artistName);
     }
 }
 
