@@ -68,7 +68,7 @@ public class SongController {
     //---------------------------------------------------------------------------------------
     //Aggiunge (uso DTO)
 
-    @PostMapping("/create-song")                                     //funziona
+    @PostMapping("/create")                                     //funziona
     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
             songService.addSong(songDTO);
@@ -82,7 +82,7 @@ public class SongController {
 
     //---------------------------------------------------------------------------------------
     //Aggiorna un Song nel database DTO
-    @PutMapping("/update-song/{id}")                               //funziona
+    @PutMapping("/update/{id}")                               //funziona
     public ResponseEntity<?> updateSong(@PathVariable Long id, @RequestBody SongDTO song) {
         try {
             songService.updateSong(id, song);
