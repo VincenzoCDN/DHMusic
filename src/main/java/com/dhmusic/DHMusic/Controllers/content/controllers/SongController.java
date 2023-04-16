@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,6 @@ public class SongController {
     private SongRepository songRepository;
 
 
-    //---------------------------------------------------------------------------------------
-    //aggiunge una nuova canzone
-    @PostMapping("/create")
-    public Song addSong(@RequestBody Song song) throws Exception {   //funziona
-        return songService.addSong(song);
-    }
 
     //---------------------------------------------------------------------------------------
     //mostra lista di canzoni
@@ -69,12 +64,35 @@ public class SongController {
         songService.deleteAll();
     }
 
+
     //---------------------------------------------------------------------------------------
-    //Aggiorna un Song nel database
-    @PutMapping("/update/{id}")                                     //funziona se inserisco nel body "id"
-    public Song updateSong(@PathVariable Long id, @RequestBody Song song) throws Exception {
-        return songService.updateSong(song);
+    //Aggiunge (uso DTO)
+
+    @PostMapping("/create-song")                                     //funziona
+    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
+        try {
+            songService.addSong(songDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+        }
+
     }
 
+    //---------------------------------------------------------------------------------------
+    //Aggiorna un Song nel database DTO
+    @PutMapping("/update-song/{id}")                               //funziona
+    public ResponseEntity<?> updateSong(@PathVariable Long id, @RequestBody SongDTO song) {
+        try {
+            songService.updateSong(id, song);
+            return ResponseEntity.accepted().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+        }
+        //---------------------------------------------------------------------------------------
 
+
+    }
 }

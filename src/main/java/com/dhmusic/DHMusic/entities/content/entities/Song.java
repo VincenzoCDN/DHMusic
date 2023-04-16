@@ -2,6 +2,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 
@@ -20,6 +21,8 @@ public class Song {
     private Date publicationDate;
 
     private String genre;
+
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private boolean isPublic;
 
     @ManyToOne
@@ -96,8 +99,8 @@ public class Song {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setIsPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 
     public String getGenre() {
