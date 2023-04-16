@@ -98,11 +98,11 @@ public class ArtistController {
     }
 
     @GetMapping("/get-user-followers")
-    public ResponseEntity getFollowers(@RequestParam String artistName){
+    public ResponseEntity getFollowers(@RequestParam Long id){
         try {
-            artistService.getUsersFollowers(artistName);
-            logger.info("all followers of "+artistName+" have been seen\"");
-            return ResponseEntity.ok(artistName);
+            artistService.getUsersFollowers(id);
+            logger.info("all followers of " +id+ " have been seen\"");
+            return ResponseEntity.ok(id);
         } catch (Exception e) {
             logger.error("artist not found");
             throw new RuntimeException(e);

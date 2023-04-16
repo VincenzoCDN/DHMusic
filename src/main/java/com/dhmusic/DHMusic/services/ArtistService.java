@@ -7,6 +7,7 @@ import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.mapper.ArtistMapper;
 import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 
+import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
 import jakarta.transaction.Transactional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +23,13 @@ public class ArtistService {
     Logger logger = LoggerFactory.getLogger(ArtistService.class);
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ArtistRepository artistRepository;
 
     @Autowired
-    ArtistMapper artistMapper;
+    private ArtistMapper artistMapper;
 
     public boolean existArtistName(ArtistDTO artistDTO){
         boolean exist;
@@ -40,7 +44,7 @@ public class ArtistService {
 
     public boolean existUserId(ArtistDTO artistDTO){
         boolean exist;
-        Artist userId = artistRepository.findByUserId(artistDTO.getUserId());
+        User userId = userRepository.findUserById(artistDTO.getUserId());
         if (userId != null){
             logger.error("exist artist");
             return exist = true;
@@ -54,11 +58,18 @@ public class ArtistService {
         if(artistDTO == null){
             logger.error("error creation artist");
             throw new Exception("you didn't put the artist");
+
+        } else if (artistDTO.getArtistName() == null) {
+            logger.error("enter the name of the artist");
+            throw new Exception("enter the name of the artist");
+
         } else if (existArtistName(artistDTO) == true) {
             logger.error("exist artist");
             throw new Exception("Exist artist");
+
         } else if (artistDTO.getUserId()==null) {
             throw new Exception("User id does not exist");
+
         } else if (existUserId(artistDTO) == true) {
             logger.error("user tries to create another artist");
             throw new Exception("there is already an artist linked to this user ");
@@ -74,6 +85,12 @@ public class ArtistService {
             logger.warn("the artist to be modified does not exist");
             throw new Exception("the artist does not exist");
 
+        }
+        if (artistEditDTO.getArtistName() == null && artistEditDTO.getBio() == null && artistEditDTO.getUserId() == null ) {
+
+            logger.info("the artist"+ existArtist+ "has not been modified");
+            return existArtist;
+
         } else if (artistEditDTO.getBio() == null) {
             logger.info("the artist changed only the name");
             existArtist.setArtistName(artistEditDTO.getArtistName());
@@ -84,7 +101,8 @@ public class ArtistService {
             existArtist.setBio(artistEditDTO.getBio());
             return artistRepository.save(existArtist);
 
-        } else {
+        }
+        else {
             existArtist.setArtistName(artistEditDTO.getArtistName());
             existArtist.setBio(artistEditDTO.getBio());
             logger.info("the artist has been modified");
@@ -102,13 +120,13 @@ public class ArtistService {
         artistRepository.deleteById(id);
     }
 
-    public List<User> getUsersFollowers(String artistName) throws Exception {
-        Artist existingArtist = artistRepository.findByArtistName(artistName);
+    public List<User> getUsersFollowers(Long id) throws Exception {
+        Artist existingArtist = artistRepository.findArtistById(id);
         if(existingArtist == null){
             logger.warn("artist not found");
             throw new Exception("artist not found");
         }
-        logger.info("all followers of "+artistName+" have been seen");
+        logger.info("all followers of "+id+" have been seen");
         return existingArtist.getUsersFollowers();
     }
 
