@@ -95,11 +95,29 @@ public class SongController {
         //---------------------------------------------------------------------------------------
 
     @GetMapping("/play/{id}")
-    public ResponseEntity<?> getSongTitle(@PathVariable Long id) {   //Funziona
+    public ResponseEntity<?> playSong(@PathVariable Long id) {
         try {
             Song song = songRepository.findSongById(id);
 
-            return ResponseEntity.accepted().body(song.getLink());
+            return ResponseEntity.accepted().body("https://www.youtube.com/watch?v=" + song.getLink());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/play2/{id}")
+    public ResponseEntity<?> playSong2(@PathVariable Long id) {   //Funziona
+        try {
+            Song song = songRepository.findSongById(id);
+            String strID= song.getLink();
+
+            String str1= String.format("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s\"" +
+                    " title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; " +
+                    "encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>", strID);
+
+
+            return ResponseEntity.accepted().body(str1);
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
