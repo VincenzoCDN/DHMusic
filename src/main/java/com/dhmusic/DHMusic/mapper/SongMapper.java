@@ -33,6 +33,7 @@ public class SongMapper {
         song.setGenre(songDTO.getGenre());
         song.setLength(songDTO.getLength());
         song.setIsPublic(songDTO.isPublic());
+        song.setPublicationDate(songDTO.getPublicationDate());
         Artist artist = artistRepository.findArtistById(songDTO.getIdArtistOfSong());
         song.setArtistOfSong(artist);
         if (songDTO.getIdAlbumOfSong() != null) {

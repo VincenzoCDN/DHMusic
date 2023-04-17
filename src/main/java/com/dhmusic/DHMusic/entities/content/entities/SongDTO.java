@@ -2,6 +2,8 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.util.Date;
+
 public class SongDTO {
 
    private Long id;
@@ -12,6 +14,8 @@ public class SongDTO {
     private Long idAlbumOfSong;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private boolean isPublic;
+    @JsonFormat(pattern = "yyyy/mm/dd")
+    private Date publicationDate;
 
     public SongDTO(){
     }
@@ -73,5 +77,11 @@ public class SongDTO {
         this.isPublic = isPublic;
     }
 
+    public Date getPublicationDate() {
+        return publicationDate;
+    }
 
+    public void setPublicationDate(Date publicationDate) {
+        this.publicationDate = publicationDate;
+    }
 }
