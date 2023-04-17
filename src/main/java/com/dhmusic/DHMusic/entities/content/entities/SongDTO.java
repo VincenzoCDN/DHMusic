@@ -1,10 +1,6 @@
 package com.dhmusic.DHMusic.entities.content.entities;
 
-
-import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.fasterxml.jackson.annotation.JsonFormat;
-
-import java.time.LocalDateTime;
 
 public class SongDTO {
 

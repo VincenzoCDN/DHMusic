@@ -22,7 +22,6 @@ public class SongController {
     private SongRepository songRepository;
 
 
-
     //---------------------------------------------------------------------------------------
     //mostra lista di canzoni
     @GetMapping
@@ -72,7 +71,7 @@ public class SongController {
     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
             songService.addSong(songDTO);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body("The song was created!");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
