@@ -1,7 +1,11 @@
 package com.dhmusic.DHMusic.entities.account.entities;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -17,9 +21,12 @@ public abstract class Account {
     private String password;
     @Column(unique = true, length = 45)
     private String email;
-
-    private String creationDate;
-
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private Date creationDate;
+    @UpdateTimestamp
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date updateDate;
     private boolean verificateEmail;
 
     public Account() {
@@ -58,11 +65,11 @@ public abstract class Account {
         this.email = email;
     }
 
-    public String getCreationDate() {
+    public Date getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(String creationDate) {
+    public void setCreationDate(Date creationDate) {
         this.creationDate = creationDate;
     }
 
@@ -74,5 +81,11 @@ public abstract class Account {
         this.verificateEmail = verificateEmail;
     }
 
+    public Date getUpdateDate() {
+        return updateDate;
+    }
 
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 }

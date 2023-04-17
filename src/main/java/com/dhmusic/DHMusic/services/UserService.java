@@ -8,6 +8,7 @@ import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,10 +34,14 @@ public class UserService {
         if (!isValidUser(newUser) || !isValidEmail(newUser.getEmail()) || !isValidPassword(newUser.getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid data");
         }
-        User user = userMapper.toArtist(newUser);
-        user.setVerificationCode(generateCode());
-        emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
-        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
+        try {
+            User user = userMapper.toUser(newUser);
+            user.setVerificationCode(generateCode());
+            emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
+            return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
+        }catch(DataIntegrityViolationException ex){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("account already exist");
+        }
     }
 
     public ResponseEntity<?> getUserById(Long id){
