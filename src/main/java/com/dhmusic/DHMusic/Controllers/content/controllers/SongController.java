@@ -31,17 +31,7 @@ public class SongController {
     }
 
     //---------------------------------------------------------------------------------------
-    //mostrare la singola canzone
-    @GetMapping("/{id}")
-    public Song getSongId(@PathVariable Long id) {             //Funziona
-        Song existSong = songRepository.findSongById(id);
-        if (existSong == null) {
-            throw new RuntimeException("Song not exist!");
-        }
-        return songRepository.findSongById(id);
-    }
 
-    //---------------------------------------------------------------------------------------
     //Mostra la singola canzone per titolo
     @GetMapping("/get/title/{title}")
     public Song getSongTitle(@PathVariable String title) {   //Funziona
@@ -90,8 +80,17 @@ public class SongController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-        //---------------------------------------------------------------------------------------
 
-
+    }
+    //---------------------------------------------------------------------------------------
+    //mostrare la singola canzone
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Song> getSongById(@PathVariable Long id){
+        Song existSong = songRepository.findSongById(id);
+        if (existSong == null) {
+            throw new RuntimeException("Song not exist!");
+        }
+        songRepository.findSongById(id);
+        return ResponseEntity.ok().body(existSong);
     }
 }

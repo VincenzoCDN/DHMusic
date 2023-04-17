@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -23,12 +24,14 @@ public class Song {
     private String title;
     private float length;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy/mm/dd")
+    @Column(columnDefinition = "DATE")
     private Date publicationDate;
 
     private String genre;
-
     @CreationTimestamp
+    @JsonFormat(pattern = "yyyy/mm/dd")
+    @Column(columnDefinition = "DATE")
     private Date creationDatePlatform;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
@@ -36,10 +39,12 @@ public class Song {
 
     @ManyToOne
     @JoinColumn(name= "artist_id", nullable = false)
+    @JsonIgnore
     private Artist artistOfSong;
 
     @ManyToOne
     @JoinColumn(name = "album_id")
+    @JsonIgnore
     private Album albumOfSong;
 
     @ManyToMany(mappedBy = "songsOfPlaylist")
