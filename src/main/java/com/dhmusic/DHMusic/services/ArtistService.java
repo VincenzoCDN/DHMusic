@@ -46,10 +46,10 @@ public class ArtistService {
         boolean exist;
         User userId = userRepository.findUserById(artistDTO.getUserId());
         if (userId != null){
-            logger.error("exist artist");
+            logger.error("exist User");
             return exist = true;
         }
-        logger.info("not exist artist");
+        logger.info("not exist User");
         return exist = false;
     }
 
@@ -65,7 +65,7 @@ public class ArtistService {
 
         } else if (existArtistName(artistDTO) == true) {
             logger.error("exist artist");
-            throw new Exception("Exist artist");
+            throw new Exception("Exist artist Name");
 
         } else if (artistDTO.getUserId()==null) {
             throw new Exception("User id does not exist");
