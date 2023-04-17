@@ -26,7 +26,7 @@ public class Song {
     private boolean isPublic;
 
     @ManyToOne
-    @JoinColumn(name= "artist_id")
+    @JoinColumn(name= "artist_id", nullable = false)
     private Artist artistOfSong;
 
     @ManyToOne
