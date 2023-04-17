@@ -35,31 +35,38 @@ public class ArtistService {
         boolean exist;
         Artist artist = artistRepository.findByArtistName(artistDTO.getArtistName());
         if (artist != null){
-            logger.error("exist artist");
+            logger.debug("exist artist");
             return exist = true;
         }
-        logger.info("not exist artist for creation new artist");
+        logger.debug("not exist artist for creation new artist");
         return exist = false;
     }
 
     public boolean existUserId(ArtistDTO artistDTO){
         boolean exist;
         User userId = userRepository.findUserById(artistDTO.getUserId());
-        if (userId != null){
-            logger.error("exist User");
-            return exist = true;
+        if (userId == null){
+            logger.debug("not exist User");
+            return exist = false;
+
         }
-        logger.info("not exist User");
-        return exist = false;
+        logger.debug("exist User");
+        return exist = true;
     }
 
 
     public void createArtist(ArtistDTO artistDTO) throws Exception{
-        if(artistDTO == null){
+
+        if(artistDTO == null && artistDTO.getArtistName() == null){
             logger.error("error creation artist");
             throw new Exception("you didn't put the artist");
 
-        } else if (artistDTO.getArtistName() == null) {
+        }
+        if (artistDTO.getUserId() == null) {
+            logger.error("enter the userId of the artist");
+            throw new Exception("enter the userId");
+
+        }else if (artistDTO.getArtistName() == null) {
             logger.error("enter the name of the artist");
             throw new Exception("enter the name of the artist");
 
@@ -67,10 +74,10 @@ public class ArtistService {
             logger.error("exist artist");
             throw new Exception("Exist artist Name");
 
-        } else if (artistDTO.getUserId()==null) {
+        } else if (existUserId(artistDTO)==false) {
             throw new Exception("User id does not exist");
 
-        } else if (existUserId(artistDTO) == true) {
+        } else if (artistRepository.findByUserId(artistDTO.getUserId()) != null) {
             logger.error("user tries to create another artist");
             throw new Exception("there is already an artist linked to this user ");
         }
