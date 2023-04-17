@@ -23,9 +23,11 @@ public abstract class Account {
     private String email;
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(columnDefinition = "DATE")
     private Date creationDate;
     @UpdateTimestamp
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @Column(columnDefinition = "DATETIME(0)")
     private Date updateDate;
     private boolean verificateEmail;
 

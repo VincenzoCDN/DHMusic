@@ -49,7 +49,7 @@ public class UserController {
     }
 
     @PutMapping("/verificate_code/{id}")
-    public ResponseEntity verificateUser(@PathVariable Long id, @RequestParam String code){
+    public ResponseEntity<?> verificateUser(@PathVariable Long id, @RequestParam String code){
 
         try {
 
