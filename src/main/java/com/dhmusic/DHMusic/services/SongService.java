@@ -53,6 +53,9 @@ public class SongService {
         if (song.getTitle() == null || song.getIdArtistOfSong() == null) {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
+        if (songRepository.findSongByTitle(song.getTitle()) != null){
+            throw new Exception("The title exist!");
+        }
         if (artistRepository.findArtistById(song.getIdArtistOfSong()) == null){
             throw new Exception("Artist not exist!");
         }
