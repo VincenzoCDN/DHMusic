@@ -27,48 +27,6 @@ public class SongMapper {
     }
 
 
-   /* public Song toSong(SongDTO songDTO){
-        Song song = new Song();
-        song.setTitle(songDTO.getTitle());
-        song.setGenre(songDTO.getGenre());
-        song.setLength(songDTO.getLength());
-        song.setIsPublic(songDTO.isPublic());
-        Artist artist = artistRepository.findById(songDTO.getIdArtistOfSong());//Optional yes or not?
-        song.setArtistOfSong(artist);
-        Album album = albumRepository.findById(songDTO.getIdAlbumOfSong());
-        song.setAlbumOfSong(album);
-        return  songRepository.save(song);
-
-    }
-
-    */
-
-    /*
-    Sono stati usati i puntini perché la funzione non è stata definita completamente.
-    È possibile che ci siano altri parametri da specificare per la funzione,
-    come ad esempio il titolo della canzone o l'artista da assegnare.
-    La sintassi completa potrebbe essere qualcosa del genere:
-     song::setArtistOfSong(nomeArtista, nomeCanzone)
-    dove "nomeArtista" e "nomeCanzone" sono i parametri da passare alla funzione
-    per specificare l'artista e il titolo della canzone da aggiornare.
-     */
-   /*public Song toSong(SongDTO songDTO){
-       Song song = new Song();
-       song.setTitle(songDTO.getTitle());
-       song.setGenre(songDTO.getGenre());
-       song.setLength(songDTO.getLength());
-       song.setIsPublic(songDTO.isPublic());
-       Optional<Artist> artist = artistRepository.findById(songDTO.getIdArtistOfSong());
-       artist.ifPresent(song::setArtistOfSong);
-       Optional<Album> album = albumRepository.findById(songDTO.getIdAlbumOfSong());
-       album.ifPresent(song::setAlbumOfSong);
-       songRepository.save(song);
-       return song;
-   }
-
-    */
-
-
     public Song toSong(SongDTO songDTO){
         Song song = new Song();
         song.setTitle(songDTO.getTitle());

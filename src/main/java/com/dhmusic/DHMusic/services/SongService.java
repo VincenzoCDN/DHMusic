@@ -30,33 +30,6 @@ public class SongService {
 
 
     //---------------------------------------------------------------------------------------
-    //Aggiunge canzone
-    public Song addSong(Song song) throws Exception {
-        Song existSong = songRepository.findSongByTitle(song.getTitle());
-        if (existSong != null) {
-            throw new RuntimeException("Song exist!");
-        }
-        if (song.getTitle() == null || song.getArtistOfSong() == null) {
-            throw new IllegalArgumentException("Mistake! Required fields are missing");
-        }
-        return songRepository.save(song);
-
-    }
-    //---------------------------------------------------------------------------------------
-    //aggiorna la canzone
-    public Song updateSong(Song song) throws Exception {
-        Song existSong = songRepository.findSongById(song.getId()); // id string o long?
-        if (existSong == null) {
-            throw new RuntimeException("Song not exist");
-        } else {
-            existSong.setTitle(song.getTitle());
-            existSong.setArtistOfSong(song.getArtistOfSong());
-            existSong.setAlbumOfSong(song.getAlbumOfSong());
-            existSong.setGenre(song.getGenre());
-            return songRepository.save(existSong);
-        }
-    }
-    //---------------------------------------------------------------------------------------
 
     public void deleteSong(Long id) throws Exception {
          Song existSong = songRepository.findSongById(id);
@@ -73,13 +46,17 @@ public class SongService {
         }
     //-----------------------------------------------------------------------
     public ResponseEntity<Song> addSong(SongDTO song) throws Exception {
-        Song existSong = songRepository.findSongByTitle(song.getTitle());
+        Song existSong = songRepository.findSongById(song.getId());
         if (existSong != null) {
             throw new RuntimeException("Song exist!");
         }
         if (song.getTitle() == null || song.getIdArtistOfSong() == null) {
             throw new IllegalArgumentException("Mistake! Required fields are missing");
         }
+        if (artistRepository.findArtistById(song.getIdArtistOfSong()) == null){
+            throw new Exception("Artist not exist!");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(songRepository.save(songMapper.toSong(song)));
     }
 

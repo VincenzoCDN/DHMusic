@@ -68,28 +68,28 @@ public class SongController {
     //---------------------------------------------------------------------------------------
     //Aggiunge (uso DTO)
 
-    @PostMapping("/create-song")                                     //funziona
+    @PostMapping("/create")                                     //funziona
     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
             songService.addSong(songDTO);
             return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
 
     }
 
     //---------------------------------------------------------------------------------------
     //Aggiorna un Song nel database DTO
-    @PutMapping("/update-song/{id}")                               //funziona
+    @PutMapping("/update/{id}")                               //funziona
     public ResponseEntity<?> updateSong(@PathVariable Long id, @RequestBody SongDTO song) {
         try {
             songService.updateSong(id, song);
             return ResponseEntity.accepted().build();
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
         //---------------------------------------------------------------------------------------
 

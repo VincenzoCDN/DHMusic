@@ -12,7 +12,6 @@ public class SongDTO {
    private String title;
     private float length;
    private String genre;
-   //private LocalDateTime publicationDate;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
@@ -78,13 +77,5 @@ public class SongDTO {
         this.isPublic = isPublic;
     }
 
-   /* public LocalDateTime getPublicationDate() {
-        return publicationDate;
-    }
 
-    public void setPublicationDate(LocalDateTime publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-    */
 }

@@ -4,8 +4,10 @@ package com.dhmusic.DHMusic.entities.content.entities;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,15 +20,20 @@ public class Song {
     private Long id;
     private String title;
     private float length;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date publicationDate;
 
     private String genre;
+
+    @CreationTimestamp
+    private Date creationDatePlatform;
 
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private boolean isPublic;
 
     @ManyToOne
-    @JoinColumn(name= "artist_id")
+    @JoinColumn(name= "artist_id", nullable = false)
     private Artist artistOfSong;
 
     @ManyToOne
@@ -109,5 +116,13 @@ public class Song {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Date getCreationDatePlatform() {
+        return creationDatePlatform;
+    }
+
+    public void setCreationDatePlatform(Date creationDatePlatform) {
+        this.creationDatePlatform = creationDatePlatform;
     }
 }
