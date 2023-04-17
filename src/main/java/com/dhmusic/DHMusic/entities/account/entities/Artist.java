@@ -31,7 +31,7 @@ public class Artist {
     private List<Song> songOfArtist;
     private int follower;
 
-    @OneToOne()
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id",nullable = false)
     @JsonIgnore
     private User user;
@@ -41,7 +41,6 @@ public class Artist {
 
     public Artist() {
     }
-
 
     public Long getId() {
         return id;
