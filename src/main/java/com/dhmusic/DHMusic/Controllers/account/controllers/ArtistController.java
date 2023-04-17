@@ -31,7 +31,7 @@ public class ArtistController {
 
             artistService.createArtist(artistDTO);
             logger.info("a new artist was created");
-            return ResponseEntity.ok(artistDTO);
+            return ResponseEntity.ok("create artist ");
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("there was an error in creating a new artist");
@@ -59,7 +59,7 @@ public class ArtistController {
         try {
             artistService.updateArtist(id,newArtist);
             logger.info("an artist has been modified");
-            return ResponseEntity.ok().body(newArtist);
+            return ResponseEntity.ok().body("modified artist");
         } catch (Exception e) {
             logger.error("error in the modification of the artist");
            e.printStackTrace();
