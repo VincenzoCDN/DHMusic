@@ -25,7 +25,7 @@ public class Album {
     @OneToMany(mappedBy = "albumOfSong")
     @JsonIgnore
     private List<Song> songsOfAlbum;
-    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date publicationDate;
 
     private boolean isPublic;

@@ -45,7 +45,7 @@ public class AlbumService {
             throw new Exception("the album need a Artist");
         }
         if (albumDTO.getPublicationDate() == null) {
-            throw new Exception("the album need Date with format (dd/mm/yyyy)");
+            throw new Exception("the album need Date with format (yyyy-MM-dd)");
         }
 
 
