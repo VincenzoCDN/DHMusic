@@ -91,8 +91,18 @@ public class SongController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
         //---------------------------------------------------------------------------------------
 
+    @GetMapping("/play/{id}")
+    public ResponseEntity<?> getSongTitle(@PathVariable Long id) {   //Funziona
+        try {
+            Song song = songRepository.findSongById(id);
 
+            return ResponseEntity.accepted().body(song.getLink());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
     }
 }

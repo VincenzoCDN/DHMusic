@@ -27,6 +27,8 @@ public class Song {
     private Date publicationDate;
 
     private String genre;
+    @Column(length = 500)
+    private String link;
 
     @CreationTimestamp
     private Date creationDatePlatform;
@@ -126,5 +128,18 @@ public class Song {
 
     public void setCreationDatePlatform(Date creationDatePlatform) {
         this.creationDatePlatform = creationDatePlatform;
+    }
+
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 }

@@ -10,6 +10,8 @@ public class SongDTO {
    private String genre;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
+
+    private String link;
     @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private boolean isPublic;
 
@@ -73,5 +75,11 @@ public class SongDTO {
         this.isPublic = isPublic;
     }
 
+    public String getLink() {
+        return link;
+    }
 
+    public void setLink(String link) {
+        this.link = link;
+    }
 }
