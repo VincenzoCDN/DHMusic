@@ -11,7 +11,7 @@ import static com.dhmusic.DHMusic.services.UserService.hashPassword;
 @Component
 public class UserMapper {
 
-    public User toArtist(UserDTO userDTO){
+    public User toUser(UserDTO userDTO){
         User user = new User();
         user.setEmail(userDTO.getEmail());
         user.setPassword(hashPassword(userDTO.getPassword()));
@@ -21,9 +21,6 @@ public class UserMapper {
         user.setNationality(userDTO.getNationality());
         user.setGender(userDTO.getGender());
         user.setDateOfBirth(userDTO.getDateOfBirth());
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDateTime now = LocalDateTime.now();
-        user.setCreationDate(dtf.format(now));
         return user;
     }
 }
