@@ -57,7 +57,7 @@ public class ArtistService {
 
     public void createArtist(ArtistDTO artistDTO) throws Exception{
 
-        if(artistDTO == null && artistDTO.getArtistName() == null){
+        if( artistDTO.getArtistName() == null && artistDTO.getUserId() == null){
             logger.error("error creation artist");
             throw new Exception("you didn't put the artist");
 
@@ -75,6 +75,7 @@ public class ArtistService {
             throw new Exception("Exist artist Name");
 
         } else if (existUserId(artistDTO)==false) {
+            logger.error("userId does not exist "+ artistDTO.getUserId());
             throw new Exception("User id does not exist");
 
         } else if (artistRepository.findByUserId(artistDTO.getUserId()) != null) {
@@ -92,6 +93,10 @@ public class ArtistService {
             logger.warn("the artist to be modified does not exist");
             throw new Exception("the artist does not exist");
 
+        }
+        if(existArtistName(artistEditDTO) == true){
+            logger.warn("there is already an artist with this name " +artistEditDTO.getArtistName());
+            throw new Exception("there is already an artist with this name ");
         }
         if (artistEditDTO.getArtistName() == null && artistEditDTO.getBio() == null && artistEditDTO.getUserId() == null ) {
 
