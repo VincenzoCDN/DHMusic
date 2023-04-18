@@ -107,7 +107,7 @@ public class SongController {
     }
 
     @GetMapping("/play2/{id}")
-    public ResponseEntity<?> playSong2(@PathVariable Long id) {   //Funziona
+    public ResponseEntity<?> playSong2(@PathVariable Long id) {
         try {
             Song song = songRepository.findSongById(id);
             String strID= song.getLink();

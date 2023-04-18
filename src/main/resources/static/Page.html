@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <script src="/app.js"></script>
     <title>My YouTube Video</title>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+
+
     <style>
 		body {
 			display: flex;
@@ -9,7 +16,7 @@
 			align-items: center;
 			justify-content: center;
 			height: 100vh;
-			background-color: #000080
+			background-color: #6495ed
 		}
 
 		h1 {
@@ -24,8 +31,8 @@
 </head>
 
 <body>
-<h1>Titolo della canzone</h1>
-<div>
+<h1 id="nino">Titolo della canzone</h1>
+<div id="nino2">
     <iframe width="560" height="315" src="https://www.youtube.com/embed/l4w7mevweXA" frameborder="0" allowfullscreen></iframe>
 </div>
 <h1>DH Music</h1>
