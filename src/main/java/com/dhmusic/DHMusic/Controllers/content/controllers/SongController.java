@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
 import com.dhmusic.DHMusic.entities.content.entities.Song;
+import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,35 +22,23 @@ public class SongController {
     private SongRepository songRepository;
 
 
-    //---------------------------------------------------------------------------------------
-    //aggiunge una nuova canzone
-    @PostMapping("/create")
-    public Song addSong(@RequestBody Song song) throws Exception {   //funziona
-        return songService.addSong(song);
-    }
+
     //---------------------------------------------------------------------------------------
     //mostra lista di canzoni
     @GetMapping
-    public List<Song> getSongs(){           //Funziona
-      return songRepository.findAll();
+    public List<Song> getSongs() {           //Funziona
+        return songRepository.findAll();
 
     }
+
     //---------------------------------------------------------------------------------------
-    //mostrare la singola canzone
-    @GetMapping("/{id}")
-    public Song getSongId( @PathVariable Long id){             //Funziona
-        Song existSong = songRepository.findSongById(id);
-        if (existSong == null){
-            throw new RuntimeException("Song not exist!");
-        }
-        return songRepository.findSongById(id);
-    }
-    //---------------------------------------------------------------------------------------
+
     //Mostra la singola canzone per titolo
     @GetMapping("/get/title/{title}")
-    public Song getSongTitle( @PathVariable String title){   //Funziona
+    public Song getSongTitle(@PathVariable String title) {   //Funziona
         return songRepository.findSongByTitle(title);
     }
+
     //---------------------------------------------------------------------------------------
     //elimina un Song nel database
     @DeleteMapping("/delete/{id}")                                    //Funziona
@@ -57,17 +46,53 @@ public class SongController {
         songService.deleteSong(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
     //---------------------------------------------------------------------------------------
     //elimina tutto
     @DeleteMapping("/delete/all")            //funziona
-    public void deleteAll(){
+    public void deleteAll() {
         songService.deleteAll();
     }
+
+
     //---------------------------------------------------------------------------------------
-    //Aggiorna un Song nel database
-    @PutMapping("/update/{id}")                                     //funziona se inserisco nel body "id"
-    public Song updateSong (@PathVariable Long id, @RequestBody Song song) throws Exception {
-        return songService.updateSong(song);
+    //Aggiunge (uso DTO)
+
+    @PostMapping("/create")                                     //funziona
+    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
+        try {
+            songService.addSong(songDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body("The song was created!");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
+    }
+
+    //---------------------------------------------------------------------------------------
+    //Aggiorna un Song nel database DTO
+    @PutMapping("/update/{id}")                               //funziona
+    public ResponseEntity<?> updateSong(@PathVariable Long id, @RequestBody SongDTO song) {
+        try {
+            songService.updateSong(id, song);
+            return ResponseEntity.accepted().build();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+
+    }
+    //---------------------------------------------------------------------------------------
+    //mostrare la singola canzone
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Song> getSongById(@PathVariable Long id){
+        Song existSong = songRepository.findSongById(id);
+        if (existSong == null) {
+            throw new RuntimeException("Song not exist!");
+        }
+        songRepository.findSongById(id);
+        return ResponseEntity.ok().body(existSong);
     }
 
 

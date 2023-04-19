@@ -5,7 +5,9 @@ package com.dhmusic.DHMusic.entities.content.entities;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 
 
+
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -24,6 +26,7 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
     private List<Song> songsOfPlaylist;
     private Date publicationDate;
+    private LocalDateTime creationDateToPlatform;
 
 
 
@@ -76,5 +79,11 @@ public class Playlist {
 
     }
 
+    public LocalDateTime getCreationDateToPlatform() {
+        return creationDateToPlatform;
+    }
 
+    public void setCreationDateToPlatform(LocalDateTime creationDateToPlatform) {
+        this.creationDateToPlatform = creationDateToPlatform;
+    }
 }

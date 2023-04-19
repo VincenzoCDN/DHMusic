@@ -2,9 +2,14 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import org.hibernate.annotations.CreationTimestamp;
 
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -15,19 +20,32 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String title;
     private float length;
+
+    @JsonFormat(pattern = "yyyy/mm/dd")
+    @Column(columnDefinition = "DATE")
     private Date publicationDate;
 
     private String genre;
+    @CreationTimestamp
+    @JsonFormat(pattern = "yyyy/mm/dd")
+    @Column(columnDefinition = "DATE")
+    private Date creationDatePlatform;
+
+    @JsonFormat(shape = JsonFormat.Shape.NUMBER)
     private boolean isPublic;
 
     @ManyToOne
-    @JoinColumn(name= "artist_id")
+    @JoinColumn(name= "artist_id", nullable = false)
+    @JsonIgnore
     private Artist artistOfSong;
 
     @ManyToOne
     @JoinColumn(name = "album_id")
+    @JsonIgnore
     private Album albumOfSong;
 
     @ManyToMany(mappedBy = "songsOfPlaylist")
@@ -96,8 +114,8 @@ public class Song {
         return isPublic;
     }
 
-    public void setPublic(boolean aPublic) {
-        isPublic = aPublic;
+    public void setIsPublic(boolean isPublic) {
+        this.isPublic = isPublic;
     }
 
     public String getGenre() {
@@ -106,5 +124,13 @@ public class Song {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Date getCreationDatePlatform() {
+        return creationDatePlatform;
+    }
+
+    public void setCreationDatePlatform(Date creationDatePlatform) {
+        this.creationDatePlatform = creationDatePlatform;
     }
 }
