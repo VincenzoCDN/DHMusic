@@ -131,9 +131,11 @@ public class SongService {
     public ResponseEntity<Song> getSongById(Long id){
         Song existSong = songRepository.findSongById(id);
         if (existSong == null) {
+            logger.error("Song not exist!");
             throw new RuntimeException("Song not exist!");
         }
         songRepository.findSongById(id);
+        logger.info("the data of the song %d has been obtained", id);
         return ResponseEntity.ok().body(existSong);
     }
 
