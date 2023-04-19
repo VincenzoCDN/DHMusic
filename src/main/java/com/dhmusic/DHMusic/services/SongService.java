@@ -125,7 +125,7 @@ public class SongService {
                 existSong.setArtistOfSong(artist);
                 songRepository.save(existSong);
                 return ResponseEntity.ok().body("Artist's song has been successfully changed!") ;
-            } else if (updateSong.getIdAlbumOfSong() != null) {
+            } else if (updateSong.getIdAlbumOfSong() != null ||updateSong.getIdAlbumOfSong() == null) {
                 logger.info("Changed only the album");
                 Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
                 existSong.setAlbumOfSong(album);
@@ -170,6 +170,19 @@ public class SongService {
         songRepository.findSongById(id);
         logger.info("the data of the song %d has been obtained", id);
         return ResponseEntity.ok().body(existSong);
+    }
+    //------------------------------------------------------------------------------------------------------
+
+    public String getSongByIdWithArtist(Long id){
+        Song existSong = songRepository.findSongById(id);
+        Artist artist = artistRepository.findArtistById(id);
+        if (existSong == null) {
+            logger.error("Song not exist!");
+            throw new RuntimeException("Song not exist!");
+        }
+        songRepository.findSongById(id);
+        return existSong + artist.getArtistName();
+
     }
 
 

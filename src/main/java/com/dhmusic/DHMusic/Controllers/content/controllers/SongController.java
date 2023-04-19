@@ -131,5 +131,11 @@ public class SongController {
         }
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Song>getSongByIdWithArtist(@PathVariable Long id){
+        songService.getSongByIdWithArtist(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 
 }
