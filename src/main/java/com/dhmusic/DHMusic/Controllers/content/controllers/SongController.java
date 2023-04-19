@@ -87,12 +87,14 @@ public class SongController {
     //mostrare la singola canzone
     @GetMapping("/get/{id}")
     public ResponseEntity<Song> getSongById(@PathVariable Long id){
-        Song existSong = songRepository.findSongById(id);
-        if (existSong == null) {
-            throw new RuntimeException("Song not exist!");
+        try {
+            songService.getSongById(id);
+            Song existSong = songRepository.findSongById(id);
+            return ResponseEntity.ok(existSong);
+        } catch (Exception e){
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
-        songRepository.findSongById(id);
-        return ResponseEntity.ok().body(existSong);
     }
 
 

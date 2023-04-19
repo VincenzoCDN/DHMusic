@@ -14,6 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class SongService {
@@ -124,6 +126,16 @@ public class SongService {
             logger.info("The song %d has been successfully updated", id);
             return ResponseEntity.ok(existSong);
         }
+
+
+    public ResponseEntity<Song> getSongById(Long id){
+        Song existSong = songRepository.findSongById(id);
+        if (existSong == null) {
+            throw new RuntimeException("Song not exist!");
+        }
+        songRepository.findSongById(id);
+        return ResponseEntity.ok().body(existSong);
+    }
 
 
 
