@@ -8,7 +8,7 @@ public class SongDTO {
 
    private Long id;
    private String title;
-    private float length;
+   private float length;
    private String genre;
     private Long idArtistOfSong;
     private Long idAlbumOfSong;
