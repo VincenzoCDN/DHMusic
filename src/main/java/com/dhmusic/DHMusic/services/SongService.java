@@ -14,12 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-
 @Service
 public class SongService {
 
+    /**
+     * Inserito il logger in SongService per registrare informazioni utili
+     * durante l'esecuzione del programma.
+     */
     Logger logger = LoggerFactory.getLogger(SongService.class);
 
     @Autowired
@@ -35,6 +36,13 @@ public class SongService {
 
     //---------------------------------------------------------------------------------------
 
+    /**
+     * Creazione metodo per cancellare la singola canzone passando come
+     * @param id
+     * se la canzone esiste,la cancella, altrimenti darà un eccezione quali:
+     * @throws Exception "La canzone non esiste".
+     */
+
     public void deleteSong(Long id) throws Exception {
          Song existSong = songRepository.findSongById(id);
          if(existSong != null) {
@@ -46,11 +54,22 @@ public class SongService {
          }
     }
     //-----------------------------------------------------------------------
+
+    /**
+     * Creazione metodo per cancellare tutte le canzoni presenti.
+     */
     public void deleteAll() {
         logger.info("All songs have been deleted.");
       songRepository.deleteAll();
         }
     //-----------------------------------------------------------------------
+
+    /**
+     * Creazione metodo per aggiungere una canzone passando come parametro:
+     * @param song utilizzando SongDTO
+     * @return se i dati sono inseriti correttamente aggiunge e salva la canzone altrimenti può dare diverse eccezioni:
+     * @throws Exception "la canzone già esiste"/"il titolo già esiste"/"l'artista non esiste".
+     */
     public ResponseEntity<Song> addSong(SongDTO song) throws Exception {
         Song existSong = songRepository.findSongById(song.getId());
         if (existSong != null) {
@@ -75,7 +94,13 @@ public class SongService {
 
 
     //-----------------------------------------------------------------------
-        //aggiorna la canzone DTO
+
+    /**
+     * Creazione metodo per aggiornare una canzone esistente
+     * con la possibilità di aggiornare anche un singolo dato
+     * i paramentri utilizzati.
+     *
+     */
        public ResponseEntity<?> updateSong(Long id,SongDTO updateSong) {
             Song existSong = songRepository.findSongById(id); // id string o long?
             if (existSong == null) {
@@ -127,6 +152,14 @@ public class SongService {
             return ResponseEntity.ok(existSong);
         }
 
+    //-----------------------------------------------------------------------
+
+    /**
+     * Creazione metodo che mostra i dati della singola canzone, utilizzando come parametro:
+     * @param id
+     * @return ritorna i dati della canzone se l'id è corretto,
+     * altrimenti ritorna un eccezione nel caso la canzone non esista.
+     */
 
     public ResponseEntity<Song> getSongById(Long id){
         Song existSong = songRepository.findSongById(id);
