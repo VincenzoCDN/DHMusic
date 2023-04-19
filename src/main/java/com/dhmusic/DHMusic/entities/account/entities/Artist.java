@@ -12,7 +12,9 @@ import java.util.List;
 @Entity
 @Table(name = "artists")
 public class Artist {
-
+    /**
+     * creazione classe Artist con le relative variabili, getter, setter e costruttori
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

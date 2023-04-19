@@ -31,6 +31,12 @@ public class ArtistService {
     @Autowired
     private ArtistMapper artistMapper;
 
+    /**
+     * verifico se il nome dell'artista è gia esistente
+     * @param artistDTO
+     * @return
+     */
+
     public boolean existArtistName(ArtistDTO artistDTO){
         boolean exist;
         Artist artist = artistRepository.findByArtistName(artistDTO.getArtistName());
@@ -41,7 +47,11 @@ public class ArtistService {
         logger.debug("not exist artist for creation new artist");
         return exist = false;
     }
-
+    /**
+     * verifico se l'id dello user esiste
+     * @param artistDTO
+     * @return
+     */
     public boolean existUserId(ArtistDTO artistDTO){
         boolean exist;
         User userId = userRepository.findUserById(artistDTO.getUserId());
@@ -54,6 +64,13 @@ public class ArtistService {
         return exist = true;
     }
 
+    /**
+     * creazione dell'artista, verifico se ci sono i dati essenziali, poi utilizzo i metodi existArtistName e existUserId
+     * per verificare se il nome dell'artista è già utilizzato e se esiste l'id dello user , in fine verifico se id dello user
+     * è gia utilizzato e se non è utilizzato salva l'artista nel database
+     * @param artistDTO
+     * @throws Exception
+     */
 
     public void createArtist(ArtistDTO artistDTO) throws Exception{
 
@@ -86,6 +103,15 @@ public class ArtistService {
         artistRepository.save(artist);
         logger.info("artist creation");
     }
+
+    /**
+     * modifico un artista esistente, controlliamo se l'artista esiste tramite id, verifichiamo sempre se il nome esiste o meno
+     * successivamente vedo cosa modifica utente e salvo la modifica
+     * @param id
+     * @param artistEditDTO
+     * @return l'artista modificato
+     * @throws Exception
+     */
 
     public Artist updateArtist(Long id,ArtistDTO artistEditDTO) throws Exception {
         Artist existArtist = artistRepository.findArtistById(id);
@@ -123,6 +149,11 @@ public class ArtistService {
         }
     }
 
+    /**
+     * elimino l'artista con un determinato id
+     * @param id
+     * @throws Exception
+     */
     public void deleteArtist(Long id) throws Exception {
         if(!artistRepository.existsById(id)){
             logger.warn("Attempt to eliminate an artist who does not exist");
@@ -132,6 +163,12 @@ public class ArtistService {
         artistRepository.deleteById(id);
     }
 
+    /**
+     * vedo tutti gli user che seguono un artista con un id specifico
+     * @param id
+     * @return tutti gli utenti che seguono l'artista
+     * @throws Exception
+     */
     public List<User> getUsersFollowers(Long id) throws Exception {
         Artist existingArtist = artistRepository.findArtistById(id);
         if(existingArtist == null){
@@ -142,12 +179,21 @@ public class ArtistService {
         return existingArtist.getUsersFollowers();
     }
 
+    /**
+     * vedo tutti gli artisti
+     * @return tutti gli artisti
+     */
 
     public List<Artist> getAllArtist(){
         logger.info("all artists were seen");
         return artistRepository.findAll();
     }
 
+    /**
+     * controllo se esiste artista con un determinato id
+     * @param id
+     * @return se esiste
+     */
     public boolean isValidId(Long id)  {
         boolean exists = artistRepository.existsById(id);
         if (exists == false) {
@@ -156,6 +202,12 @@ public class ArtistService {
         return true;
     }
 
+    /**
+     * verifico se l'artista esiste o no e mostro l'artista con un id specifico
+     * @param id
+     * @return l'artista
+     * @throws Exception
+     */
     public Optional<Artist> getArtistById(Long id) throws Exception {
         if(isValidId(id) == false){
             logger.warn("no artists were found with this id "+id);
