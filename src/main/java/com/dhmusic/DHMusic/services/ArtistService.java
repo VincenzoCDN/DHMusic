@@ -67,11 +67,11 @@ public class ArtistService {
             throw new Exception("enter the userId");
 
         }else if (artistDTO.getArtistName() == null) {
-            logger.error("enter the name of the artist");
+            logger.error("The name of the artist was not entered with id "+artistDTO.getId());
             throw new Exception("enter the name of the artist");
 
         } else if (existArtistName(artistDTO) == true) {
-            logger.error("exist artist");
+            logger.error("there is already an artist with this name "+ artistDTO.getArtistName());
             throw new Exception("Exist artist Name");
 
         } else if (existUserId(artistDTO)==false) {
