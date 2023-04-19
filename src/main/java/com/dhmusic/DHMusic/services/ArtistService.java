@@ -63,14 +63,14 @@ public class ArtistService {
             logger.error("enter the name of the artist");
             throw new Exception("enter the name of the artist");
 
-        } else if (existArtistName(artistDTO) == true) {
+        } else if (existArtistName(artistDTO)) {
             logger.error("exist artist");
             throw new Exception("Exist artist Name");
 
         } else if (artistDTO.getUserId()==null) {
             throw new Exception("User id does not exist");
 
-        } else if (existUserId(artistDTO) == true) {
+        } else if (artistRepository.findByUserId(artistDTO.getUserId()) != null) {
             logger.error("user tries to create another artist");
             throw new Exception("there is already an artist linked to this user ");
         }
@@ -138,14 +138,14 @@ public class ArtistService {
 
     public boolean isValidId(Long id)  {
         boolean exists = artistRepository.existsById(id);
-        if (exists == false) {
+        if (!exists) {
             return false;
         }
         return true;
     }
 
     public Optional<Artist> getArtistById(Long id) throws Exception {
-        if(isValidId(id) == false){
+        if(!isValidId(id)){
             logger.warn("no artists were found with this id "+id);
             throw new Exception("the artist does not exist");
         }

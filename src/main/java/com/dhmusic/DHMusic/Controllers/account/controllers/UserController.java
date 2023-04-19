@@ -52,7 +52,6 @@ public class UserController {
     public ResponseEntity<?> verificateUser(@PathVariable Long id, @RequestParam String code){
 
         try {
-
             return ResponseEntity.accepted().body(userService.verificareAccount(id, code));
 
     }catch (Exception e) {
