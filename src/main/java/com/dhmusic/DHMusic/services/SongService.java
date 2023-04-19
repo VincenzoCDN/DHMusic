@@ -82,6 +82,34 @@ public class SongService {
             } else if (!existSong.getId().equals(updateSong.getId())) {
                 logger.error("Song %d does not match", id);
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Song id does not match");
+            } else if (updateSong.getTitle() != null) {
+                logger.info("Changed only the title");
+                existSong.setTitle(updateSong.getTitle());
+                songRepository.save(existSong);
+                return ResponseEntity.ok().body("Song's title has been successfully changed!") ;
+            } else if (updateSong.getGenre() != null) {
+                logger.info("Changed only the genre");
+                existSong.setGenre(updateSong.getGenre());
+                songRepository.save(existSong);
+                return ResponseEntity.ok().body("Song's genre has been successfully changed!") ;
+            } else if (updateSong.getIdArtistOfSong() != null) {
+                logger.info("Changed only the artist");
+                Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
+                existSong.setArtistOfSong(artist);
+                songRepository.save(existSong);
+                return ResponseEntity.ok().body("Artist's song has been successfully changed!") ;
+            } else if (updateSong.getIdAlbumOfSong() != null) {
+                logger.info("Changed only the album");
+                Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
+                existSong.setAlbumOfSong(album);
+                songRepository.save(existSong);
+                return ResponseEntity.ok().body("Song's album has been successfully changed!") ;
+            } else if (updateSong.getPublicationDate() != null || updateSong.getPublicationDate() == null) {
+                logger.info("Changed only the publication date");
+                existSong.setPublicationDate(updateSong.getPublicationDate());
+                songRepository.save(existSong);
+                return ResponseEntity.ok().body("Song's publication date has been successfully changed!") ;
+
             } else {
                 existSong.setTitle(updateSong.getTitle());
                 existSong.setGenre(updateSong.getGenre());
