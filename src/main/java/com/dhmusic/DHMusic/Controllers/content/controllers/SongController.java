@@ -23,40 +23,62 @@ public class SongController {
 
 
 
-    //---------------------------------------------------------------------------------------
-    //mostra lista di canzoni
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * mostra la lista di canzoni
+     * @return tutte le canzoni presenti all'interno della repository
+     */
     @GetMapping
     public List<Song> getSongs() {           //Funziona
         return songRepository.findAll();
 
     }
 
-    //---------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------
 
-    //Mostra la singola canzone per titolo
+    /**
+     * mostra la singola canzone per titolo
+     * @param title come @PathVariable
+     * @return canzone trovata all'interno della repository con lo stesso titolo
+     */
     @GetMapping("/get/title/{title}")
     public Song getSongTitle(@PathVariable String title) {   //Funziona
         return songRepository.findSongByTitle(title);
     }
 
-    //---------------------------------------------------------------------------------------
-    //elimina un Song nel database
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Elimina una canzone all'interno del database.
+     * @param id come @PathVariable.
+     * @return salvataggio dell'eliminazione avvenuta.
+     * @throws Exception Ok se la canzone è stata eliminata con successo.
+     */
     @DeleteMapping("/delete/{id}")                                    //Funziona
     public ResponseEntity<Void> deleteSong(@PathVariable Long id) throws Exception {
         songService.deleteSong(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    //---------------------------------------------------------------------------------------
-    //elimina tutto
+    //------------------------------------------------------------------------------------------------------
+    /**
+     * Elimina tutte le canzoni presenti all'interno del database
+     */
     @DeleteMapping("/delete/all")            //funziona
     public void deleteAll() {
         songService.deleteAll();
     }
 
 
-    //---------------------------------------------------------------------------------------
-    //Aggiunge (uso DTO)
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Aggiunge una nuova canzone
+     * @param songDTO come @RequestBody
+     * @return lo stato "Created" con messaggio che la canzone è stata creata con successo.
+     * @throws Exception Bad Request con messaggio dell'eventuale errore presente.
+     */
 
     @PostMapping("/create")                                     //funziona
     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
@@ -70,8 +92,15 @@ public class SongController {
 
     }
 
-    //---------------------------------------------------------------------------------------
+    //------------------------------------------------------------------------------------------------------
     //Aggiorna un Song nel database DTO
+
+    /**
+     * Aggiorna una canzone presente all'interno del database
+     * @param id come @PathVariable
+     * @param song come @RequestBody
+     * @return se l'aggiornamento è stato accettato o no tramite una Bad request.
+     */
     @PutMapping("/update/{id}")                               //funziona
     public ResponseEntity<?> updateSong(@PathVariable Long id, @RequestBody SongDTO song) {
         try {
@@ -83,8 +112,13 @@ public class SongController {
         }
 
     }
-    //---------------------------------------------------------------------------------------
-    //mostrare la singola canzone
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Mostra la singola canzone richiesta
+     * @param id come @PathVariable
+     * @return i dati della canzone richiesta o un "Not found" nel caso in cui la canzone non viene trovata
+     */
     @GetMapping("/get/{id}")
     public ResponseEntity<Song> getSongById(@PathVariable Long id){
         try {
