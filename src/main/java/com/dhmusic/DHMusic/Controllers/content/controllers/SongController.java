@@ -132,9 +132,9 @@ public class SongController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Song>getSongByIdWithArtist(@PathVariable Long id){
-        songService.getSongByIdWithArtist(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<String>getSongByIdWithArtist(@PathVariable Long id){
+       String existSong = songService.getSongByIdWithArtist(id);
+        return ResponseEntity.status(HttpStatus.OK).body(existSong);
     }
 
 

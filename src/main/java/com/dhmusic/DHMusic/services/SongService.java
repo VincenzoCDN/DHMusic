@@ -173,17 +173,27 @@ public class SongService {
     }
     //------------------------------------------------------------------------------------------------------
 
-    public String getSongByIdWithArtist(Long id){
-        Song existSong = songRepository.findSongById(id);
-        Artist artist = artistRepository.findArtistById(id);
+    /**
+     * Creazione metodo per visualizzare solo il titolo e il nome dell'artista
+     * @param idSong
+     * @return titolo + nome artista
+     */
+
+    public String getSongByIdWithArtist(Long idSong) {
+        Song existSong = songRepository.findSongById(idSong);
+        Artist artist = songRepository.findSongByArtistOfSong(existSong.getArtistOfSong()).getArtistOfSong();
         if (existSong == null) {
             logger.error("Song not exist!");
             throw new RuntimeException("Song not exist!");
-        }
-        songRepository.findSongById(id);
-        return existSong + artist.getArtistName();
 
+        }
+
+        return existSong.getTitle() + " by " + artist.getArtistName();
     }
+
+
+
+
 
 
 
