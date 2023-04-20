@@ -183,20 +183,7 @@ public class SongService {
      * @return titolo + nome artista
      */
 
-    /*public String getSongByIdWithArtist(Long idSong) {
-        Song existSong = songRepository.findSongById(idSong);
-        Artist artist = songRepository.findSongByArtistOfSong(existSong.getArtistOfSong()).getArtistOfSong();
-        if (existSong == null) {
-            logger.error("Song not exist!");
-            throw new RuntimeException("Song not exist!");
 
-        }
-
-        return "Title: " + existSong.getTitle() + "\n" +
-                "Artist: " + artist.getArtistName();
-    }
-
- */
     public String getSongByIdWithArtist(Long idSong) {
         Song existSong = songRepository.findSongById(idSong);
         Artist artist = songRepository.findArtistBySong(existSong);
@@ -204,10 +191,10 @@ public class SongService {
             logger.error("Song not exist!");
             throw new RuntimeException("Song not exist!");
         }
+        logger.info("Song's title %d associated with the artist was obtained", idSong);
         return "Title: " + existSong.getTitle() + "\n" +
                 "Artist: " + artist.getArtistName();
     }
-
 
 
 
