@@ -17,4 +17,6 @@ public interface ArtistRepository extends JpaRepository<Artist,Long> {
 
     Artist findByUserId(Long id);
 
+
+
 }
