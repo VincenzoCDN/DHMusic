@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class SongService {
 
@@ -179,7 +183,7 @@ public class SongService {
      * @return titolo + nome artista
      */
 
-    public String getSongByIdWithArtist(Long idSong) {
+    /*public String getSongByIdWithArtist(Long idSong) {
         Song existSong = songRepository.findSongById(idSong);
         Artist artist = songRepository.findSongByArtistOfSong(existSong.getArtistOfSong()).getArtistOfSong();
         if (existSong == null) {
@@ -188,7 +192,20 @@ public class SongService {
 
         }
 
-        return existSong.getTitle() + " by " + artist.getArtistName();
+        return "Title: " + existSong.getTitle() + "\n" +
+                "Artist: " + artist.getArtistName();
+    }
+
+ */
+    public String getSongByIdWithArtist(Long idSong) {
+        Song existSong = songRepository.findSongById(idSong);
+        Artist artist = songRepository.findArtistBySong(existSong);
+        if (existSong == null) {
+            logger.error("Song not exist!");
+            throw new RuntimeException("Song not exist!");
+        }
+        return "Title: " + existSong.getTitle() + "\n" +
+                "Artist: " + artist.getArtistName();
     }
 
 
