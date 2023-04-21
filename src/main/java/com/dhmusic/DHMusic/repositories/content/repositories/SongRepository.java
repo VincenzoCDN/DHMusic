@@ -21,9 +21,7 @@ public interface SongRepository extends JpaRepository<Song,Long> {
     Song findSongById(Long id);
     List<Song> findSongByalbumOfSong(Album album);
     //Song findSongByArtistOfSong(Artist artist);
-    @Query("SELECT s.artistOfSong FROM Song s WHERE s = :song")
-    Artist findArtistBySong(@Param("song") Song song);
-    //Song findSongByArtistOfSong(Artist artist);
+
 
 }
 

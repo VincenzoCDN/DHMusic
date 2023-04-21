@@ -186,7 +186,7 @@ public class SongService {
 
     public String getSongByIdWithArtist(Long idSong) {
         Song existSong = songRepository.findSongById(idSong);
-        Artist artist = songRepository.findArtistBySong(existSong);
+        Artist artist = artistRepository.findArtistBySong(existSong);
         if (existSong == null) {
             logger.error("Song not exist!");
             throw new RuntimeException("Song not exist!");
