@@ -24,7 +24,11 @@ public class ArtistController {
 
     Logger logger = LoggerFactory.getLogger(ArtistController.class);
 
-    //inserisce un nuovo artista nel database
+    /**
+     * inserisce un nuovo artista nel database
+     * @param artistDTO
+     * @return restituisce lo status più un messaggio
+     */
     @PostMapping("/create-artist")
     public ResponseEntity createArtist(@RequestBody ArtistDTO artistDTO){
         try {
@@ -39,7 +43,11 @@ public class ArtistController {
         }
     }
 
-    //elimina un artista nel database
+    /**
+     * elimina un artista nel database
+     * @param id
+     * @return restituisce lo status
+     */
     @DeleteMapping("/delete-artist/{id}")
     public ResponseEntity deleteArtist(@PathVariable Long id){
         try {
@@ -53,7 +61,12 @@ public class ArtistController {
         }
     }
 
-    //Aggiorna un artista nel database
+    /**
+     * Aggiorna un artista nel database
+     * @param id
+     * @param newArtist
+     * @return restituisce lo status più un messaggio
+     */
     @PutMapping("/update-artist/{id}")
     public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody ArtistDTO newArtist){
         try {
@@ -68,7 +81,10 @@ public class ArtistController {
     }
 
 
-    //Seleziona gli artisti nel database
+    /**
+     * visualizza gli artisti nel database
+     * @return un messaggio di status più tutti gli artisti
+     */
     @GetMapping("/get-all-artists")
     public ResponseEntity getAllArtist(){
         try {
@@ -82,7 +98,11 @@ public class ArtistController {
         }
     }
 
-    //Seleziona un artista nel database
+    /**
+     * visualizza un artista nel database
+     * @param id
+     * @return un messaggio di status più un artisti
+     */
     @GetMapping("/get-artist-by-id/{id}")
     public ResponseEntity getArtistById(@PathVariable Long id){
         try{
@@ -97,6 +117,11 @@ public class ArtistController {
 
     }
 
+    /**
+     * visualizza i followers di un artista con un determinato id
+     * @param id
+     * @return un messaggio di status più tutti i followers
+     */
     @GetMapping("/get-user-followers")
     public ResponseEntity getFollowers(@RequestParam Long id){
         try {
