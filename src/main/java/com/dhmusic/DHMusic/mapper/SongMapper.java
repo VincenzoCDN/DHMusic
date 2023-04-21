@@ -26,6 +26,13 @@ public class SongMapper {
         this.songRepository = songRepository;
     }
 
+    /**
+     * Il metodo toSong all'interno della classe SongMapper serve per convertire un oggetto SongDTO in un oggetto Song.
+     * Questa conversione è necessaria quando si vuole salvare una nuova canzone nel database,
+     * perché in genere si riceve un oggetto DTO dalla richiesta HTTP e si deve convertire in un oggetto persistente.
+     * @param songDTO
+     * @return song
+     */
 
     public Song toSong(SongDTO songDTO){
         Song song = new Song();

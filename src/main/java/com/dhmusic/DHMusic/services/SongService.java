@@ -102,7 +102,7 @@ public class SongService {
     /**
      * Creazione metodo per aggiornare una canzone esistente
      * con la possibilità di aggiornare anche un singolo dato
-     * i paramentri utilizzati.
+     * i parametri utilizzati.
      *
      */
        public ResponseEntity<?> updateSong(Long id,SongDTO updateSong) {
