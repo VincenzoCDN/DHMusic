@@ -8,7 +8,7 @@ import com.dhmusic.DHMusic.mapper.ArtistMapper;
 import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
-import jakarta.transaction.Transactional;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
