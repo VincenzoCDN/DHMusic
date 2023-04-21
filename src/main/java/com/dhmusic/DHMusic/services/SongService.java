@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class SongService {
 
@@ -125,7 +129,7 @@ public class SongService {
                 existSong.setArtistOfSong(artist);
                 songRepository.save(existSong);
                 return ResponseEntity.ok().body("Artist's song has been successfully changed!") ;
-            } else if (updateSong.getIdAlbumOfSong() != null) {
+            } else if (updateSong.getIdAlbumOfSong() != null ||updateSong.getIdAlbumOfSong() == null) {
                 logger.info("Changed only the album");
                 Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
                 existSong.setAlbumOfSong(album);
@@ -171,6 +175,29 @@ public class SongService {
         logger.info("the data of the song %d has been obtained", id);
         return ResponseEntity.ok().body(existSong);
     }
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Creazione metodo per visualizzare solo il titolo e il nome dell'artista
+     * @param idSong
+     * @return titolo + nome artista
+     */
+
+
+    public String getSongByIdWithArtist(Long idSong) {
+        Song existSong = songRepository.findSongById(idSong);
+        Artist artist = artistRepository.findArtistBySong(existSong);
+        if (existSong == null) {
+            logger.error("Song not exist!");
+            throw new RuntimeException("Song not exist!");
+        }
+        logger.info("Song's title %d associated with the artist was obtained", idSong);
+        return "Title: " + existSong.getTitle() + "\n" +
+                "Artist: " + artist.getArtistName();
+    }
+
+
+
 
 
 
