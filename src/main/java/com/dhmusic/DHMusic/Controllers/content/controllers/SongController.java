@@ -4,6 +4,8 @@ import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +22,8 @@ public class SongController {
     private SongService songService; // per accesso al database
     @Autowired
     private SongRepository songRepository;
+
+    Logger logger = LoggerFactory.getLogger(SongController.class);
 
 
 
@@ -124,12 +128,20 @@ public class SongController {
         try {
             songService.getSongById(id);
             Song existSong = songRepository.findSongById(id);
+
             return ResponseEntity.ok(existSong);
         } catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Mostra solo iil titolo e l'artista della canzone.
+     * @param id come @PathVariable.
+     * @return titolo + artista.
+     */
 
     @GetMapping("/{id}")
     public ResponseEntity<String>getSongByIdWithArtist(@PathVariable Long id){
