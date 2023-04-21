@@ -39,7 +39,22 @@ public class Artist {
     @JoinTable(name="followers", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="artist_id"))
     private List<User> usersFollowers;
 
+    private String profilePictureFilename;
+
     public Artist() {
+    }
+
+    public Artist(Long id, String artistName, String bio, List<Album> albumsOfArtist, List<Song> songOfArtist, int follower,
+                  User user, List<User> usersFollowers, String profilePictureFilename) {
+        this.id = id;
+        this.artistName = artistName;
+        this.bio = bio;
+        this.albumsOfArtist = albumsOfArtist;
+        this.songOfArtist = songOfArtist;
+        this.follower = follower;
+        this.user = user;
+        this.usersFollowers = usersFollowers;
+        this.profilePictureFilename = profilePictureFilename;
     }
 
     public Long getId() {
@@ -106,13 +121,11 @@ public class Artist {
         this.usersFollowers = usersFollowers;
     }
 
-    public int addFollower(){
-        //this.usersFollowers.add(User);
-        return this.follower++;
+    public String getProfilePictureFilename() {
+        return profilePictureFilename;
     }
 
-    public int removeFollower(){
-      //  this.usersFollowers.remove(User);
-        return this.follower--;
+    public void setProfilePictureFilename(String profilePictureFilename) {
+        this.profilePictureFilename = profilePictureFilename;
     }
 }

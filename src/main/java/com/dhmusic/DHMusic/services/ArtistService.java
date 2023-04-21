@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,9 @@ public class ArtistService {
 
     @Autowired
     private ArtistMapper artistMapper;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
     public boolean existArtistName(ArtistDTO artistDTO){
         boolean exist;
@@ -164,5 +168,24 @@ public class ArtistService {
         logger.info("The artists were seen");
         return artistRepository.findById(id);
     }
+
+    public Artist uploadProfilePictureArtist(Long artistId, MultipartFile profilePicture) throws Exception{
+        Optional<Artist> optionalArtist = artistRepository.findById(artistId);
+        if(optionalArtist.isEmpty()) throw new Exception("artist not found");
+        // fileStorageSerive.upload() assigns the file a name, save it into the hard disk and return the name
+        String fileName = fileStorageService.upload(profilePicture);
+        Artist artist = optionalArtist.get();
+        artist.setProfilePictureFilename(fileName);
+        return  artistRepository.save(artist);
+    }
+
+    public byte[] getUserProfilePicture(Long artistId) throws Exception {
+        Optional<Artist> optionalArtist = artistRepository.findById(artistId);
+        if(optionalArtist.isEmpty()) throw new Exception("Cannot find artist " + artistId);
+        String fileName = optionalArtist.get().getProfilePictureFilename();
+        return fileStorageService.download(fileName);
+    }
+
+
 }
 

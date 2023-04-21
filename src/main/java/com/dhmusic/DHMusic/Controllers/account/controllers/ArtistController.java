@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -107,7 +109,38 @@ public class ArtistController {
             logger.error("artist not found");
             throw new RuntimeException(e);
         }
-
     }
+
+    @PostMapping("/upload-profile/{artistId}")
+    public ResponseEntity uploadProfilePicture(@PathVariable Long artistId, @RequestParam MultipartFile[] profilePictures) {
+        if (profilePictures.length == 0) {
+            return ResponseEntity.noContent().build();
+        }
+        else if (profilePictures.length > 1) {
+            return ResponseEntity.badRequest().body("Too much profile pictures, please upload only one");
+        }
+        try {
+            logger.info("Uploading profile picture for user " + artistId);
+            // upload the single profile picture into the hard disk
+            // and write its partial path into correspondent user entity
+            artistService.uploadProfilePictureArtist(artistId,profilePictures[0]);
+            return ResponseEntity.status(HttpStatus.OK).body("file uploaded");
+        } catch (Exception e) {
+            logger.warn(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/download-ProfilePic/{artistId}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+    public ResponseEntity viewProfilePicture(@PathVariable Long artistId){
+        try {
+            logger.info("Requested profile picture for artist: " + artistId);
+            return ResponseEntity.ok(artistService.getUserProfilePicture(artistId));
+        }catch (Exception e){
+            logger.warn("internal error");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
 }
 
