@@ -81,16 +81,17 @@ public class PlaylistService {
     public void addSongToPlaylist(Long playlistId, Long songId) throws Exception {
         Playlist existPlaylist = playlistRepository.findPlaylistById(playlistId);
         Song existSong = songRepository.findSongById(songId);
-        if(!playlistRepository.existsById(playlistId)){
+        if(existPlaylist == null){
             logger.error("not exist playlist with this id " +playlistId);
             throw new Exception("not exist Playlist");
         }
-        if(!songRepository.existsById(songId)){
+        else if(existSong == null){
             logger.error("not exist song with this id " +songId);
             throw new Exception("not exist Song");
         }
-        existPlaylist.setSongsOfPlaylist((List<Song>) existSong);
-        logger.info("add song with id "+songId+" into playlist with id "+playlistId);
+            existPlaylist.addSongToPlaylist(existSong);
+            playlistRepository.save(existPlaylist);
+            logger.info("add song with id " + songId + " into playlist with id " + playlistId);
     }
 
 }

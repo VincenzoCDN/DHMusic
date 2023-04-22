@@ -69,4 +69,7 @@ public class Playlist {
         this.songsOfPlaylist = songsOfPlaylist;
     }
 
+    public void addSongToPlaylist(Song song) {
+        this.songsOfPlaylist.add(song);
+    }
 }

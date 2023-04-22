@@ -81,13 +81,12 @@ public class PlaylistController {
     public ResponseEntity<?> addSongToPlaylist(@RequestParam Long playlistId,@RequestParam Long songId){
         try {
             playlistService.addSongToPlaylist(playlistId,songId);
-            logger.info("the song with id "+songId+" add to playlist with id %d " + playlistId);
-            return ResponseEntity.ok("and song to playlist");
+            logger.info("the song with id "+songId+" add to playlist with id " + playlistId);
+            return ResponseEntity.ok("add song to playlist");
         } catch (Exception e) {
-            logger.error("could not add the song with id " +songId+"  to the playlist with id  " + playlistId);
+            logger.error("could not add the song with id "+songId+"  to the playlist with id  " + playlistId);
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
-
 }
