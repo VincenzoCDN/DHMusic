@@ -78,7 +78,7 @@ public class PlaylistController {
     }
 
     @PutMapping("add-song-to-playlist")
-    public ResponseEntity<?> addSongToPlaylist(@RequestParam Long playlistId,@RequestParam Long songId){
+    public ResponseEntity<?> addSongToPlaylist(@RequestBody Long playlistId,@RequestBody Long songId){
         try {
             playlistService.addSongToPlaylist(playlistId,songId);
             logger.info("the song with id "+songId+" add to playlist with id %d " + playlistId);

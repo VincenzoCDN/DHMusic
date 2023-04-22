@@ -13,7 +13,7 @@ import java.util.List;
 @Table(name="playlists")
 public class Playlist {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(nullable = false)
     private String title;
@@ -21,8 +21,8 @@ public class Playlist {
     @JoinColumn(name="user_id",nullable = false)
     private User userId;
     @ManyToMany
-    @JoinTable(name = "playlist_song",joinColumns = @JoinColumn(name = "song_id"),
-            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @JoinTable(name = "playlist_song",joinColumns =@JoinColumn(name = "song_id")
+    ,inverseJoinColumns = @JoinColumn(name = "playlist_id"))
     private List<Song> songsOfPlaylist;
 
 
