@@ -31,12 +31,10 @@ public class PlaylistService {
         if(playlistDTO.getUserId() == null){
             logger.error("no userid was entered");
             throw new NullPointerException("userId is null ");
-
         }
         if(playlistDTO.getTitle() == null){
-            logger.error("user"+playlistDTO.getUserId() + "did not enter the title in the playlist");
+            logger.error("user "+playlistDTO.getUserId() + "did not enter the title in the playlist");
             throw new NullPointerException("title is null ");
-
         }
         Playlist playlist = playlistMapper.toPlaylist(playlistDTO);
         logger.info("creation new playlist with id " + playlist.getId());
@@ -44,6 +42,7 @@ public class PlaylistService {
     }
 
     public List<Playlist> getAllPlaylist(){
+        logger.info("the all playlist was shown");
         return playlistRepository.findAll();
     }
 
@@ -82,11 +81,11 @@ public class PlaylistService {
     public void addSongToPlaylist(Long playlistId, Long songId) throws Exception {
         Playlist existPlaylist = playlistRepository.findPlaylistById(playlistId);
         Song existSong = songRepository.findSongById(songId);
-        if(playlistRepository.existsById(playlistId)){
+        if(!playlistRepository.existsById(playlistId)){
             logger.error("not exist playlist with this id " +playlistId);
             throw new Exception("not exist Playlist");
         }
-        if(songRepository.existsById(songId)){
+        if(!songRepository.existsById(songId)){
             logger.error("not exist song with this id " +songId);
             throw new Exception("not exist Song");
         }

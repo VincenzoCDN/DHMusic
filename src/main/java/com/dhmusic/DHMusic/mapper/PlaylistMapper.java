@@ -20,7 +20,7 @@ public class PlaylistMapper {
     public Playlist toPlaylist(PlaylistDTO playlistDTO){
         Playlist playlist = new Playlist();
         playlist.setTitle(playlistDTO.getTitle());
-        User user =  userRepository.findUserById(playlistDTO.getId());
+        User user =  userRepository.findUserById(playlistDTO.getUserId());
         playlist.setUserId(user);
         return playlist;
     }
