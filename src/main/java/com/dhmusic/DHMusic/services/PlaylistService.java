@@ -78,9 +78,32 @@ public class PlaylistService {
          return playlistRepository.save(existPlaylist);
     }
 
+    public boolean existSongInToPlaylist(Long playlistId,Long songId){
+        Playlist playlist = playlistRepository.findPlaylistById(playlistId);
+        List<Song> songList = playlist.getSongsOfPlaylist();
+        boolean existSongInPlaylist = false;
+        for (int i = 0; i < songList.size(); i++) {
+            if(songList.get(i).getId() == songId){
+                logger.debug("the song with id "+songId+" already exists in the playlist");
+                existSongInPlaylist = true;
+                break;
+            }else {
+                logger.debug("the song with id "+songId+" already not exists in the playlist");
+                existSongInPlaylist = false;
+            }
+        }
+        return existSongInPlaylist;
+
+    }
+
     public void addSongToPlaylist(Long playlistId, Long songId) throws Exception {
         Playlist existPlaylist = playlistRepository.findPlaylistById(playlistId);
         Song existSong = songRepository.findSongById(songId);
+
+        if(existSongInToPlaylist(playlistId,songId) == true){
+            logger.error("the song with id "+songId+" already exists in the playlist");
+            throw new Exception("exist this song in Playlist");
+        }
         if(existPlaylist == null){
             logger.error("not exist playlist with this id " +playlistId);
             throw new Exception("not exist Playlist");

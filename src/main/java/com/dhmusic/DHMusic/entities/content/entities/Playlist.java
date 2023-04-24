@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.entities.account.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -23,6 +24,7 @@ public class Playlist {
     @ManyToMany
     @JoinTable(name = "playlist_song",joinColumns =@JoinColumn(name = "song_id")
     ,inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @JsonIgnore
     private List<Song> songsOfPlaylist;
 
 
