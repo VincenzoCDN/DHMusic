@@ -29,6 +29,9 @@ public class Song {
     private Date publicationDate;
 
     private String genre;
+    @Column(length = 100)
+    private String link;
+
     @CreationTimestamp
     @JsonFormat(pattern = "yyyy/mm/dd")
     @Column(columnDefinition = "DATE")
@@ -131,5 +134,18 @@ public class Song {
 
     public void setCreationDatePlatform(Date creationDatePlatform) {
         this.creationDatePlatform = creationDatePlatform;
+    }
+
+
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public void setPublic(boolean aPublic) {
+        isPublic = aPublic;
     }
 }

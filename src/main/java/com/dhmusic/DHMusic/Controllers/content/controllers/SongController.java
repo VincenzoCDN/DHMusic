@@ -39,7 +39,16 @@ public class SongController {
 
     }
 
-    //------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
+    //mostrare la singola canzone
+    @GetMapping("/{id}")
+    public Song getSongId(@PathVariable Long id) {             //Funziona
+        Song existSong = songRepository.findSongById(id);
+        if (existSong == null) {
+            throw new RuntimeException("Song not exist!");
+        }
+        return songRepository.findSongById(id);
+    }
 
     /**
      * mostra la singola canzone per titolo
@@ -142,6 +151,27 @@ public class SongController {
      * @param id come @PathVariable.
      * @return titolo + artista.
      */
+    @GetMapping("/play/{id}")
+    public ResponseEntity<?> playSong(@PathVariable Long id) {
+        try {
+            Song song = songRepository.findSongById(id);
+
+            return ResponseEntity.accepted().body("https://www.youtube.com/watch?v=" + song.getLink());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/play2/{id}")
+    public ResponseEntity<?> playSong2(@PathVariable Long id) {
+        try {
+            Song song = songRepository.findSongById(id);
+            String strID= song.getLink();
+
+            String str1= String.format("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s\"" +
+                    " title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; " +
+                    "encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>", strID);
 
     @GetMapping("/{id}")
     public ResponseEntity<String>getSongByIdWithArtist(@PathVariable Long id){
@@ -151,6 +181,12 @@ public class SongController {
         }catch (Exception e){
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+
+            return ResponseEntity.accepted().body(str1);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
 
