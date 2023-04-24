@@ -7,6 +7,8 @@ import com.dhmusic.DHMusic.mapper.UserMapper;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
@@ -29,17 +31,27 @@ public class UserService {
     @Autowired
     private EmailService emailService;
 
+    private String errorMessage = "";
+
+    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+
+
     public ResponseEntity<?> createUser(UserDTO newUser) {
         if (!isValidUser(newUser) || !isValidEmail(newUser.getEmail()) || !isValidPassword(newUser.getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("invalid data");
+            logger.error("createUser:"+errorMessage);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
         }
+        User user = userMapper.toUser(newUser);
         try {
-            User user = userMapper.toUser(newUser);
             user.setVerificationCode(generateCode());
             emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
             return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
         }catch(DataIntegrityViolationException ex){
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("account already exist");
+            String response = "";
+            if(userRepository.existsUserByUsernameIgnoreCase(user.getUsername())) response ="Username already token";
+            if(userRepository.existsUserByEmail(user.getEmail())) response ="Account already exist";
+            logger.error("createUser:"+response);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
         }
     }
 
@@ -63,18 +75,47 @@ public class UserService {
         User user;
         if (userRepository.existsById(id)){
             user = userRepository.getById(id);
+            if(updateUser.getEmail() != null){
+                if(isValidEmail(updateUser.getEmail())) {
+                    user.setEmail(updateUser.getEmail());
+                    user.setVerificationCode(generateCode());
+                    emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
+                }else {
+                    logger.error("UpdateUser:"+errorMessage);
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+                }
+            }
+
+            if(updateUser.getPassword() != null) {
+                if (isValidPassword(updateUser.getPassword())) {
+                    user.setPassword(hashPassword(updateUser.getPassword()));
+                }else {
+                    logger.error("UpdateUser:"+errorMessage);
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+                }
+            }
+
+
             user.setName(updateUser.getName() != null ? updateUser.getName() : user.getName());
             user.setSurname(updateUser.getSurname() != null ? updateUser.getSurname() : user.getSurname());
             user.setUsername(updateUser.getUsername() != null ? updateUser.getUsername() : user.getUsername());
-            user.setEmail(updateUser.getEmail() != null ? updateUser.getEmail() : user.getEmail());
-            user.setPassword(updateUser.getPassword() != null ? updateUser.getPassword() : user.getPassword());
             user.setDateOfBirth(updateUser.getDateOfBirth() != null ? updateUser.getDateOfBirth() : user.getDateOfBirth());
             user.setGender(updateUser.getGender() != null ? updateUser.getGender() : user.getGender());
             user.setNationality(updateUser.getNationality() != null ? updateUser.getNationality() : user.getNationality());
-            user = userRepository.save(user);
-            return ResponseEntity.status(HttpStatus.OK).body(user);
+            try {
+                user = userRepository.save(user);
+                return ResponseEntity.status(HttpStatus.OK).body(user);
+            }catch(DataIntegrityViolationException ex){
+                String response = "";
+                if(userRepository.existsUserByUsernameIgnoreCase(user.getUsername())) response ="Username already token";
+                if(userRepository.existsUserByEmail(user.getEmail())) response ="Account already exist";
+                logger.error("UpdateUser:"+response);
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+            }
         }else{
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+            errorMessage="...User not found...";
+            logger.error("UpdateUser:"+errorMessage);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
         }
     }
     public boolean isValidUser(UserDTO user){
@@ -83,12 +124,14 @@ public class UserService {
                 user.getPassword() == null || user.getPassword().isEmpty() ||
                 user.getName() == null || user.getName().isEmpty() ||
                 user.getSurname() == null || user.getSurname().isEmpty()) {
+            errorMessage="...Not all user data has been entered...";
             return false;
         }
         return true;
     }
     public static String hashPassword(String password){
         String salt = BCrypt.gensalt();
+        logger.info("Password has been encrypted");
         return BCrypt.hashpw(password,salt);
     }
 
@@ -98,6 +141,7 @@ public class UserService {
 
     public boolean isValidPassword(String password){
         if(password.length()<8){
+            errorMessage="...Password length min 8 has been not met...";
             return false;
         }
         return true;
@@ -106,6 +150,7 @@ public class UserService {
     public boolean isValidEmail(String email){
         // Controlla la sintassi dell'email
         if (!email.matches("\\b[\\w.%-]+@[\\w.-]+\\.[a-zA-Z]{2,}\\b")) {
+            errorMessage="...Incorrect email syntax...";
             return false;
         }
         // Controlla la validità del dominio
@@ -114,6 +159,7 @@ public class UserService {
         try {
             InetAddress.getByName(domain);
         } catch (UnknownHostException ex) {
+            errorMessage="...Wrong email domain...";
             return false;
         }
         // L'email è valida
@@ -130,8 +176,11 @@ public class UserService {
             String s = alphaArray[n];
             tempList.add(s);
         }
-        String code= tempList.toString().replaceAll(",","").replaceAll("[^\\w\\s]", "").replaceAll(" ", "");
-
+        String code = tempList.toString()
+                      .replaceAll(",","")
+                      .replaceAll("[^\\w\\s]", "")
+                      .replaceAll(" ", "");
+        logger.info("the verification code has been generated");
         return code;
 
     }
@@ -141,9 +190,7 @@ public class UserService {
         if(!userRepository.existsById(id)){
             return "Account not found";
         }
-
-
-        User existingUser= userRepository.findUserById(id);
+        User existingUser = userRepository.findUserById(id);
 
         if (existingUser.isVerificateEmail()){
             return "The mail is already authenticated";
@@ -152,14 +199,12 @@ public class UserService {
       if(Objects.equals(existingUser.getVerificationCode(), code)) {
           existingUser.setVerificateEmail(true);
           userRepository.save(existingUser);
+          logger.info("The account has been authenticated");
           return "The code is correct. \nYour Account is validate now!";
 
       } else {
           return "The code is not correct.\nPlease check end try again.";
       }
-
-
-
     }
 
 }
