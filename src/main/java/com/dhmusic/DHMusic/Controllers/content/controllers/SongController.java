@@ -1,7 +1,9 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
+import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
+import com.dhmusic.DHMusic.repositories.account_repositories.ArtistRepository;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.services.SongService;
 import org.slf4j.Logger;
@@ -13,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping("/songs")
 public class SongController {
@@ -23,16 +25,15 @@ public class SongController {
     @Autowired
     private SongRepository songRepository;
 
+    @Autowired
+    private ArtistRepository artistRepository;
+
     Logger logger = LoggerFactory.getLogger(SongController.class);
 
 
 
-    //------------------------------------------------------------------------------------------------------
-
-    /**
-     * mostra la lista di canzoni
-     * @return tutte le canzoni presenti all'interno della repository
-     */
+    //---------------------------------------------------------------------------------------
+    //mostra lista di canzoni
     @GetMapping
     public List<Song> getSongs() {           //Funziona
         return songRepository.findAll();
@@ -105,7 +106,7 @@ public class SongController {
 
     }
 
-    //------------------------------------------------------------------------------------------------------
+    //---------------------------------------------------------------------------------------
     //Aggiorna un Song nel database DTO
 
     /**
@@ -123,9 +124,8 @@ public class SongController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
-
     }
-    //------------------------------------------------------------------------------------------------------
+        //---------------------------------------------------------------------------------------
 
     /**
      * Mostra la singola canzone richiesta
@@ -145,53 +145,59 @@ public class SongController {
         }
     }
     //------------------------------------------------------------------------------------------------------
-
+/*
     /**
      * Mostra solo iil titolo e l'artista della canzone.
      * @param id come @PathVariable.
      * @return titolo + artista.
      */
-    @GetMapping("/play/{id}")
-    public ResponseEntity<?> playSong(@PathVariable Long id) {
-        try {
-            Song song = songRepository.findSongById(id);
-
-            return ResponseEntity.accepted().body("https://www.youtube.com/watch?v=" + song.getLink());
-        } catch (Exception e) {
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
-
-    @GetMapping("/play2/{id}")
-    public ResponseEntity<?> playSong2(@PathVariable Long id) {
-        try {
-            Song song = songRepository.findSongById(id);
-            String strID= song.getLink();
-
-            String str1= String.format("<iframe width=\"560\" height=\"315\" src=\"https://www.youtube.com/embed/%s\"" +
-                    " title=\"YouTube video player\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; " +
-                    "encrypted-media; gyroscope; picture-in-picture; web-share\" allowfullscreen></iframe>", strID);
-
+    /*
     @GetMapping("/{id}")
-    public ResponseEntity<String>getSongByIdWithArtist(@PathVariable Long id){
+    public ResponseEntity<String>getSongByIdWithArtist(@PathVariable Long id) {
         try {
             String existSong = songService.getSongByIdWithArtist(id);
             return ResponseEntity.status(HttpStatus.OK).body(existSong);
-        }catch (Exception e){
-            e.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
 
-            return ResponseEntity.accepted().body(str1);
+
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }*/
+    //------------------------------------------------------------------------------------------------------
+    @GetMapping("/play/{id}")
+    public String playSong(@PathVariable Long id) {
+        try {
+            Song song = songRepository.findSongById(id);
+
+            return "https://www.youtube.com/embed/" + song.getLink();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
     }
+    @GetMapping("getTitile/{id}")
+    public String getTitleByID(@PathVariable Long id) {
+        try {
+            Song song = songRepository.findSongById(id);
 
+            return song.getTitle();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
 
+    }
+    @GetMapping("getArtistName/{id}")
+    public String getArtistNameByIDSong(@PathVariable Long id) {
+        try {
+            Song song = songRepository.findSongById(id);
+            Artist artist = artistRepository.findArtistById(song.getArtistOfSong().getId());
 
-
-
+            return artist.getArtistName();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "error";
+        }
+    }
 }
