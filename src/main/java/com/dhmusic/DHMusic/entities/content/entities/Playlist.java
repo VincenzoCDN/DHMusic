@@ -20,6 +20,7 @@ public class Playlist {
     private String title;
     @ManyToOne
     @JoinColumn(name="user_id",nullable = false)
+    @JsonIgnore
     private User userId;
     @ManyToMany
     @JoinTable(name = "playlist_song",joinColumns =@JoinColumn(name = "song_id")

@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.Controllers.content.controllers;
 import com.dhmusic.DHMusic.Controllers.account.controllers.ArtistController;
 import com.dhmusic.DHMusic.entities.content.entities.Playlist;
 import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
+import com.dhmusic.DHMusic.entities.content.entities.PlaylistRTO;
 import com.dhmusic.DHMusic.services.PlaylistService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,13 +36,13 @@ public class PlaylistController {
     }
 
     @GetMapping("get-all-playlist")
-    public ResponseEntity<List<Playlist>> getAllPlaylist(){
-        List<Playlist> playlists = playlistService.getAllPlaylist();
+    public ResponseEntity<List<PlaylistRTO>> getAllPlaylist(){
+        List<PlaylistRTO> playlistsRTO = playlistService.getAllPlaylist();
         logger.info("all playlist were seen");
-        return ResponseEntity.ok(playlists);
+        return ResponseEntity.ok(playlistsRTO);
     }
 
-    @GetMapping("get-playlist-by-id/{id}")
+    /*@GetMapping("get-playlist-by-id/{id}")
     public ResponseEntity<?> getOnePlaylist(@PathVariable Long id){
         try{
             Playlist playlist = playlistService.getById(id);
@@ -51,6 +52,19 @@ public class PlaylistController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+     */
+    @GetMapping("get-playlist-by-id/{id}")
+    public ResponseEntity<?> getOnePlaylist(@PathVariable Long id){
+        try{
+            PlaylistRTO playlistRTO = playlistService.getById(id);
+            logger.info("the playlist were seen");
+            return ResponseEntity.ok(playlistRTO);
+        }catch (NullPointerException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
 
     @DeleteMapping("delete-playlist/{id}")
     public ResponseEntity<?> deletePlaylist(@PathVariable Long id){

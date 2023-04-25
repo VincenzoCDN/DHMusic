@@ -2,8 +2,10 @@ package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.entities.content.entities.Playlist;
 import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
+import com.dhmusic.DHMusic.entities.content.entities.PlaylistRTO;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.mapper.PlaylistMapper;
+import com.dhmusic.DHMusic.mapper.PlaylistMapperRTO;
 import com.dhmusic.DHMusic.repositories.content.repositories.PlaylistRepository;
 import com.dhmusic.DHMusic.repositories.content.repositories.SongRepository;
 import org.slf4j.Logger;
@@ -21,6 +23,9 @@ public class PlaylistService {
 
     @Autowired
     private PlaylistMapper playlistMapper;
+
+    @Autowired
+    private PlaylistMapperRTO playlistMapperRTO;
 
     @Autowired
     private SongRepository songRepository;
@@ -41,18 +46,38 @@ public class PlaylistService {
         return playlistRepository.save(playlist);
     }
 
-    public List<Playlist> getAllPlaylist(){
+    /*public List<Playlist> getAllPlaylist(){
         logger.info("the all playlist was shown");
         return playlistRepository.findAll();
     }
 
-    public Playlist getById(Long playlistId){
+     */
+
+    public List<PlaylistRTO> getAllPlaylist(){
+        logger.info("the all playlist was shown");
+        List<Playlist> playlistList = playlistRepository.findAll();
+        List<PlaylistRTO> playlistRTOList = playlistMapperRTO.toAllPlaylistRTO(playlistList);
+        return playlistRTOList;
+    }
+
+    /*public Playlist getById(Long playlistId){
         if(!playlistRepository.existsById(playlistId)){
             logger.error("not exist playlist with this id " +playlistId);
             throw new NullPointerException("there is no playlist with this id");
         }
         logger.info("the playlist with id "+playlistId+" was shown");
         return playlistRepository.findPlaylistById(playlistId);
+    }*/
+
+    public PlaylistRTO getById(Long playlistId){
+        if(!playlistRepository.existsById(playlistId)){
+            logger.error("not exist playlist with this id " +playlistId);
+            throw new NullPointerException("there is no playlist with this id");
+        }
+        logger.info("the playlist with id "+playlistId+" was shown");
+        Playlist playlist = playlistRepository.findPlaylistById(playlistId);
+        PlaylistRTO playlistRTO = playlistMapperRTO.toPlaylistRTO(playlist);
+        return playlistRTO;
     }
 
     public void deletePlaylist(Long playlistId) throws Exception {
