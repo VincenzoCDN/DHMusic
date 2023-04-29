@@ -1,12 +1,11 @@
-package com.dhmusic.DHMusic.mapper;
+package com.dhmusic.DHMusic.Components.mapper;
 
-import com.dhmusic.DHMusic.entities.account.entities.User;
-import com.dhmusic.DHMusic.entities.content.entities.Playlist;
+
+import com.dhmusic.DHMusic.Components.entities.account.entities.User;
+import com.dhmusic.DHMusic.Components.entities.content.entities.Playlist;
+import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
 import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
-import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
-import com.dhmusic.DHMusic.repositories.content.repositories.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 @Component

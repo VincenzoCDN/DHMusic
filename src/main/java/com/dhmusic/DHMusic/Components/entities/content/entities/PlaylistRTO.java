@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.entities.content.entities;
+package com.dhmusic.DHMusic.Components.entities.content.entities;
 
 import java.util.List;
 

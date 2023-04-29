@@ -1,7 +1,7 @@
-package com.dhmusic.DHMusic.repositories.content.repositories;
+package com.dhmusic.DHMusic.Components.repositories.content.repositories;
 
-import com.dhmusic.DHMusic.entities.content.entities.Album;
-import com.dhmusic.DHMusic.entities.content.entities.Playlist;
+
+import com.dhmusic.DHMusic.Components.entities.content.entities.Playlist;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

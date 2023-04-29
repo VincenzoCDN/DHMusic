@@ -5,9 +5,6 @@ package com.dhmusic.DHMusic.Components.entities.content.entities;
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 @Entity
