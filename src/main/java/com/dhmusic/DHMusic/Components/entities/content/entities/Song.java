@@ -50,6 +50,7 @@ public class Song {
     private Album albumOfSong;
 
     @ManyToMany(mappedBy = "songsOfPlaylist")
+    @JsonIgnore
     private List<Playlist> playlistOfSong;
     public Song(){
 

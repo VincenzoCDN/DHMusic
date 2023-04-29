@@ -22,7 +22,6 @@ public class ArtistMapper {
         return artist;
     }
 
-
     public Artist toArtistEdit(ArtistDTO artistDTO){
         Artist artist = new Artist();
         artist.setId(artistDTO.getId());

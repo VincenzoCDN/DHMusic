@@ -3,6 +3,7 @@ package com.dhmusic.DHMusic.Components.entities.content.entities;
 
 
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -15,22 +16,28 @@ public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String title;
     @ManyToOne
-    @JoinColumn(name="user_id")
-    private User creator;
+    @JoinColumn(name="user_id",nullable = false)
+    @JsonIgnore
+    private User userId;
     @ManyToMany
-    @JoinTable(name = "playlist_song",joinColumns = @JoinColumn(name = "song_id"),
-            inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @JoinTable(name = "playlist_song",joinColumns =@JoinColumn(name = "song_id")
+    ,inverseJoinColumns = @JoinColumn(name = "playlist_id"))
+    @JsonIgnore
     private List<Song> songsOfPlaylist;
-    private Date publicationDate;
-    private LocalDateTime creationDateToPlatform;
-
-
 
 
     public Playlist() {
 
+    }
+
+    public Playlist(Long id, String title, User userId, List<Song> songsOfPlaylist) {
+        this.id = id;
+        this.title = title;
+        this.userId = userId;
+        this.songsOfPlaylist = songsOfPlaylist;
     }
 
     public Long getId() {
@@ -49,12 +56,12 @@ public class Playlist {
         this.title = title;
     }
 
-    public User getCreator() {
-        return creator;
+    public User getUserId() {
+        return userId;
     }
 
-    public void setCreator(User creator) {
-        this.creator = creator;
+    public void setUserId(User userId) {
+        this.userId = userId;
     }
 
     public List<Song> getSongsOfPlaylist() {
@@ -65,23 +72,7 @@ public class Playlist {
         this.songsOfPlaylist = songsOfPlaylist;
     }
 
-    public Date getPublicationDate() {
-        return publicationDate;
-    }
-
-    public void setPublicationDate(Date publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-    protected static void playPlaylist(Playlist playlist) {
-
-    }
-
-    public LocalDateTime getCreationDateToPlatform() {
-        return creationDateToPlatform;
-    }
-
-    public void setCreationDateToPlatform(LocalDateTime creationDateToPlatform) {
-        this.creationDateToPlatform = creationDateToPlatform;
+    public void addSongToPlaylist(Song song) {
+        this.songsOfPlaylist.add(song);
     }
 }
