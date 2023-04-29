@@ -1,8 +1,8 @@
 package com.dhmusic.DHMusic.email;
 
-import com.dhmusic.DHMusic.entities.account.entities.User;
-import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
-import com.dhmusic.DHMusic.services.UserService;
+import com.dhmusic.DHMusic.Components.entities.account.entities.User;
+import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
+import com.dhmusic.DHMusic.Components.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
