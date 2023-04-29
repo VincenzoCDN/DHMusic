@@ -4,6 +4,7 @@ package com.dhmusic.DHMusic.entities.account.entities;
 import com.dhmusic.DHMusic.entities.content.entities.Playlist;
 import com.dhmusic.DHMusic.entities.exception.AccountExceptions;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.net.InetAddress;
@@ -26,14 +27,14 @@ public class User extends Account {
     private List<Artist> followedArtists;
 
     @OneToOne(cascade = CascadeType.ALL,mappedBy = "user")
-    @JsonIgnore
+    @JsonIgnoreProperties("user")
     private Artist artist;
     @OneToMany(mappedBy = "creator")
     @JsonIgnore
     private List<Playlist> playlistOfUser;
 
     @Column(columnDefinition = "int default '0'",nullable = false)
-    private int isAdmin; //chiedere per il boolean su db
+    private int isAdmin;
 
     private String verificationCode;
 

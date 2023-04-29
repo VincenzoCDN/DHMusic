@@ -1,10 +1,9 @@
 package com.dhmusic.DHMusic.entities.account.entities;
 
-
-
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 
@@ -35,7 +34,7 @@ public class Artist {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", referencedColumnName = "id",nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties("artist")
     private User user;
     @ManyToMany
     @JoinTable(name="followers", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="artist_id"))

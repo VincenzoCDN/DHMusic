@@ -12,7 +12,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
     boolean existsById(Long id);
 
-    User getById(Long id);
+    User getUserById(Long id);
 
     void deleteById(Long id);
 

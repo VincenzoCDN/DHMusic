@@ -57,7 +57,7 @@ public class UserService {
 
     public ResponseEntity<?> getUserById(Long id){
         return userRepository.existsById(id)
-                ? ResponseEntity.status(HttpStatus.OK).body(userRepository.getById(id))
+                ? ResponseEntity.status(HttpStatus.OK).body(userRepository.getUserById(id))
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
     }
     public List<User> getAllUsers() {
@@ -74,7 +74,7 @@ public class UserService {
     public ResponseEntity<?> updateUser(Long id, UserDTO updateUser){
         User user;
         if (userRepository.existsById(id)){
-            user = userRepository.getById(id);
+            user = userRepository.getUserById(id);
             if(updateUser.getEmail() != null){
                 if(isValidEmail(updateUser.getEmail())) {
                     user.setEmail(updateUser.getEmail());
