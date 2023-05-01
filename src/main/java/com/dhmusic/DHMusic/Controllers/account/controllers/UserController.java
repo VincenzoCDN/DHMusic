@@ -48,17 +48,64 @@ public class UserController {
         return userService.getUserById(id);
     }
 
+    //---------------------------------------------------------------------------------------
+    //verifica il codice di Autenticazione
+
     @PutMapping("/verificate_code/{id}")
-    public ResponseEntity<?> verificateUser(@PathVariable Long id, @RequestParam String code){
+    public ResponseEntity<?> verificateUser(@PathVariable Long id, @RequestParam String code) {
 
         try {
             return ResponseEntity.accepted().body(userService.verificareAccount(id, code));
 
-    }catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
 
-
+        }
     }
-}
+    //---------------------------------------------------------------------------------------
+    //Aggiorna un normale Account ad un Artist
+    @PutMapping("/UpdateAccountInToArtist/{id}")
+    public ResponseEntity<?> updateAccountInToArtist(@PathVariable Long id){
+
+        try {
+            return ResponseEntity.accepted().body(userService.toAccountInArtist(id));
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
+
+            }
+    }
+
+    //---------------------------------------------------------------------------------------
+    //Ritorna lo status di un account
+    @GetMapping("/statusAccount/{id}")
+    public String statusAccount(@PathVariable Long id) {
+
+        try {
+            return userService.accoutStatus(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Account not found";
+        }
+    }
+
+    //---------------------------------------------------------------------------------------
+    //Forgotten Password
+    @GetMapping("/RescureForgottenPassword")
+    public String forgottenPassword(@RequestBody String email){
+    return userService.forgottenPassword(email);
+    }
+
+
+
+
+
+
+
+
+
+
+
 }

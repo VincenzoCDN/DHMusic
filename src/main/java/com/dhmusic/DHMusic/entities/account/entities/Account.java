@@ -31,6 +31,16 @@ public abstract class Account {
     private Date updateDate;
     private boolean verificateEmail;
 
+    private AccountStatus accountStatus;
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
+
     public Account() {
 
     }

@@ -40,5 +40,16 @@ public class EmailService {
         javaMailSender.send(message);
     }
 
+    public void sendForgottePW(String email, String code){
+
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("DHMusi rescue team");
+        message.setFrom("dhmusicstreamingsong@gmail.com");
+        message.setText("this is recover code: \n" + code);
+        javaMailSender.send(message);
+    }
+
 
 }

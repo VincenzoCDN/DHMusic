@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.services;
 
 import com.dhmusic.DHMusic.email.EmailService;
+import com.dhmusic.DHMusic.entities.account.entities.AccountStatus;
 import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.mapper.UserMapper;
@@ -14,6 +15,8 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -45,6 +48,7 @@ public class UserService {
         try {
             user.setVerificationCode(generateCode());
             emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
+            user.setAccountStatus(AccountStatus.NotActive);
             return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(user));
         }catch(DataIntegrityViolationException ex){
             String response = "";
@@ -198,13 +202,69 @@ public class UserService {
 
       if(Objects.equals(existingUser.getVerificationCode(), code)) {
           existingUser.setVerificateEmail(true);
+          existingUser.setAccountStatus(AccountStatus.Active);
+          existingUser.setVerificationCode(null);
           userRepository.save(existingUser);
-          logger.info("The account has been authenticated");
+          logger.info("The account " + existingUser.getId() +" has been authenticated");
           return "The code is correct. \nYour Account is validate now!";
 
       } else {
           return "The code is not correct.\nPlease check end try again.";
       }
     }
+
+    //---------------------------------------------------------------------------------------
+    //Metodo per rendere un user -> Arist
+
+    public String toAccountInArtist(long id){
+        if(!userRepository.existsById(id)){
+            return "Account not found";
+        }
+        User existingUser = userRepository.findUserById(id);
+
+        if (existingUser.getAccountStatus() == AccountStatus.TimeOut){
+            return "Sorry your Account have Status TimeOut.";
+        }
+        if (existingUser.getAccountStatus() == AccountStatus.NotActive){
+            return "Sorry your Account have Status NotActive, please check your email box";
+        }
+
+        if (existingUser.getAccountStatus() == AccountStatus.Active) {
+            existingUser.setAccountStatus(AccountStatus.Artist);
+            userRepository.save(existingUser);
+            logger.info("The account " + existingUser.getId() +" has been upDate in to Artist");
+            return "Your Account is able to UpLoad your songs";
+
+        } else {
+            return "Error";
+        }
+    }
+
+    //---------------------------------------------------------------------------------------
+    //Ritorna lo status dell'account
+    public String accoutStatus(Long id){
+        User existingUser= userRepository.findUserById(id);
+
+        return existingUser.getAccountStatus().toString();
+    }
+
+    //---------------------------------------------------------------------------------------
+    //forgotten Password
+    public String forgottenPassword(String email) {
+        if (!userRepository.existsUserByEmail(email)) {
+            return "Account not found";
+        }
+
+            User existingUser = userRepository.findUserByEmail(email);
+            existingUser.setVerificationCode(generateCode());
+
+            emailService.sendForgottePW(existingUser.getEmail(), existingUser.getVerificationCode());
+            return "The code is send in your emailBox.";
+
+    }
+
+
+
+
 
 }
