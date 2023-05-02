@@ -6,7 +6,6 @@ import com.dhmusic.DHMusic.entities.account.entities.User;
 import com.dhmusic.DHMusic.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.mapper.UserMapper;
 import com.dhmusic.DHMusic.repositories.account_repositories.UserRepository;
-import jakarta.servlet.http.HttpServletResponse;
 import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import javax.servlet.http.HttpServletResponse;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;

@@ -6,7 +6,7 @@ package com.dhmusic.DHMusic.entities.content.entities;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 
 import java.util.Date;

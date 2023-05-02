@@ -1,10 +1,10 @@
 package com.dhmusic.DHMusic.entities.account.entities;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 
+import javax.persistence.*;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
