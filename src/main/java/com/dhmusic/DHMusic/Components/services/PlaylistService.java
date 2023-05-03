@@ -1,13 +1,14 @@
 package com.dhmusic.DHMusic.Components.services;
 
 import com.dhmusic.DHMusic.Components.entities.content.entities.Playlist;
+import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistDTO;
 import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistRTO;
 import com.dhmusic.DHMusic.Components.entities.content.entities.Song;
 import com.dhmusic.DHMusic.Components.mapper.PlaylistMapper;
 import com.dhmusic.DHMusic.Components.mapper.PlaylistMapperRTO;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.PlaylistRepository;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.SongRepository;
-import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,21 +126,21 @@ public class PlaylistService {
         Playlist existPlaylist = playlistRepository.findPlaylistById(playlistId);
         Song existSong = songRepository.findSongById(songId);
 
-        if(existSongInToPlaylist(playlistId,songId) == true){
-            logger.error("the song with id "+songId+" already exists in the playlist");
-            throw new Exception("exist this song in Playlist");
-        }
         if(existPlaylist == null){
             logger.error("not exist playlist with this id " +playlistId);
             throw new Exception("not exist Playlist");
+        }
+        if(existSongInToPlaylist(playlistId,songId)){
+            logger.error("the song with id "+songId+" already exists in the playlist");
+            throw new Exception("exist this song in Playlist");
         }
         else if(existSong == null){
             logger.error("not exist song with this id " +songId);
             throw new Exception("not exist Song");
         }
-            existPlaylist.addSongToPlaylist(existSong);
-            playlistRepository.save(existPlaylist);
-            logger.info("add song with id " + songId + " into playlist with id " + playlistId);
+        existPlaylist.addSongToPlaylist(existSong);
+        playlistRepository.save(existPlaylist);
+        logger.info("add song with id " + songId + " into playlist with id " + playlistId);
     }
 
 }

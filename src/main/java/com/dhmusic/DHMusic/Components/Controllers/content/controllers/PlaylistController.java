@@ -2,9 +2,10 @@ package com.dhmusic.DHMusic.Components.Controllers.content.controllers;
 
 
 import com.dhmusic.DHMusic.Components.entities.content.entities.Playlist;
+import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistDTO;
 import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistRTO;
 import com.dhmusic.DHMusic.Components.services.PlaylistService;
-import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
