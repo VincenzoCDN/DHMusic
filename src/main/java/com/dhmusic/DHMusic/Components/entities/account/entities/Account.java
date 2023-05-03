@@ -31,6 +31,7 @@ public abstract class Account {
     private Date updateDate;
     private boolean verificateEmail;
 
+    private String roles;
     public Account() {
 
     }
@@ -81,6 +82,14 @@ public abstract class Account {
 
     public void setVerificateEmail(boolean verificateEmail) {
         this.verificateEmail = verificateEmail;
+    }
+
+    public String getRoles() {
+        return roles;
+    }
+
+    public void setRoles(String roles) {
+        this.roles = roles;
     }
 
     public Date getUpdateDate() {

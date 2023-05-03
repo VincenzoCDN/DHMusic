@@ -3,8 +3,8 @@ package com.dhmusic.DHMusic.Components.mapper;
 
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.entities.content.entities.Playlist;
+import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistDTO;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
-import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

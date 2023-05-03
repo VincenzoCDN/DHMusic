@@ -1,13 +1,13 @@
 package com.dhmusic.DHMusic.Components.services;
 
 import com.dhmusic.DHMusic.Components.entities.content.entities.Playlist;
+import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistDTO;
 import com.dhmusic.DHMusic.Components.entities.content.entities.PlaylistRTO;
 import com.dhmusic.DHMusic.Components.entities.content.entities.Song;
 import com.dhmusic.DHMusic.Components.mapper.PlaylistMapper;
 import com.dhmusic.DHMusic.Components.mapper.PlaylistMapperRTO;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.PlaylistRepository;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.SongRepository;
-import com.dhmusic.DHMusic.entities.content.entities.PlaylistDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

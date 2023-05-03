@@ -25,7 +25,7 @@ public class NotificationController {
     @PostMapping("/notification")
     public ResponseEntity<?> sendNotification(@RequestBody NotificationDTO payload){
         try{
-            User userToNotify = userRepository.getById(Long.valueOf(payload.getContactId()));
+            User userToNotify = userRepository.getUserById(Long.valueOf(payload.getContactId()));
             System.out.println(" " );
             if (userToNotify == null)
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("I couldn't find the user");

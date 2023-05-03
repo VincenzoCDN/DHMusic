@@ -32,6 +32,7 @@ public class UserController {
 
     //Aggiorna un User nel database
     @PutMapping("/update-user/{id}")
+    //TODO: @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO updateUser){
         return userService.updateUser(id, updateUser);
     }

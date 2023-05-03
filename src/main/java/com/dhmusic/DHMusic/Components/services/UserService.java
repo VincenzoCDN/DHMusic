@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -30,6 +31,9 @@ public class UserService {
     private UserMapper userMapper;
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private PasswordEncoder encoder;
 
     private String errorMessage = "";
 
@@ -85,17 +89,14 @@ public class UserService {
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
                 }
             }
-
             if(updateUser.getPassword() != null) {
                 if (isValidPassword(updateUser.getPassword())) {
-                    user.setPassword(hashPassword(updateUser.getPassword()));
+                    user.setPassword(encoder.encode(updateUser.getPassword()));
                 }else {
                     logger.error("UpdateUser:"+errorMessage);
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
                 }
             }
-
-
             user.setName(updateUser.getName() != null ? updateUser.getName() : user.getName());
             user.setSurname(updateUser.getSurname() != null ? updateUser.getSurname() : user.getSurname());
             user.setUsername(updateUser.getUsername() != null ? updateUser.getUsername() : user.getUsername());
@@ -128,15 +129,6 @@ public class UserService {
             return false;
         }
         return true;
-    }
-    public static String hashPassword(String password){
-        String salt = BCrypt.gensalt();
-        logger.info("Password has been encrypted");
-        return BCrypt.hashpw(password,salt);
-    }
-
-    public static boolean checkPassword(String password, String hashedPassword){
-        return BCrypt.checkpw(password,hashedPassword);
     }
 
     public boolean isValidPassword(String password){

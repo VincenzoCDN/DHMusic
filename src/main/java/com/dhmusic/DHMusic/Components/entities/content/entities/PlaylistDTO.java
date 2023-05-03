@@ -1,8 +1,4 @@
-package com.dhmusic.DHMusic.entities.content.entities;
-
-import com.dhmusic.DHMusic.entities.account.entities.User;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+package com.dhmusic.DHMusic.Components.entities.content.entities;
 
 public class PlaylistDTO {
 
