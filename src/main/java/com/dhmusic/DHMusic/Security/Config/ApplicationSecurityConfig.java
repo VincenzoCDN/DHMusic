@@ -26,8 +26,7 @@ public class ApplicationSecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
        return http.csrf().disable()
                 .authorizeHttpRequests()
-                .requestMatchers("/welcome").permitAll()
-                .requestMatchers("/users/**").permitAll()
+                .requestMatchers("/users/create-user").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/**").authenticated()
                 .and().httpBasic()
