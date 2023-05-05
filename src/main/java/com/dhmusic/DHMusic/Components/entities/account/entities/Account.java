@@ -30,7 +30,6 @@ public abstract class Account {
     @Column(columnDefinition = "DATETIME(0)")
     private Date updateDate;
     private boolean verificateEmail;
-
     private String roles;
     public Account() {
 
@@ -98,5 +97,9 @@ public abstract class Account {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public boolean isActive() {
+        return true;
     }
 }

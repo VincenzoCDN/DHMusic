@@ -21,15 +21,15 @@ public class Artist {
     private String artistName;
     private String bio;
     @OneToMany(mappedBy = "artist", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonIgnoreProperties("artist")
     private List<Album> albumsOfArtist;
     @OneToMany(mappedBy = "artistOfSong", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
+    @JsonIgnoreProperties("artist")
     private List<Song> songOfArtist;
     private int follower;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id",nullable = false)
-    @JsonIgnoreProperties("artist")
+    @JsonIgnore
     private User user;
     @ManyToMany
     @JoinTable(name="followers", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="artist_id"))
