@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.Security.Auth.Entities;
+package com.dhmusic.DHMusic.security.Auth.Entities;
 
 public enum Roles {
 

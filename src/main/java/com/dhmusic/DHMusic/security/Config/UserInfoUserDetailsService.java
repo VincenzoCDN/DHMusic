@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.Security.Config;
+package com.dhmusic.DHMusic.security.Config;
 
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;

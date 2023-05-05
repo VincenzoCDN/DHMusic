@@ -1,4 +1,5 @@
 package com.dhmusic.DHMusic.Components.entities.account.entities;
+import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
@@ -6,6 +7,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -31,7 +33,7 @@ public abstract class Account {
     private Date updateDate;
     private boolean verificateEmail;
     @Column(columnDefinition = "ROLE_USER")
-    private String roles;
+    private List<Roles> roles;
     public Account() {
 
     }
@@ -84,11 +86,11 @@ public abstract class Account {
         this.verificateEmail = verificateEmail;
     }
 
-    public String getRoles() {
+    public List<Roles> getRoles() {
         return roles;
     }
 
-    public void setRoles(String roles) {
+    public void setRoles(List<Roles> roles) {
         this.roles = roles;
     }
 

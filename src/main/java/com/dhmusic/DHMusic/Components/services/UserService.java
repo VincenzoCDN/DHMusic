@@ -42,7 +42,7 @@ public class UserService {
 
     public ResponseEntity<?> createUser(UserDTO newUser) {
         if (!isValidUser(newUser) || !isValidEmail(newUser.getEmail()) || !isValidPassword(newUser.getPassword())) {
-            logger.error("createUser:"+errorMessage);
+            logger.error("createUser: " + errorMessage);
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
         }
         User user = userMapper.toUser(newUser);
