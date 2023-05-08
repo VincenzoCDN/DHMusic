@@ -32,7 +32,7 @@ public abstract class Account {
     @Column(columnDefinition = "DATETIME(0)")
     private Date updateDate;
     private boolean verificateEmail;
-    @Column(columnDefinition = "ROLE_USER")
+    //@Column(columnDefinition = "ROLE_USER")
     private List<Roles> roles;
     public Account() {
 

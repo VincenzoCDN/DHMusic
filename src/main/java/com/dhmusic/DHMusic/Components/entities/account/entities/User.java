@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -15,7 +16,7 @@ public class User extends Account {
     private String name;
     @Column(nullable = false,length = 45)
     private String surname;
-    private String dateOfBirth;
+    private LocalDate dateOfBirth;
     private String gender;
     private String nationality;
     @ManyToMany(mappedBy = "usersFollowers")
@@ -53,11 +54,11 @@ public class User extends Account {
         this.surname = surname;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

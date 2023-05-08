@@ -50,6 +50,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         // preleviamo l'header
         final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (header == null) {
+            response.sendError(400, "Missing authorization header");
             filterChain.doFilter(request,response);
             return;
         }
@@ -65,6 +66,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         try {
             token = header.split(" ")[1].trim();
         } catch (JWTVerificationException ex){
+            response.sendError(400, "Cannot read token properly");
             filterChain.doFilter(request,response);
             return;
         }
@@ -75,12 +77,14 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             JWTVerifier decoder = JWT.require(Algorithm.HMAC256(ENCRYPTION_KEY)).withIssuer("dhmusic").build();
             decodedJWT = decoder.verify(token);
         } catch (JWTVerificationException ex){
+            response.sendError(400, "Cannot decode JWT");
             filterChain.doFilter(request,response);
             return;
         }
 
         Optional<User> optional = userRepository.findById(decodedJWT.getClaim("id").asLong());
         if (optional.isEmpty()) {
+            response.sendError(400, "User not found");
             filterChain.doFilter(request,response);
             return;
         }

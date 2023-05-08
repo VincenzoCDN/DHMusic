@@ -3,9 +3,13 @@ package com.dhmusic.DHMusic.Components.mapper;
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.services.UserService;
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
+import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 @Component
 public class UserMapper {
@@ -22,6 +26,7 @@ public class UserMapper {
         user.setNationality(userDTO.getNationality());
         user.setGender(userDTO.getGender());
         user.setDateOfBirth(userDTO.getDateOfBirth());
+        user.setRoles(new ArrayList<>(Arrays.asList(Roles.ROLE_REGISTERED)));
         return user;
     }
 }

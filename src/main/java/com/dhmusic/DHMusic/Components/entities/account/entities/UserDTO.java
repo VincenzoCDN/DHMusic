@@ -1,5 +1,9 @@
 package com.dhmusic.DHMusic.Components.entities.account.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.time.LocalDate;
+
 public class UserDTO {
 
     private String email;
@@ -7,7 +11,9 @@ public class UserDTO {
     private String username;
     private String name;
     private String surname;
-    private String dateOfBirth;
+
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dateOfBirth;
     private String nationality;
     private String gender;
 
@@ -54,11 +60,11 @@ public class UserDTO {
         this.surname = surname;
     }
 
-    public String getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

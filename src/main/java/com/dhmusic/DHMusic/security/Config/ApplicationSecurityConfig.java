@@ -34,6 +34,7 @@ public class ApplicationSecurityConfig {
         return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/users/create-user").permitAll()
+                .requestMatchers("/users/login").permitAll()
                 .and()
                 .authorizeHttpRequests().requestMatchers("/**").authenticated()
                 .and().httpBasic()

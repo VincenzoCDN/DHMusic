@@ -18,20 +18,18 @@ import java.util.Optional;
 @Service
 public class LoginService {
 
-    // stringa SECRET(andrebbe nello YAML) mi permette si "firmare" il JWT
-
     @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private UserRepository userRepository;
 
-    public String login(LoginDTO loginDTO){
-        if(loginDTO == null) return null;
+    public String login(LoginDTO loginDTO) throws Exception {
+        if(loginDTO == null) throw new Exception("Bad input");
         Optional<User> optional = userRepository.findByEmail(loginDTO.getEmail());
-        if(optional.isEmpty()) return null;
+        if(optional.isEmpty()) throw new Exception("User not found");
 
-        if (optional.get().getPassword() != loginDTO.getPassword()) return null;
+        // if (passwordEncoder.matches(loginDTO.getPassword(), optional.get().getPassword())) throw new Exception("Wrong password");
 
         return generateJWT(optional.get());
     }
