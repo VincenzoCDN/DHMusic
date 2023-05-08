@@ -1,5 +1,6 @@
 package com.dhmusic.DHMusic.Controllers.content.controllers;
 
+import com.dhmusic.DHMusic.entities.account.entities.AccountStatus;
 import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
@@ -11,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -94,8 +96,8 @@ public class SongController {
      * @throws Exception Bad Request con messaggio dell'eventuale errore presente.
      */
 
-    @PostMapping("/create")                                     //funziona
-    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
+    @PostMapping("/create")
+     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
             songService.addSong(songDTO);
             return ResponseEntity.status(HttpStatus.CREATED).body("The song was created!");

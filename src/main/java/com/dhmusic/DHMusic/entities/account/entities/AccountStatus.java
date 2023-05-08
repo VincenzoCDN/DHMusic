@@ -7,6 +7,8 @@ public enum AccountStatus {
     Active, //commentare like
     Artist, //upDate music
     Banned, //
-    TimeOut
+    TimeOut,
+    Admin
+
 
 }

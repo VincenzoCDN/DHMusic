@@ -37,6 +37,8 @@ public class User extends Account {
 
     private String verificationCode;
 
+    private AccountStatus accountStatus;
+
     public User(){
         super();
     }
@@ -125,7 +127,19 @@ public class User extends Account {
         this.verificationCode = verificationCode;
     }
 
+
     //--------------------
+
+
+    @Override
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    @Override
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
+    }
 }
 
 
