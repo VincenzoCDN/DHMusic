@@ -4,8 +4,6 @@ package com.dhmusic.DHMusic.Components.entities.account.entities;
 public class ArtistDTO {
 
 
-    private Long id;
-
     private String artistName;
 
     private String bio;
@@ -15,13 +13,6 @@ public class ArtistDTO {
     public ArtistDTO() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getArtistName() {
         return artistName;
