@@ -16,10 +16,18 @@ public class SongDTO {
     private boolean isPublic;
     @JsonFormat(pattern = "yyyy/mm/dd")
     private Date publicationDate;
+    private String fileSong;
 
     public SongDTO(){
     }
 
+    public String getFileSong() {
+        return fileSong;
+    }
+
+    public void setFileSong(String fileSong) {
+        this.fileSong = fileSong;
+    }
 
     public String getTitle() {
         return title;

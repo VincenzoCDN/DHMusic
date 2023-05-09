@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import java.time.LocalDateTime;
@@ -49,8 +50,18 @@ public class Song {
 
     @ManyToMany(mappedBy = "songsOfPlaylist")
     private List<Playlist> playlistOfSong;
+
+    private String fileSong;
     public Song(){
 
+    }
+
+    public String getFileSong() {
+        return fileSong;
+    }
+
+    public void setFileSong(String fileSong) {
+        this.fileSong = fileSong;
     }
 
     public Long getId() {

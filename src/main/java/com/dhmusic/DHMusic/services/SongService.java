@@ -1,6 +1,6 @@
 package com.dhmusic.DHMusic.services;
 
-import com.dhmusic.DHMusic.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.entities.account.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
@@ -14,6 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.util.Optional;
+
 @Service
 public class SongService {
 
@@ -32,6 +36,9 @@ public class SongService {
     private AlbumRepository albumRepository;
     @Autowired
     private ArtistRepository artistRepository;
+
+    @Autowired
+    private FileStorageService fileStorageService;
 
 
     //------------------------------------------------------------------------------------------------------
@@ -86,7 +93,7 @@ public class SongService {
         }
         if (artistRepository.findArtistById(song.getIdArtistOfSong()) == null){
             logger.error("The user has not entered an existing artist.");
-            throw new Exception("Artist not exist!");
+            throw new Exception("Song not exist!");
         }
         logger.info("The user has entered a new song.");
         return ResponseEntity.status(HttpStatus.CREATED).body(songRepository.save(songMapper.toSong(song)));
@@ -121,10 +128,10 @@ public class SongService {
                 return ResponseEntity.ok().body("Song's genre has been successfully changed!") ;
             } else if (updateSong.getIdArtistOfSong() != null) {
                 logger.info("Changed only the artist");
-                Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
+                Song artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
                 existSong.setArtistOfSong(artist);
                 songRepository.save(existSong);
-                return ResponseEntity.ok().body("Artist's song has been successfully changed!") ;
+                return ResponseEntity.ok().body("Song's song has been successfully changed!") ;
             } else if (updateSong.getIdAlbumOfSong() != null) {
                 logger.info("Changed only the album");
                 Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
@@ -141,7 +148,7 @@ public class SongService {
                 existSong.setTitle(updateSong.getTitle());
                 existSong.setGenre(updateSong.getGenre());
                 existSong.setLength(updateSong.getLength());
-                Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
+                Song artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
                 existSong.setArtistOfSong(artist);
                 Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
                 existSong.setAlbumOfSong(album);
@@ -170,6 +177,24 @@ public class SongService {
         songRepository.findSongById(id);
         logger.info("the data of the song %d has been obtained", id);
         return ResponseEntity.ok().body(existSong);
+    }
+    //------------------------------------------------------------------------------------
+
+    public Song uploadFileSong(Long songId, MultipartFile fileSong) throws Exception{
+        Optional<Song> optionalSong = songRepository.findById(songId);
+        if(optionalSong.isEmpty()) throw new Exception("song not found");
+        // fileStorageSerive.upload() assigns the file a name, save it into the hard disk and return the name
+        String fileName = fileStorageService.upload(fileSong);
+        Song song = optionalSong.get();
+        song.setFileSong(fileName);
+        return  songRepository.save(song);
+    }
+
+    public byte[] getFileSong(Long songId) throws Exception {
+        Optional<Song> optionalSong = songRepository.findById(songId);
+        if(optionalSong.isEmpty()) throw new Exception("Cannot find song " + songId);
+        String fileName = optionalSong.get().getFileSong();
+        return fileStorageService.download(fileName);
     }
 
 
