@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -81,9 +82,9 @@ public class SongController {
      */
 
     @PostMapping("/create")                                     //funziona
-    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
+    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO, @RequestParam MultipartFile fileSong) throws Exception {
         try {
-            songService.addSong(songDTO);
+            songService.addSong(songDTO, fileSong);
             return ResponseEntity.status(HttpStatus.CREATED).body("The song was created!");
         } catch (Exception e) {
             e.printStackTrace();

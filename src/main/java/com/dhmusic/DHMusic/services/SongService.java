@@ -1,6 +1,6 @@
 package com.dhmusic.DHMusic.services;
 
-import com.dhmusic.DHMusic.entities.account.entities.Song;
+import com.dhmusic.DHMusic.entities.account.entities.Artist;
 import com.dhmusic.DHMusic.entities.content.entities.Album;
 import com.dhmusic.DHMusic.entities.content.entities.Song;
 import com.dhmusic.DHMusic.entities.content.entities.SongDTO;
@@ -77,7 +77,7 @@ public class SongService {
      * @return se i dati sono inseriti correttamente aggiunge e salva la canzone altrimenti può dare diverse eccezioni:
      * @throws Exception "la canzone già esiste"/"il titolo già esiste"/"l'artista non esiste".
      */
-    public ResponseEntity<Song> addSong(SongDTO song) throws Exception {
+    public ResponseEntity<Song> addSong(SongDTO song, MultipartFile fileSong) throws Exception {
         Song existSong = songRepository.findSongById(song.getId());
         if (existSong != null) {
             logger.error("The song you were looking for does not exist!");
@@ -96,7 +96,10 @@ public class SongService {
             throw new Exception("Song not exist!");
         }
         logger.info("The user has entered a new song.");
-        return ResponseEntity.status(HttpStatus.CREATED).body(songRepository.save(songMapper.toSong(song)));
+        Song savedSong = songRepository.save(songMapper.toSong(song));
+        // Chiama il metodo uploadFileSong per caricare il file e associarlo al brano salvato
+        Song songWithFile = uploadFileSong(fileSong, savedSong.getId());
+        return ResponseEntity.status(HttpStatus.CREATED).body(songWithFile);
     }
 
 
@@ -128,7 +131,7 @@ public class SongService {
                 return ResponseEntity.ok().body("Song's genre has been successfully changed!") ;
             } else if (updateSong.getIdArtistOfSong() != null) {
                 logger.info("Changed only the artist");
-                Song artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
+                Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
                 existSong.setArtistOfSong(artist);
                 songRepository.save(existSong);
                 return ResponseEntity.ok().body("Song's song has been successfully changed!") ;
@@ -148,7 +151,7 @@ public class SongService {
                 existSong.setTitle(updateSong.getTitle());
                 existSong.setGenre(updateSong.getGenre());
                 existSong.setLength(updateSong.getLength());
-                Song artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
+                Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
                 existSong.setArtistOfSong(artist);
                 Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
                 existSong.setAlbumOfSong(album);
@@ -180,7 +183,7 @@ public class SongService {
     }
     //------------------------------------------------------------------------------------
 
-    public Song uploadFileSong(Long songId, MultipartFile fileSong) throws Exception{
+    public Song uploadFileSong(MultipartFile fileSong, Long songId) throws Exception{
         Optional<Song> optionalSong = songRepository.findById(songId);
         if(optionalSong.isEmpty()) throw new Exception("song not found");
         // fileStorageSerive.upload() assigns the file a name, save it into the hard disk and return the name
@@ -189,6 +192,8 @@ public class SongService {
         song.setFileSong(fileName);
         return  songRepository.save(song);
     }
+
+
 
     public byte[] getFileSong(Long songId) throws Exception {
         Optional<Song> optionalSong = songRepository.findById(songId);
