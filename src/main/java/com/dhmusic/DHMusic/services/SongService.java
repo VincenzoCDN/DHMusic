@@ -77,7 +77,9 @@ public class SongService {
      * @return se i dati sono inseriti correttamente aggiunge e salva la canzone altrimenti può dare diverse eccezioni:
      * @throws Exception "la canzone già esiste"/"il titolo già esiste"/"l'artista non esiste".
      */
-    public ResponseEntity<Song> addSong(SongDTO song, MultipartFile fileSong) throws Exception {
+    public Song addSong(SongDTO song) throws Exception {
+        // TODO non si inserisce l'id nel dto... al massimo possiamo cercare omonimie
+        //  però le omonimie sono previste
         Song existSong = songRepository.findSongById(song.getId());
         if (existSong != null) {
             logger.error("The song you were looking for does not exist!");
@@ -98,8 +100,18 @@ public class SongService {
         logger.info("The user has entered a new song.");
         Song savedSong = songRepository.save(songMapper.toSong(song));
         // Chiama il metodo uploadFileSong per caricare il file e associarlo al brano salvato
-        Song songWithFile = uploadFileSong(fileSong, savedSong.getId());
-        return ResponseEntity.status(HttpStatus.CREATED).body(songWithFile);
+
+        return savedSong;
+    }
+
+    public Song addFileToSong(long songId, MultipartFile file) throws Exception {
+        Optional<Song> optionalSong = songRepository.findById(songId);
+        if(optionalSong.isEmpty()) throw new Exception("song not found");
+        Song song = optionalSong.get();
+        // fileStorageSerive.upload() assigns the file a name, save it into the hard disk and return the name
+        String fileName = fileStorageService.upload(file);
+        song.setFileSong(fileName);
+        return songRepository.save(song);
     }
 
 
@@ -183,15 +195,6 @@ public class SongService {
     }
     //------------------------------------------------------------------------------------
 
-    public Song uploadFileSong(MultipartFile fileSong, Long songId) throws Exception{
-        Optional<Song> optionalSong = songRepository.findById(songId);
-        if(optionalSong.isEmpty()) throw new Exception("song not found");
-        // fileStorageSerive.upload() assigns the file a name, save it into the hard disk and return the name
-        String fileName = fileStorageService.upload(fileSong);
-        Song song = optionalSong.get();
-        song.setFileSong(fileName);
-        return  songRepository.save(song);
-    }
 
 
 

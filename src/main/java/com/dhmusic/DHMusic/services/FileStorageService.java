@@ -22,7 +22,7 @@ public class FileStorageService {
     private Logger log = LoggerFactory.getLogger(FileStorageService.class);
 
     private String getFileRepositoryFolder(){
-        return System.getProperty("user.home")+"/OneDrive/Desktop/" +folderName;
+        return System.getProperty("user.home") + File.separator + "dhmusic" + File.separator + folderName;
     }
 
     public String upload(MultipartFile file) throws IOException {

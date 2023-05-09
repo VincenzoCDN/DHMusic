@@ -82,15 +82,32 @@ public class SongController {
      */
 
     @PostMapping("/create")                                     //funziona
-    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO, @RequestParam MultipartFile fileSong) throws Exception {
+    public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
-            songService.addSong(songDTO, fileSong);
-            return ResponseEntity.status(HttpStatus.CREATED).body("The song was created!");
+            return ResponseEntity.status(HttpStatus.CREATED).body(songService.addSong(songDTO));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
 
+    @PutMapping("/add-file-to-song")
+    public ResponseEntity addFileToSong(@RequestParam long songId, @RequestParam MultipartFile file) {
+        try {
+            return ResponseEntity.ok(songService.addFileToSong(songId, file));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/create-with-file", method = RequestMethod.POST, consumes = {"multipart/form-data"})
+    public ResponseEntity createSongWithFile(@RequestPart("song") SongDTO songDTO, @RequestPart("file") MultipartFile file) {
+        try {
+            Song song = songService.addSong(songDTO);
+            return ResponseEntity.ok(songService.addFileToSong(song.getId(), file));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     //------------------------------------------------------------------------------------------------------
