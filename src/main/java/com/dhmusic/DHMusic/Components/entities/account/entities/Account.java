@@ -32,7 +32,8 @@ public abstract class Account {
     @Column(columnDefinition = "DATETIME(0)")
     private Date updateDate;
     private boolean verificateEmail;
-    //@Column(columnDefinition = "ROLE_USER")
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Roles.class)
     private List<Roles> roles;
     public Account() {
 

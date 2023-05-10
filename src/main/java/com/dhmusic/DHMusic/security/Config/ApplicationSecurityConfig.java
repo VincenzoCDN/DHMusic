@@ -13,6 +13,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.Arrays;
+import java.util.List;
+
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
@@ -23,22 +26,22 @@ public class ApplicationSecurityConfig {
         return new UserInfoUserDetailsService();
     }
 
-    @Bean
-    public JwtTokenFilter jwtTokenFilter() {
-        return new JwtTokenFilter();
+
+    public PermitJwtTokenFilter permitJwtTokenFilter(List<String> excludedPath) {
+        return new PermitJwtTokenFilter(excludedPath);
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        List<String> excludedPaths = Arrays.asList("/users/create-user", "/users/login");
         return http.csrf().disable()
                 .authorizeHttpRequests()
                 .requestMatchers("/users/create-user").permitAll()
                 .requestMatchers("/users/login").permitAll()
+                .requestMatchers("/**").authenticated()
                 .and()
-                .authorizeHttpRequests().requestMatchers("/**").authenticated()
-                .and().httpBasic()
-                .and().build();
+                .addFilterBefore(permitJwtTokenFilter(excludedPaths), UsernamePasswordAuthenticationFilter.class)
+                .build();
     }
 
     @Bean

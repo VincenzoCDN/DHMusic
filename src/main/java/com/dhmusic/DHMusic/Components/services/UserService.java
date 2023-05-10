@@ -6,7 +6,6 @@ import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.Components.mapper.UserMapper;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
 import jakarta.servlet.http.HttpServletResponse;
-import org.mindrot.jbcrypt.BCrypt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Random;
+import java.util.*;
 
 @Service
 public class UserService {
@@ -63,6 +59,12 @@ public class UserService {
         return userRepository.existsById(id)
                 ? ResponseEntity.status(HttpStatus.OK).body(userRepository.getUserById(id))
                 : ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+    }
+
+    public User getById(Long id){
+        return userRepository.existsById(id)
+                ? userRepository.getUserById(id)
+                : null;
     }
     public List<User> getAllUsers() {
         return userRepository.findAll();

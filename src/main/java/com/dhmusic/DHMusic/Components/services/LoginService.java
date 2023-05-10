@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.dhmusic.DHMusic.Components.entities.account.entities.LoginDTO;
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
+import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import com.dhmusic.DHMusic.security.Config.JwtTokenFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -28,9 +29,7 @@ public class LoginService {
         if(loginDTO == null) throw new Exception("Bad input");
         Optional<User> optional = userRepository.findByEmail(loginDTO.getEmail());
         if(optional.isEmpty()) throw new Exception("User not found");
-
         // if (passwordEncoder.matches(loginDTO.getPassword(), optional.get().getPassword())) throw new Exception("Wrong password");
-
         return generateJWT(optional.get());
     }
 
@@ -47,7 +46,7 @@ public class LoginService {
 
     public static String getJWT(User user){
         Date expiresAt = convertToDateViaInstant(LocalDateTime.now().plusDays(15));
-        String[] roles = user.getRoles().stream().map(role -> role.toString()).toArray(String[]::new);
+        String[] roles = user.getRoles().stream().map(Roles::toString).toArray(String[]::new);
         return JWT.create()
                 .withIssuer("develhope-demo")
                 .withIssuedAt(new Date())
@@ -59,10 +58,7 @@ public class LoginService {
 
     public String generateJWT(User user) {
         String JWT = getJWT(user);
-
-        // user.setJwtCreatedOn(LocalDateTime.now());
-        userRepository.save(user);
-
+        System.out.println(JWT);
         return JWT;
     }
 }

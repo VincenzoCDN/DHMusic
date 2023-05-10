@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 @Component
 public class UserMapper {
@@ -26,7 +27,7 @@ public class UserMapper {
         user.setNationality(userDTO.getNationality());
         user.setGender(userDTO.getGender());
         user.setDateOfBirth(userDTO.getDateOfBirth());
-        user.setRoles(new ArrayList<>(Arrays.asList(Roles.ROLE_REGISTERED)));
+        user.setRoles(new ArrayList<>(List.of(Roles.ROLE_REGISTERED)));
         return user;
     }
 }
