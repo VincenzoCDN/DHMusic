@@ -90,6 +90,15 @@ public class SongController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metodo che permette di aggiungere un file audio
+     * @param songId
+     * @param file
+     * @return
+     */
+
 
     @PutMapping("/add-file-to-song")
     public ResponseEntity addFileToSong(@RequestParam long songId, @RequestParam MultipartFile file) {
@@ -99,6 +108,17 @@ public class SongController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    //------------------------------------------------------------------------------------------------------
+
+    /**
+     * Metodo che permette di aggiungere sia i dati di una Song che il file di una canzone.
+     * Per far funzionare il tutto essendo che postman va in conflitto se entrambi i parametri non sono "file",
+     * abbiamo dovuto specificare che è una POST e altro tramite un @RequestMapping, risolvendo i possibili conflitti
+     * nel momento in cui si inserisce sia un Json che un mp3 tramite file.
+     * @param songDTO
+     * @param file
+     * @return
+     */
 
     @RequestMapping(value = "/create-with-file", method = RequestMethod.POST, consumes = {"multipart/form-data"})
     public ResponseEntity createSongWithFile(@RequestPart("song") SongDTO songDTO, @RequestPart("file") MultipartFile file) {
@@ -111,7 +131,6 @@ public class SongController {
     }
 
     //------------------------------------------------------------------------------------------------------
-    //Aggiorna un Song nel database DTO
 
     /**
      * Aggiorna una canzone presente all'interno del database

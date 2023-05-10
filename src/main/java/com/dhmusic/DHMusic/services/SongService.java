@@ -108,7 +108,7 @@ public class SongService {
         Optional<Song> optionalSong = songRepository.findById(songId);
         if(optionalSong.isEmpty()) throw new Exception("song not found");
         Song song = optionalSong.get();
-        // fileStorageSerive.upload() assigns the file a name, save it into the hard disk and return the name
+        // fileStorageService.upload() assigns the file a name, save it into the hard disk and return the name
         String fileName = fileStorageService.upload(file);
         song.setFileSong(fileName);
         return songRepository.save(song);
@@ -121,43 +121,42 @@ public class SongService {
      * Creazione metodo per aggiornare una canzone esistente
      * con la possibilità di aggiornare anche un singolo dato
      * i paramentri utilizzati.
-     *
      */
-       public ResponseEntity<?> updateSong(Long id,SongDTO updateSong) {
+       public Object updateSong(Long id, SongDTO updateSong) {
             Song existSong = songRepository.findSongById(id); // id string o long?
             if (existSong == null) {
                 logger.error("The song %d was not found", id);
-               return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Song %d not found");
+               return "Song %d not found";
             } else if (!existSong.getId().equals(updateSong.getId())) {
                 logger.error("Song %d does not match", id);
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Song id does not match");
+                return "Song id does not match";
             } else if (updateSong.getTitle() != null) {
                 logger.info("Changed only the title");
                 existSong.setTitle(updateSong.getTitle());
                 songRepository.save(existSong);
-                return ResponseEntity.ok().body("Song's title has been successfully changed!") ;
+                return "Song's title has been successfully changed!";
             } else if (updateSong.getGenre() != null) {
                 logger.info("Changed only the genre");
                 existSong.setGenre(updateSong.getGenre());
                 songRepository.save(existSong);
-                return ResponseEntity.ok().body("Song's genre has been successfully changed!") ;
+                return "Song's genre has been successfully changed!";
             } else if (updateSong.getIdArtistOfSong() != null) {
                 logger.info("Changed only the artist");
                 Artist artist = artistRepository.findArtistById(updateSong.getIdArtistOfSong());
                 existSong.setArtistOfSong(artist);
                 songRepository.save(existSong);
-                return ResponseEntity.ok().body("Song's song has been successfully changed!") ;
+                return "Song's song has been successfully changed!";
             } else if (updateSong.getIdAlbumOfSong() != null) {
                 logger.info("Changed only the album");
                 Album album = albumRepository.findAlbumById(updateSong.getIdAlbumOfSong());
                 existSong.setAlbumOfSong(album);
                 songRepository.save(existSong);
-                return ResponseEntity.ok().body("Song's album has been successfully changed!") ;
+                return "Song's album has been successfully changed!";
             } else if (updateSong.getPublicationDate() != null || updateSong.getPublicationDate() == null) {
                 logger.info("Changed only the publication date");
                 existSong.setPublicationDate(updateSong.getPublicationDate());
                 songRepository.save(existSong);
-                return ResponseEntity.ok().body("Song's publication date has been successfully changed!") ;
+                return "Song's publication date has been successfully changed!";
 
             } else {
                 existSong.setTitle(updateSong.getTitle());
@@ -171,7 +170,7 @@ public class SongService {
 
             }
             logger.info("The song %d has been successfully updated", id);
-            return ResponseEntity.ok(existSong);
+            return existSong;
         }
 
     //------------------------------------------------------------------------------------------------------
@@ -183,7 +182,7 @@ public class SongService {
      * altrimenti ritorna un eccezione nel caso la canzone non esista.
      */
 
-    public ResponseEntity<Song> getSongById(Long id){
+    public Song getSongById(Long id){
         Song existSong = songRepository.findSongById(id);
         if (existSong == null) {
             logger.error("Song not exist!");
@@ -191,9 +190,19 @@ public class SongService {
         }
         songRepository.findSongById(id);
         logger.info("the data of the song %d has been obtained", id);
-        return ResponseEntity.ok().body(existSong);
+        return existSong;
     }
     //------------------------------------------------------------------------------------
+
+    /**
+     * Questo metodo recupera il file audio di una canzone dal servizio di archiviazione file, dato l'ID della canzone.
+     * Innanzitutto controlla se la canzone esiste nel repository e recupera il nome del file.
+     * Quindi, chiama il servizio di archiviazione file per scaricare il file audio e restituirlo come matrice di byte.
+     * @param songId l'ID del brano il cui file audio deve essere recuperato.
+     * @return un array di byte contenente il file audio della canzone
+     * @throws Exception se l'ID del brano non è valido o non è stato possibile recuperare il file
+     * dal servizio di archiviazione file
+     */
 
 
 
