@@ -1,4 +1,4 @@
-package com.dhmusic.DHMusic.Components.entities.account.entities;
+package com.dhmusic.DHMusic.security.Auth.Entities;
 
 public class LoginDTO {
 

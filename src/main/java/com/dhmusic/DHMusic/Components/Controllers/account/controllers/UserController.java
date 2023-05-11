@@ -1,8 +1,7 @@
 package com.dhmusic.DHMusic.Components.Controllers.account.controllers;
 
-import com.dhmusic.DHMusic.Components.entities.account.entities.LoginDTO;
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
-import com.dhmusic.DHMusic.Components.services.LoginService;
+import com.dhmusic.DHMusic.security.Auth.Services.AuthService;
 import com.dhmusic.DHMusic.Components.services.UserService;
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,24 +20,6 @@ public class UserController {
 
     @Autowired
     UserService userService;
-
-    @Autowired
-    LoginService loginService;
-
-    //inserisce un nuovo user nel database
-    @PostMapping("/create-user")
-    public ResponseEntity<?> createUser(@RequestBody UserDTO newUser) {
-            return userService.createUser(newUser);
-    }
-
-    @PostMapping("/login")
-    public ResponseEntity login(@RequestBody LoginDTO loginDTO) {
-        try {
-            return ResponseEntity.ok(loginService.login(loginDTO));
-        } catch (Exception e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
-        }
-    }
 
     //elimina un user nel database
     @DeleteMapping("/delete-user/{id}")

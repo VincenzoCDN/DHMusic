@@ -23,7 +23,7 @@ public class UserInfoUserDetails implements UserDetails {
         id = user.getId();
         username = user.getUsername();
         password = user.getPassword();
-        authorities = Arrays.asList(user.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_"+role.toString())).toArray(SimpleGrantedAuthority[]::new));
+        authorities = Arrays.asList(user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.toString())).toArray(SimpleGrantedAuthority[]::new));
     }
 
     @Override

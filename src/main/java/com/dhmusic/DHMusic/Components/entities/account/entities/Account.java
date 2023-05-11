@@ -3,6 +3,8 @@ import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 
@@ -34,6 +36,7 @@ public abstract class Account {
     private boolean verificateEmail;
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Roles.class)
+    @Fetch(FetchMode.JOIN)
     private List<Roles> roles;
     public Account() {
 

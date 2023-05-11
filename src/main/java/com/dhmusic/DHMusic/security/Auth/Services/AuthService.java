@@ -1,13 +1,16 @@
-package com.dhmusic.DHMusic.Components.services;
+package com.dhmusic.DHMusic.security.Auth.Services;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.dhmusic.DHMusic.Components.entities.account.entities.LoginDTO;
+import com.dhmusic.DHMusic.security.Auth.Entities.LoginDTO;
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
 import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import com.dhmusic.DHMusic.security.Config.JwtTokenFilter;
+import com.dhmusic.DHMusic.security.Config.UserInfoUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +20,13 @@ import java.util.Date;
 import java.util.Optional;
 
 @Service
-public class LoginService {
+public class AuthService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserInfoUserDetailsService userDetailsService;
 
     @Autowired
     private UserRepository userRepository;
@@ -29,8 +35,12 @@ public class LoginService {
         if(loginDTO == null) throw new Exception("Bad input");
         Optional<User> optional = userRepository.findByEmail(loginDTO.getEmail());
         if(optional.isEmpty()) throw new Exception("User not found");
-        // if (passwordEncoder.matches(loginDTO.getPassword(), optional.get().getPassword())) throw new Exception("Wrong password");
-        return generateJWT(optional.get());
+        User user = optional.get();
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        if(!passwordEncoder.matches(loginDTO.getPassword(), userDetails.getPassword())){
+            throw new BadCredentialsException("Invalid password");
+        }
+        return generateJWT(user);
     }
 
     public boolean canUserLogin(User user, String password){
@@ -51,7 +61,8 @@ public class LoginService {
                 .withIssuer("develhope-demo")
                 .withIssuedAt(new Date())
                 .withExpiresAt(expiresAt)
-                .withClaim("roles",String.join(",",roles)) //funziona su nuove versioni Java (17)
+                .withClaim("username",user.getUsername())
+                .withClaim("roles",String.join(",",roles))
                 .withClaim("id", user.getId())
                 .sign(Algorithm.HMAC512(JwtTokenFilter.ENCRYPTION_KEY));
     }

@@ -1,0 +1,380 @@
+2023-05-11T11:41:51.193+02:00  INFO 14216 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 14216 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T11:41:51.211+02:00  INFO 14216 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T11:41:51.494+02:00  INFO 14216 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T11:41:51.494+02:00  INFO 14216 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T11:41:54.916+02:00  INFO 14216 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T11:41:55.199+02:00  INFO 14216 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 255 ms. Found 5 JPA repository interfaces.
+2023-05-11T11:41:59.137+02:00  INFO 14216 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T11:41:59.172+02:00  INFO 14216 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T11:41:59.174+02:00  INFO 14216 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T11:41:59.317+02:00  INFO 14216 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T11:41:59.318+02:00  INFO 14216 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 7821 ms
+2023-05-11T11:42:00.231+02:00  INFO 14216 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T11:42:00.331+02:00  INFO 14216 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T11:42:01.075+02:00  INFO 14216 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T11:42:02.116+02:00  INFO 14216 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@66c226e3
+2023-05-11T11:42:02.121+02:00  INFO 14216 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T11:42:02.333+02:00  INFO 14216 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T11:42:06.763+02:00  INFO 14216 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T11:42:06.781+02:00  INFO 14216 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:42:09.436+02:00  WARN 14216 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T11:42:10.141+02:00  INFO 14216 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@64c7f519, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@591a3d67, org.springframework.security.web.context.SecurityContextHolderFilter@26b3fefb, org.springframework.security.web.header.HeaderWriterFilter@28ae397e, org.springframework.security.web.authentication.logout.LogoutFilter@2db15e4e, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@2291507f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@2c422452, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c078dc7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7d2175a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7061b417, org.springframework.security.web.session.SessionManagementFilter@226b3f2b, org.springframework.security.web.access.ExceptionTranslationFilter@7dc26d3d, org.springframework.security.web.access.intercept.AuthorizationFilter@9651034]
+2023-05-11T11:42:10.698+02:00  INFO 14216 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T11:42:10.777+02:00  INFO 14216 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T11:42:10.810+02:00  INFO 14216 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 21.07 seconds (process running for 31.194)
+2023-05-11T11:42:13.851+02:00  INFO 14216 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:42:13.868+02:00  INFO 14216 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T11:42:13.947+02:00  INFO 14216 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T11:42:21.131+02:00  INFO 1268 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 1268 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T11:42:21.137+02:00  INFO 1268 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T11:42:21.377+02:00  INFO 1268 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T11:42:21.378+02:00  INFO 1268 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T11:42:24.171+02:00  INFO 1268 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T11:42:24.430+02:00  INFO 1268 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 233 ms. Found 5 JPA repository interfaces.
+2023-05-11T11:42:27.660+02:00  INFO 1268 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T11:42:27.690+02:00  INFO 1268 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T11:42:27.691+02:00  INFO 1268 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T11:42:27.824+02:00  INFO 1268 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T11:42:27.827+02:00  INFO 1268 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6445 ms
+2023-05-11T11:42:28.396+02:00  INFO 1268 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T11:42:28.506+02:00  INFO 1268 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T11:42:29.152+02:00  INFO 1268 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T11:42:29.909+02:00  INFO 1268 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f32c6e6
+2023-05-11T11:42:29.912+02:00  INFO 1268 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T11:42:30.015+02:00  INFO 1268 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T11:42:32.295+02:00  INFO 1268 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T11:42:32.310+02:00  INFO 1268 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:42:34.725+02:00  WARN 1268 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T11:42:35.591+02:00  INFO 1268 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@20cee154, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4a87145e, org.springframework.security.web.context.SecurityContextHolderFilter@70fe63a1, org.springframework.security.web.header.HeaderWriterFilter@15556de, org.springframework.security.web.authentication.logout.LogoutFilter@3217018e, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@5aa500c7, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@60715a41, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1877c208, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3a49899a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65a3854f, org.springframework.security.web.session.SessionManagementFilter@378c4172, org.springframework.security.web.access.ExceptionTranslationFilter@2b6bcc14, org.springframework.security.web.access.intercept.AuthorizationFilter@4f930ccf]
+2023-05-11T11:42:36.248+02:00  INFO 1268 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T11:42:36.373+02:00  INFO 1268 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T11:42:36.400+02:00  INFO 1268 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 16.471 seconds (process running for 18.542)
+2023-05-11T11:42:54.247+02:00  INFO 1268 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T11:42:54.251+02:00  INFO 1268 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T11:42:54.254+02:00  INFO 1268 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-05-11T11:43:12.462+02:00 ERROR 1268 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.dhmusic.DHMusic.Components.entities.account.entities.User.roles: could not initialize proxy - no Session
+	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:635) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:218) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:615) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.read(AbstractPersistentCollection.java:136) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.PersistentBag.iterator(PersistentBag.java:366) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at java.base/java.util.Spliterators$IteratorSpliterator.estimateSize(Spliterators.java:1941) ~[na:na]
+	at java.base/java.util.Spliterator.getExactSizeIfKnown(Spliterator.java:414) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:508) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:499) ~[na:na]
+	at java.base/java.util.stream.ReduceOps$ReduceOp.evaluateSequential(ReduceOps.java:921) ~[na:na]
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234) ~[na:na]
+	at java.base/java.util.stream.ReferencePipeline.collect(ReferencePipeline.java:682) ~[na:na]
+	at com.dhmusic.DHMusic.security.Config.UserInfoUserDetailsService.mapRolesToAuthorities(UserInfoUserDetailsService.java:33) ~[classes/:na]
+	at com.dhmusic.DHMusic.security.Config.UserInfoUserDetailsService.loadUserByUsername(UserInfoUserDetailsService.java:30) ~[classes/:na]
+	at com.dhmusic.DHMusic.security.Config.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:76) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
+
+2023-05-11T11:48:34.843+02:00  INFO 1268 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:48:34.850+02:00  INFO 1268 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T11:48:34.880+02:00  INFO 1268 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T11:48:44.782+02:00  INFO 14700 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 14700 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T11:48:44.785+02:00  INFO 14700 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T11:48:44.943+02:00  INFO 14700 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T11:48:44.944+02:00  INFO 14700 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T11:48:46.616+02:00  INFO 14700 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T11:48:46.781+02:00  INFO 14700 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 149 ms. Found 5 JPA repository interfaces.
+2023-05-11T11:48:49.486+02:00  INFO 14700 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T11:48:49.506+02:00  INFO 14700 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T11:48:49.506+02:00  INFO 14700 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T11:48:49.625+02:00  INFO 14700 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T11:48:49.628+02:00  INFO 14700 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4678 ms
+2023-05-11T11:48:50.053+02:00  INFO 14700 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T11:48:50.155+02:00  INFO 14700 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T11:48:50.683+02:00  INFO 14700 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T11:48:51.232+02:00  INFO 14700 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68de9ff0
+2023-05-11T11:48:51.234+02:00  INFO 14700 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T11:48:51.317+02:00  INFO 14700 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T11:48:53.283+02:00  INFO 14700 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T11:48:53.295+02:00  INFO 14700 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:48:55.980+02:00  WARN 14700 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T11:48:56.760+02:00  INFO 14700 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@74ad9658, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@49f611f3, org.springframework.security.web.context.SecurityContextHolderFilter@33ea1ecc, org.springframework.security.web.header.HeaderWriterFilter@75a481a7, org.springframework.security.web.authentication.logout.LogoutFilter@79f85602, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@69522e74, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@5adce751, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@61543a4e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c5c278e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@dab5f2d, org.springframework.security.web.session.SessionManagementFilter@7d2175a, org.springframework.security.web.access.ExceptionTranslationFilter@32d638ab, org.springframework.security.web.access.intercept.AuthorizationFilter@3036b58]
+2023-05-11T11:48:57.466+02:00  INFO 14700 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T11:48:57.515+02:00  INFO 14700 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T11:48:57.541+02:00  INFO 14700 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 13.565 seconds (process running for 14.578)
+2023-05-11T11:49:04.276+02:00  INFO 14700 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T11:49:04.276+02:00  INFO 14700 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T11:49:04.281+02:00  INFO 14700 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-11T11:49:04.649+02:00 ERROR 14700 --- [http-nio-8080-exec-2] o.a.c.c.C.[.[.[/].[dispatcherServlet]    : Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception
+
+org.hibernate.LazyInitializationException: failed to lazily initialize a collection of role: com.dhmusic.DHMusic.Components.entities.account.entities.User.roles: could not initialize proxy - no Session
+	at org.hibernate.collection.spi.AbstractPersistentCollection.throwLazyInitializationException(AbstractPersistentCollection.java:635) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.withTemporarySessionIfNeeded(AbstractPersistentCollection.java:218) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.initialize(AbstractPersistentCollection.java:615) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.collection.spi.AbstractPersistentCollection.forceInitialization(AbstractPersistentCollection.java:813) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at org.hibernate.Hibernate.initialize(Hibernate.java:94) ~[hibernate-core-6.1.7.Final.jar:6.1.7.Final]
+	at com.dhmusic.DHMusic.security.Config.UserInfoUserDetailsService.loadUserByUsername(UserInfoUserDetailsService.java:31) ~[classes/:na]
+	at com.dhmusic.DHMusic.security.Config.JwtTokenFilter.doFilterInternal(JwtTokenFilter.java:76) ~[classes/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.0.2.jar:6.0.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.0.6.jar:6.0.6]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:185) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:158) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:177) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:97) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:542) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:119) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:78) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:357) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:400) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:65) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:859) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1734) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61) ~[tomcat-embed-core-10.1.5.jar:10.1.5]
+	at java.base/java.lang.Thread.run(Thread.java:1589) ~[na:na]
+
+2023-05-11T11:52:10.117+02:00  INFO 14700 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:52:10.125+02:00  INFO 14700 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T11:52:10.141+02:00  INFO 14700 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T11:52:22.752+02:00  INFO 16136 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 16136 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T11:52:22.758+02:00  INFO 16136 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T11:52:22.978+02:00  INFO 16136 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T11:52:22.979+02:00  INFO 16136 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T11:52:24.778+02:00  INFO 16136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T11:52:24.975+02:00  INFO 16136 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 182 ms. Found 5 JPA repository interfaces.
+2023-05-11T11:52:27.935+02:00  INFO 16136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T11:52:27.957+02:00  INFO 16136 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T11:52:27.958+02:00  INFO 16136 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T11:52:28.062+02:00  INFO 16136 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T11:52:28.063+02:00  INFO 16136 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 5080 ms
+2023-05-11T11:52:28.416+02:00  INFO 16136 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T11:52:28.500+02:00  INFO 16136 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T11:52:28.988+02:00  INFO 16136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T11:52:29.516+02:00  INFO 16136 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7bec3937
+2023-05-11T11:52:29.520+02:00  INFO 16136 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T11:52:29.602+02:00  INFO 16136 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T11:52:31.446+02:00  INFO 16136 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T11:52:31.458+02:00  INFO 16136 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T11:52:33.156+02:00  WARN 16136 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T11:52:33.750+02:00  INFO 16136 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@68f0f9f9, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@55a734a8, org.springframework.security.web.context.SecurityContextHolderFilter@3c3efce2, org.springframework.security.web.header.HeaderWriterFilter@7576869e, org.springframework.security.web.authentication.logout.LogoutFilter@35633264, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@7dba0bb1, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@517d82e5, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2ae52aab, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@754e196a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@cfe81e5, org.springframework.security.web.session.SessionManagementFilter@1aa0fa85, org.springframework.security.web.access.ExceptionTranslationFilter@6b816fab, org.springframework.security.web.access.intercept.AuthorizationFilter@131ea086]
+2023-05-11T11:52:34.296+02:00  INFO 16136 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T11:52:34.358+02:00  INFO 16136 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T11:52:34.379+02:00  INFO 16136 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 12.478 seconds (process running for 13.608)
+2023-05-11T11:52:41.059+02:00  INFO 16136 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T11:52:41.060+02:00  INFO 16136 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T11:52:41.063+02:00  INFO 16136 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-05-11T11:52:41.893+02:00  INFO 16136 --- [http-nio-8080-exec-1] c.d.D.Components.services.ArtistService  : artist creation
+2023-05-11T11:52:41.893+02:00  INFO 16136 --- [http-nio-8080-exec-1] c.d.D.C.C.a.c.ArtistController           : a new artist was created
+2023-05-11T11:55:28.695+02:00 ERROR 16136 --- [http-nio-8080-exec-7] c.d.D.Components.services.ArtistService  : there is already an artist with this name Panda
+2023-05-11T11:55:28.700+02:00 ERROR 16136 --- [http-nio-8080-exec-7] c.d.D.C.C.a.c.ArtistController           : there was an error in creating a new artist
+2023-05-11T12:08:11.990+02:00  INFO 16136 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:08:12.003+02:00  INFO 16136 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T12:08:12.020+02:00  INFO 16136 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T12:10:38.133+02:00  INFO 16096 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 16096 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T12:10:38.138+02:00  INFO 16096 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T12:10:38.273+02:00  INFO 16096 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T12:10:38.274+02:00  INFO 16096 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T12:10:40.124+02:00  INFO 16096 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T12:10:40.272+02:00  INFO 16096 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 132 ms. Found 5 JPA repository interfaces.
+2023-05-11T12:10:42.595+02:00  INFO 16096 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T12:10:42.616+02:00  INFO 16096 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T12:10:42.617+02:00  INFO 16096 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T12:10:42.728+02:00  INFO 16096 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T12:10:42.729+02:00  INFO 16096 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4453 ms
+2023-05-11T12:10:43.083+02:00  INFO 16096 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T12:10:43.178+02:00  INFO 16096 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T12:10:43.653+02:00  INFO 16096 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T12:10:44.206+02:00  INFO 16096 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7ee488e5
+2023-05-11T12:10:44.209+02:00  INFO 16096 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T12:10:44.304+02:00  INFO 16096 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T12:10:46.325+02:00  INFO 16096 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T12:10:46.339+02:00  INFO 16096 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:10:48.069+02:00  WARN 16096 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T12:10:48.751+02:00  INFO 16096 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@7ad567e5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@135591c0, org.springframework.security.web.context.SecurityContextHolderFilter@6b2a7dae, org.springframework.security.web.header.HeaderWriterFilter@1acbaf94, org.springframework.security.web.authentication.logout.LogoutFilter@494c5d85, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@1d8cab12, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@3e2af87f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@145a2384, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@14cdcafc, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@cd98fa5, org.springframework.security.web.session.SessionManagementFilter@7cb3805d, org.springframework.security.web.access.ExceptionTranslationFilter@3115113d, org.springframework.security.web.access.intercept.AuthorizationFilter@61627dc7]
+2023-05-11T12:10:49.621+02:00  INFO 16096 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T12:10:49.667+02:00  INFO 16096 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T12:10:49.687+02:00  INFO 16096 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 12.302 seconds (process running for 13.184)
+2023-05-11T12:10:54.207+02:00  INFO 16096 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T12:10:54.208+02:00  INFO 16096 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T12:10:54.210+02:00  INFO 16096 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-11T12:11:34.597+02:00  INFO 16096 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:11:34.603+02:00  INFO 16096 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T12:11:34.615+02:00  INFO 16096 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T12:11:39.458+02:00  INFO 15440 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 15440 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T12:11:39.464+02:00  INFO 15440 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T12:11:39.615+02:00  INFO 15440 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T12:11:39.616+02:00  INFO 15440 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T12:11:41.686+02:00  INFO 15440 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T12:11:41.888+02:00  INFO 15440 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 183 ms. Found 5 JPA repository interfaces.
+2023-05-11T12:11:45.493+02:00  INFO 15440 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T12:11:45.514+02:00  INFO 15440 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T12:11:45.515+02:00  INFO 15440 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T12:11:45.644+02:00  INFO 15440 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T12:11:45.645+02:00  INFO 15440 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 6028 ms
+2023-05-11T12:11:46.111+02:00  INFO 15440 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T12:11:46.235+02:00  INFO 15440 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T12:11:46.868+02:00  INFO 15440 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T12:11:47.608+02:00  INFO 15440 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@135ee2e1
+2023-05-11T12:11:47.611+02:00  INFO 15440 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T12:11:47.718+02:00  INFO 15440 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T12:11:50.023+02:00  INFO 15440 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T12:11:50.039+02:00  INFO 15440 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:11:52.618+02:00  WARN 15440 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T12:11:53.461+02:00  INFO 15440 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@2814ee9d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6ccb73d0, org.springframework.security.web.context.SecurityContextHolderFilter@4be6ead2, org.springframework.security.web.header.HeaderWriterFilter@232a8ae, org.springframework.security.web.authentication.logout.LogoutFilter@684e97b3, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@7d9f7e42, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@4b01f35c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@43936d16, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@769875e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3b761d35, org.springframework.security.web.session.SessionManagementFilter@38fcaa80, org.springframework.security.web.access.ExceptionTranslationFilter@4fe60249, org.springframework.security.web.access.intercept.AuthorizationFilter@2671183a]
+2023-05-11T12:11:53.971+02:00  INFO 15440 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T12:11:54.040+02:00  INFO 15440 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T12:11:54.073+02:00  INFO 15440 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 15.756 seconds (process running for 16.995)
+2023-05-11T12:12:40.845+02:00  INFO 15440 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T12:12:40.846+02:00  INFO 15440 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T12:12:40.850+02:00  INFO 15440 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-11T12:13:37.076+02:00  WARN 15440 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m19s358ms311µs100ns).
+2023-05-11T12:14:23.361+02:00  WARN 15440 --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=46s285ms205µs600ns).
+2023-05-11T12:14:30.212+02:00  INFO 15440 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:14:30.227+02:00  INFO 15440 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T12:14:30.354+02:00  INFO 15440 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T12:17:08.838+02:00  INFO 8516 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 8516 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T12:17:08.842+02:00  INFO 8516 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T12:17:09.010+02:00  INFO 8516 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T12:17:09.010+02:00  INFO 8516 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T12:17:10.540+02:00  INFO 8516 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T12:17:10.705+02:00  INFO 8516 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 147 ms. Found 5 JPA repository interfaces.
+2023-05-11T12:17:13.090+02:00  INFO 8516 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T12:17:13.108+02:00  INFO 8516 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T12:17:13.112+02:00  INFO 8516 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T12:17:13.255+02:00  INFO 8516 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T12:17:13.256+02:00  INFO 8516 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4244 ms
+2023-05-11T12:17:13.870+02:00  INFO 8516 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T12:17:13.966+02:00  INFO 8516 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T12:17:14.469+02:00  INFO 8516 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T12:17:15.247+02:00  INFO 8516 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@29db1071
+2023-05-11T12:17:15.250+02:00  INFO 8516 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T12:17:15.335+02:00  INFO 8516 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T12:17:17.273+02:00  INFO 8516 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T12:17:17.285+02:00  INFO 8516 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:17:19.146+02:00  WARN 8516 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T12:17:19.708+02:00  INFO 8516 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5af61588, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@444dfb1c, org.springframework.security.web.context.SecurityContextHolderFilter@44d08136, org.springframework.security.web.header.HeaderWriterFilter@e1bf4ee, org.springframework.security.web.authentication.logout.LogoutFilter@24cd17cb, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@4d544a67, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@12a1809a, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@333ae97c, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@15e6b354, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4ef55ab1, org.springframework.security.web.session.SessionManagementFilter@d6073ce, org.springframework.security.web.access.ExceptionTranslationFilter@63433375, org.springframework.security.web.access.intercept.AuthorizationFilter@17a28a71]
+2023-05-11T12:17:20.188+02:00  INFO 8516 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T12:17:20.281+02:00  INFO 8516 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T12:17:20.305+02:00  INFO 8516 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 12.267 seconds (process running for 13.24)
+2023-05-11T12:17:23.887+02:00  INFO 8516 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T12:17:23.888+02:00  INFO 8516 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T12:17:23.890+02:00  INFO 8516 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-05-11T12:17:24.231+02:00  WARN 8516 --- [http-nio-8080-exec-1] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2023-05-11T12:19:35.229+02:00  INFO 8516 --- [http-nio-8080-exec-5] c.d.D.Components.services.UserService    : the verification code has been generated
+2023-05-11T12:19:53.582+02:00  WARN 8516 --- [http-nio-8080-exec-7] o.s.s.c.bcrypt.BCryptPasswordEncoder     : Encoded password does not look like BCrypt
+2023-05-11T12:25:02.618+02:00  INFO 8516 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:25:02.624+02:00  INFO 8516 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T12:25:02.640+02:00  INFO 8516 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2023-05-11T12:25:09.230+02:00  INFO 16300 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Starting DhMusicApplication using Java 19.0.2 with PID 16300 (C:\DevelHope\progetto team develhope\DHMusic\target\classes started by Sal in C:\DevelHope\progetto team develhope\DHMusic)
+2023-05-11T12:25:09.234+02:00  INFO 16300 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : No active profile set, falling back to 1 default profile: "default"
+2023-05-11T12:25:09.366+02:00  INFO 16300 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-05-11T12:25:09.366+02:00  INFO 16300 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-05-11T12:25:11.044+02:00  INFO 16300 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-05-11T12:25:11.190+02:00  INFO 16300 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 131 ms. Found 5 JPA repository interfaces.
+2023-05-11T12:25:13.557+02:00  INFO 16300 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-05-11T12:25:13.578+02:00  INFO 16300 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-05-11T12:25:13.579+02:00  INFO 16300 --- [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.5]
+2023-05-11T12:25:13.702+02:00  INFO 16300 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-05-11T12:25:13.703+02:00  INFO 16300 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 4336 ms
+2023-05-11T12:25:14.015+02:00  INFO 16300 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-05-11T12:25:14.097+02:00  INFO 16300 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.1.7.Final
+2023-05-11T12:25:14.571+02:00  INFO 16300 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2023-05-11T12:25:15.115+02:00  INFO 16300 --- [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@7d74eab2
+2023-05-11T12:25:15.118+02:00  INFO 16300 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2023-05-11T12:25:15.196+02:00  INFO 16300 --- [restartedMain] SQL dialect                              : HHH000400: Using dialect: org.hibernate.dialect.MySQLDialect
+2023-05-11T12:25:16.902+02:00  INFO 16300 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-05-11T12:25:16.914+02:00  INFO 16300 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:25:18.317+02:00  WARN 16300 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-05-11T12:25:18.816+02:00  INFO 16300 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@388b5376, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4e319c4, org.springframework.security.web.context.SecurityContextHolderFilter@aa3534c, org.springframework.security.web.header.HeaderWriterFilter@520ab5a3, org.springframework.security.web.authentication.logout.LogoutFilter@857b89f, com.dhmusic.DHMusic.security.Config.PermitJwtTokenFilter@57e6359f, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@7219c9ba, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1e783781, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@764fba14, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5e77ec9a, org.springframework.security.web.session.SessionManagementFilter@26d815db, org.springframework.security.web.access.ExceptionTranslationFilter@1376f492, org.springframework.security.web.access.intercept.AuthorizationFilter@2a014c7f]
+2023-05-11T12:25:19.277+02:00  INFO 16300 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-05-11T12:25:19.339+02:00  INFO 16300 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-05-11T12:25:19.371+02:00  INFO 16300 --- [restartedMain] com.dhmusic.DHMusic.DhMusicApplication   : Started DhMusicApplication in 11.023 seconds (process running for 11.833)
+2023-05-11T12:25:25.164+02:00  INFO 16300 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-05-11T12:25:25.164+02:00  INFO 16300 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-05-11T12:25:25.166+02:00  INFO 16300 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-05-11T12:26:56.720+02:00  INFO 16300 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-05-11T12:26:56.728+02:00  INFO 16300 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2023-05-11T12:26:56.742+02:00  INFO 16300 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

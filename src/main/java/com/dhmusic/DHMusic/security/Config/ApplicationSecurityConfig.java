@@ -1,12 +1,16 @@
 package com.dhmusic.DHMusic.security.Config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,39 +25,49 @@ import java.util.List;
 @EnableMethodSecurity
 public class ApplicationSecurityConfig {
 
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new UserInfoUserDetailsService();
+    private UserInfoUserDetailsService userDetailsService;
+    private JwtAuthEntryPoint jwtAuthEntryPoint;
+
+    @Autowired
+    public ApplicationSecurityConfig(UserInfoUserDetailsService userDetailsService, JwtAuthEntryPoint jwtAuthEntryPoint) {
+        this.userDetailsService = userDetailsService;
+        this.jwtAuthEntryPoint = jwtAuthEntryPoint;
     }
 
-
-    public PermitJwtTokenFilter permitJwtTokenFilter(List<String> excludedPath) {
-        return new PermitJwtTokenFilter(excludedPath);
-    }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        List<String> excludedPaths = Arrays.asList("/users/create-user", "/users/login");
-        return http.csrf().disable()
-                .authorizeHttpRequests()
-                .requestMatchers("/users/create-user").permitAll()
-                .requestMatchers("/users/login").permitAll()
-                .requestMatchers("/**").authenticated()
+        List<String> excludedPaths = List.of("/auth/login","/auth/register");
+        http.csrf().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthEntryPoint)
                 .and()
-                .addFilterBefore(permitJwtTokenFilter(excludedPaths), UsernamePasswordAuthenticationFilter.class)
-                .build();
+                .sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers("/auth/**").permitAll()
+                .anyRequest().authenticated()
+                .and()
+                .httpBasic();
+        http.addFilterBefore(permitJwtTokenFilter(excludedPaths), UsernamePasswordAuthenticationFilter.class);
+        return http.build();
     }
 
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
     @Bean
-    public AuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService(userDetailsService());
-        authenticationProvider.setPasswordEncoder(passwordEncoder());
-        return authenticationProvider;
+    public PermitJwtTokenFilter permitJwtTokenFilter(List<String> excludedPath) {
+        return new PermitJwtTokenFilter(excludedPath);
     }
+
+
 }
