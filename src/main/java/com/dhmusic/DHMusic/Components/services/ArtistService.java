@@ -70,7 +70,9 @@ public class ArtistService {
      * @param artistDTO
      * @throws Exception
      */
-    public void createArtist(ArtistDTO artistDTO) throws Exception{
+    public void createArtist(ArtistDTO artistDTO, Long id) throws Exception{
+
+            artistDTO.setUserId(id);
 
         if( artistDTO.getArtistName() == null && artistDTO.getUserId() == null){
             logger.error("error creation artist");
@@ -82,7 +84,7 @@ public class ArtistService {
             throw new Exception("enter the userId");
 
         }else if (artistDTO.getArtistName() == null) {
-            logger.error("The name of the artist was not entered with id "+artistDTO.getId());
+            //logger.error("The name of the artist was not entered with id "+artistDTO);
             throw new Exception("enter the name of the artist");
 
         } else if (existArtistName(artistDTO) == true) {

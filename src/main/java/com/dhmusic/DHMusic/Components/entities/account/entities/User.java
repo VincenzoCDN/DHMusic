@@ -29,9 +29,6 @@ public class User extends Account {
     @JsonIgnore
     private List<Playlist> playlistOfUser;
 
-    @Column(columnDefinition = "int default '0'",nullable = false)
-    private int isAdmin;
-
     private String verificationCode;
 
     public User(){
@@ -77,14 +74,6 @@ public class User extends Account {
 
     public void setNationality(String nationality) {
         this.nationality = nationality;
-    }
-
-    public int getIsAdmin() {
-        return isAdmin;
-    }
-
-    public void setIsAdmin(int isAdmin) {
-        this.isAdmin = isAdmin;
     }
 
     public List<Artist> getFollowedArtists() {

@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,11 +29,12 @@ public class ArtistController {
      * @param artistDTO
      * @return restituisce lo status più un messaggio
      */
-    @PostMapping("/create-artist")
-    public ResponseEntity createArtist(@RequestBody ArtistDTO artistDTO){
+    @PostMapping("/create-artist/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_ACTIVE') AND #id == authentication.principal.id")
+    public ResponseEntity createArtist(@RequestBody ArtistDTO artistDTO, @PathVariable Long id){
         try {
 
-            artistService.createArtist(artistDTO);
+            artistService.createArtist(artistDTO, id);
             logger.info("a new artist was created");
             return ResponseEntity.ok("create artist ");
         } catch (Exception e) {

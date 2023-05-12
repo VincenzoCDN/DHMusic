@@ -23,14 +23,14 @@ public class UserController {
 
     //elimina un user nel database
     @DeleteMapping("/delete-user/{id}")
-    @PostAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id")
+    @PostAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id AND hasRole('ROLE_REGISTERED)")
     public void deleteUser(@PathVariable Long id, HttpServletResponse response){
         userService.deleteSingleUser(id,response);
     }
 
     //Aggiorna un User nel database
     @PutMapping("/update-user/{id}")
-    @PostAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id")
+    @PostAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id AND hasRole('ROLE_ACTIVE)")
     public ResponseEntity<?> updateUser(@PathVariable Long id, @RequestBody UserDTO updateUser){
         return userService.updateUser(id, updateUser);
     }
@@ -44,13 +44,13 @@ public class UserController {
 
     //Seleziona un User nel database
     @GetMapping("/get-user/{id}")
-    @PostAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id")
+    @PostAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> getUserById(@PathVariable Long id){
         return userService.getUserById(id);
     }
 
     @PutMapping("/verificate_code/{id}")
-    @PostAuthorize("#id == authentication.principal.id")
+    @PostAuthorize("#id == authentication.principal.id AND hasRole('ROLE_REGISTERED)")
     public ResponseEntity<?> verificateUser(@PathVariable Long id, @RequestParam String code){
         try {
             return ResponseEntity.accepted().body(userService.verificareAccount(id, code));
@@ -58,8 +58,6 @@ public class UserController {
     }catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
-
-
     }
 }
 }

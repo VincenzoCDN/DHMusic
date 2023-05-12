@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.security.Config;
 
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
+import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,11 +20,11 @@ public class UserInfoUserDetails implements UserDetails {
     private final List<GrantedAuthority> authorities;
     // "ADMIN, REGISTERED, EDITOR"
 
-    public UserInfoUserDetails(User user) {
-        id = user.getId();
-        username = user.getUsername();
-        password = user.getPassword();
-        authorities = Arrays.asList(user.getRoles().stream().map(role -> new SimpleGrantedAuthority(role.toString())).toArray(SimpleGrantedAuthority[]::new));
+    public UserInfoUserDetails(Long id, String username, String password, List<Roles> roles) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.authorities = Arrays.asList(roles.stream().map(role -> new SimpleGrantedAuthority(role.toString())).toArray(SimpleGrantedAuthority[]::new));
     }
 
     @Override

@@ -29,7 +29,6 @@ public class AuthController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
-
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody UserDTO newUser) {
         return userService.createUser(newUser);
