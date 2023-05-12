@@ -5,6 +5,7 @@ import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.Components.mapper.UserMapper;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
+import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -192,6 +193,7 @@ public class UserService {
 
       if(Objects.equals(existingUser.getVerificationCode(), code)) {
           existingUser.setVerificateEmail(true);
+          existingUser.addRoles(Roles.ROLE_ACTIVE);
           userRepository.save(existingUser);
           logger.info("The account has been authenticated");
           return "The code is correct. \nYour Account is validate now!";

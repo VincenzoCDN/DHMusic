@@ -27,7 +27,7 @@ public class UserMapper {
         user.setNationality(userDTO.getNationality());
         user.setGender(userDTO.getGender());
         user.setDateOfBirth(userDTO.getDateOfBirth());
-        user.setRoles(new ArrayList<>(List.of(Roles.ROLE_REGISTERED)));
+        user.addRoles(Roles.ROLE_REGISTERED);
         return user;
     }
 }

@@ -8,10 +8,7 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.UpdateTimestamp;
 
 
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 @MappedSuperclass
 public abstract class Account {
@@ -37,7 +34,7 @@ public abstract class Account {
     @Enumerated(EnumType.STRING)
     @ElementCollection(targetClass = Roles.class)
     @Fetch(FetchMode.JOIN)
-    private List<Roles> roles;
+    private List<Roles> roles = new ArrayList<>();
     public Account() {
 
     }
@@ -96,6 +93,10 @@ public abstract class Account {
 
     public void setRoles(List<Roles> roles) {
         this.roles = roles;
+    }
+
+    public void addRoles(Roles roles) {
+        this.roles.add(roles);
     }
 
     public Date getUpdateDate() {
