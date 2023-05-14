@@ -98,6 +98,10 @@ public abstract class Account {
         this.roles = roles;
     }
 
+    public void addRoles(Roles roles){
+        this.roles.add(roles);
+    }
+
     public Date getUpdateDate() {
         return updateDate;
     }

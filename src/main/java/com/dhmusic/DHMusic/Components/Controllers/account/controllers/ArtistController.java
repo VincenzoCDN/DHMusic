@@ -31,7 +31,7 @@ public class ArtistController {
      */
     @PostMapping("/create-artist/{id}")
     @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_ACTIVE') AND #id == authentication.principal.id")
-    public ResponseEntity createArtist(@RequestBody ArtistDTO artistDTO, @PathVariable Long id){
+    public ResponseEntity<?> createArtist(@RequestBody ArtistDTO artistDTO, @PathVariable Long id){
         try {
 
             artistService.createArtist(artistDTO, id);
@@ -50,6 +50,7 @@ public class ArtistController {
      * @return restituisce lo status
      */
     @DeleteMapping("/delete-artist/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id AND hasRole('ROLE_ARTIST')")
     public ResponseEntity<String> deleteArtist(@PathVariable Long id){
         try {
             artistService.deleteArtist(id);
@@ -69,7 +70,8 @@ public class ArtistController {
      * @return restituisce lo status più un messaggio
      */
     @PutMapping("/update-artist/{id}")
-    public ResponseEntity updateArtist(@PathVariable Long id,@RequestBody ArtistDTO newArtist){
+    @PreAuthorize("#id == authentication.principal.id AND hasRole('ROLE_ARTIST') OR hasRole('ROLE_ADMIN')")
+    public ResponseEntity<?> updateArtist(@PathVariable Long id,@RequestBody ArtistDTO newArtist){
         try {
             artistService.updateArtist(id,newArtist);
             logger.info("an artist has been modified");
@@ -87,7 +89,8 @@ public class ArtistController {
      * @return un messaggio di status più tutti gli artisti
      */
     @GetMapping("/get-all-artists")
-    public ResponseEntity getAllArtist(){
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_ACTIVE')")
+    public ResponseEntity<?> getAllArtist(){
         try {
             List<Artist> artist = artistService.getAllArtist();
             logger.info("all artists were seen");
@@ -105,7 +108,8 @@ public class ArtistController {
      * @return un messaggio di status più un artisti
      */
     @GetMapping("/get-artist-by-id/{id}")
-    public ResponseEntity getArtistById(@PathVariable Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_ACTIVE')")
+    public ResponseEntity<?> getArtistById(@PathVariable Long id){
         try{
             Optional<Artist> artist = artistService.getArtistById(id);
             logger.info("the artists were seen");
@@ -124,7 +128,8 @@ public class ArtistController {
      * @return un messaggio di status più tutti i followers
      */
     @GetMapping("/get-user-followers")
-    public ResponseEntity getFollowers(@RequestParam Long id){
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id")
+    public ResponseEntity<?> getFollowers(@RequestParam Long id){
         try {
             artistService.getUsersFollowers(id);
             logger.info("all followers of " +id+ " have been seen\"");
