@@ -165,6 +165,7 @@ public class SongController {
         }
     }*/
     //------------------------------------------------------------------------------------------------------
+    // FOR THE FRONT END
     @GetMapping("/play/{id}")
     public String playSong(@PathVariable Long id) {
         try {
