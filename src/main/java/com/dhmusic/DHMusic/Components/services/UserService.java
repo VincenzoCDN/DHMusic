@@ -5,6 +5,7 @@ import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.Components.mapper.UserMapper;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.UserRepository;
+import com.dhmusic.DHMusic.security.Auth.Entities.Roles;
 import jakarta.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -179,7 +180,7 @@ public class UserService {
 
     }
     //---------------------------------------------------------------------------------------
-    //Metodi di controllo Email:
+    //Metodi di controllo Email:                                                             Modificato, controlalre
     public String verificareAccount(long id, String code){
         if(!userRepository.existsById(id)){
             return "Account not found";
@@ -190,15 +191,80 @@ public class UserService {
             return "The mail is already authenticated";
         }
 
-      if(Objects.equals(existingUser.getVerificationCode(), code)) {
-          existingUser.setVerificateEmail(true);
-          userRepository.save(existingUser);
-          logger.info("The account has been authenticated");
-          return "The code is correct. \nYour Account is validate now!";
+        if(Objects.equals(existingUser.getVerificationCode(), code)) {
+            existingUser.setVerificateEmail(true);
+            existingUser.setRoles(Collections.singletonList(Roles.ROLE_ACTIVE));
+            existingUser.setVerificationCode(null);
+            userRepository.save(existingUser);
+            logger.info("The account " + existingUser.getId() +" has been authenticated");
+            return "The code is correct. \nYour Account is validate now!";
 
-      } else {
-          return "The code is not correct.\nPlease check end try again.";
-      }
+        } else {
+            return "The code is not correct.\nPlease check end try again.";
+        }
     }
+    //---------------------------------------------------------------------------------------
+    //Ritorna lo status dell'account TODO
+    public String accoutStatus(Long id) {
+        User existingUser = userRepository.findUserById(id);
+        List<String> role= Collections.singletonList(existingUser.getRoles().toString());
+        String status = null;
+
+        if (role.contains(Roles.ROLE_BANNED)) {
+          status = "Banned";
+        }
+        else if (role.contains(Roles.ROLE_REGISTERED)) {
+            status = "not Active";
+        }
+        else if (role.contains(Roles.ROLE_ACTIVE)) {
+           return  "Active";
+        }
+       else if (role.contains(Roles.ROLE_ARTIST)) {
+            return  "Artist";
+        }
+        else if (role.contains(Roles.ROLE_ADMIN)) {
+            return  "Admin";
+
+        }
+
+
+        return status;
+    }
+
+    //---------------------------------------------------------------------------------------
+    //forgotten Password
+    public String forgottenPassword(String email) {
+        if (!userRepository.existsUserByEmail(email)) {
+            return "Account not found";
+        }
+
+        User existingUser = userRepository.findUserByEmail(email);
+        existingUser.setVerificationCode(generateCode());
+
+        emailService.sendForgottePW(existingUser.getEmail(), existingUser.getVerificationCode());
+        return "The code is send in your emailBox.";
+
+    }
+
+    //---------------------------------------------------------------------------------------
+    //Create admin
+    public String createAdmin(){
+        if (!userRepository.existsUserByEmail("dhmusicstreamingsong@gmail.com")){
+            User user = new User();
+            user.setRoles(Collections.singletonList(Roles.ROLE_ADMIN));
+            user.setUsername("dhmusic");
+            user.setPassword(encoder.encode("admin"));
+            user.setEmail("dhmusicstreamingsong@gmail.com");
+            user.setName("admin");
+            user.setSurname("admin");
+
+            userRepository.save(user);
+            return "account admin create";
+        } else {
+            return "account not create";
+        }
+    }
+
+
 
 }

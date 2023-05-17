@@ -11,9 +11,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Random;
 
 @CrossOrigin(origins = "http://localhost:3000/")
 @RestController
@@ -93,8 +95,8 @@ public class SongController {
      * @return lo stato "Created" con messaggio che la canzone è stata creata con successo.
      * @throws Exception Bad Request con messaggio dell'eventuale errore presente.
      */
-
-    @PostMapping("/create")                                     //funziona
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PostMapping("/create")
     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
             songService.addSong(songDTO);
@@ -200,5 +202,11 @@ public class SongController {
             e.printStackTrace();
             return "error";
         }
+    }
+
+    @GetMapping("getSongsRandomByArtist")
+    public Long[] getSongsRandomByArtist(){
+       return songService.songs3();
+
     }
 }

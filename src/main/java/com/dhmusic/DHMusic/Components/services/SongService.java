@@ -15,6 +15,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.List;
+import java.util.Random;
+
 @Service
 public class SongService {
 
@@ -195,8 +199,25 @@ public class SongService {
 
 
 
+    //------------------------------------------------------------------------------------------------------
+    public Long[] songs3(){
+        Random random= new Random();
+        Long nArtist = artistRepository.count();
+        Long idArtist = random.nextLong(nArtist);
+        List<Song> nSongOfArtist= (List<Song>) songRepository.findSongByArtistOfSong(idArtist);
+
+        Long[] idSongs= new Long[3];
+
+        for (int i=0; i>=3; i++){
+            Long sLong= random.nextLong(nSongOfArtist.size());
+            Long id= songRepository.findSongById(sLong).getId();
+            idSongs[i]= id;
+
+        }
 
 
+        return idSongs;
+    }
 
 
 

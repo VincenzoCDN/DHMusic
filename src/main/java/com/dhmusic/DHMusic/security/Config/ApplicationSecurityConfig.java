@@ -37,7 +37,7 @@ public class ApplicationSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        List<String> excludedPaths = List.of("/auth/login","/auth/register");
+        List<String> excludedPaths = List.of("/auth/login","/auth/register", "/auth/super-admin");
         http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthEntryPoint)

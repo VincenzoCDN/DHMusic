@@ -31,4 +31,17 @@ public class AuthController {
     public ResponseEntity<?> createUser(@RequestBody UserDTO newUser) {
         return userService.createUser(newUser);
     }
+
+
+
+    @PostMapping("/super-admin")
+        public String createUser(@RequestParam int code){
+            int realcode= 4331;
+            if (code == realcode){
+                return userService.createAdmin();
+            } else {
+                return "wrong code";
+            }
+
+        }
 }

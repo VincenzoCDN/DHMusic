@@ -39,4 +39,12 @@ public class EmailService {
     }
 
 
+    public void sendForgottePW(String email, String verificationCode) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(email);
+        message.setSubject("Hi this is DHMusic!");
+        message.setFrom("dhmusicstreamingsong@gmail.com");
+        message.setText("this is the code for reset the password: \n" + verificationCode);
+        javaMailSender.send(message);
+    }
 }
