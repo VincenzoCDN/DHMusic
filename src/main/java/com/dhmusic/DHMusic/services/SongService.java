@@ -122,7 +122,7 @@ public class SongService {
      * con la possibilità di aggiornare anche un singolo dato
      * i paramentri utilizzati.
      */
-       public String updateSong(Long id, SongDTO updateSong) {
+       public Object updateSong(Long id, SongDTO updateSong) {
             Song existSong = songRepository.findSongById(id); // id string o long?
             if (existSong == null) {
                 logger.error("The song %d was not found", id);
