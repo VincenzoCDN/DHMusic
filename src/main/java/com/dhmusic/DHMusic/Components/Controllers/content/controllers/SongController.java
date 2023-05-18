@@ -203,9 +203,9 @@ public class SongController {
             return "error";
         }
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id AND hasRole('ROLE_REGISTERED')")  //todo
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")  //todo
     @GetMapping("/getSongsRandomByArtist")
-    public Long[] getSongsRandomByArtist(){
+    public List<Long> getSongsRandomByArtist(){
        return songService.songs3();
 
     }
