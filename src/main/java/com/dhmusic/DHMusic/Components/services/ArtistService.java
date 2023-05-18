@@ -87,11 +87,11 @@ public class ArtistService {
             //logger.error("The name of the artist was not entered with id "+artistDTO);
             throw new Exception("enter the name of the artist");
 
-        } else if (existArtistName(artistDTO) == true) {
+        } else if (existArtistName(artistDTO)) {
             logger.error("there is already an artist with this name "+ artistDTO.getArtistName());
             throw new Exception("Exist artist Name");
 
-        } else if (existUserId(artistDTO)==false) {
+        } else if (!existUserId(artistDTO)) {
             logger.error("userId does not exist "+ artistDTO.getUserId());
             throw new Exception("User id does not exist");
 
@@ -120,7 +120,7 @@ public class ArtistService {
             throw new Exception("the artist does not exist");
 
         }
-        if(existArtistName(artistEditDTO) == true){
+        if(existArtistName(artistEditDTO)){
             logger.warn("there is already an artist with this name " +artistEditDTO.getArtistName());
             throw new Exception("there is already an artist with this name ");
         }
@@ -214,7 +214,7 @@ public class ArtistService {
      * @throws Exception
      */
     public Optional<Artist> getArtistById(Long id) throws Exception {
-        if(isValidId(id) == false){
+        if(!isValidId(id)){
             logger.warn("no artists were found with this id "+id);
             throw new Exception("the artist does not exist");
         }
