@@ -47,6 +47,7 @@ public class ApplicationSecurityConfig {
                 .and()
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
+                .requestMatchers("/users/verificate_code").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

@@ -180,7 +180,7 @@ public class UserService {
 
     }
     //---------------------------------------------------------------------------------------
-    //Metodi di controllo Email:                                                             Modificato, controlalre
+    //Metodi di controllo Email:
     public String verificareAccount(long id, String code){
         if(!userRepository.existsById(id)){
             return "Account not found";
@@ -191,13 +191,12 @@ public class UserService {
             return "The mail is already authenticated";
         }
 
-        if(Objects.equals(existingUser.getVerificationCode(), code)) {
-            existingUser.setVerificateEmail(true);
-            existingUser.setRoles(Collections.singletonList(Roles.ROLE_ACTIVE));
-            existingUser.setVerificationCode(null);
-            userRepository.save(existingUser);
-            logger.info("The account " + existingUser.getId() +" has been authenticated");
-            return "The code is correct. \nYour Account is validate now!";
+      if(Objects.equals(existingUser.getVerificationCode(), code)) {
+          existingUser.setVerificateEmail(true);
+          existingUser.addRoles(Roles.ROLE_ACTIVE);
+          userRepository.save(existingUser);
+          logger.info("The account has been authenticated");
+          return "The code is correct. \nYour Account is validate now!";
 
         } else {
             return "The code is not correct.\nPlease check end try again.";
