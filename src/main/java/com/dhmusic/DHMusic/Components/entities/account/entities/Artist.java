@@ -29,7 +29,7 @@ public class Artist {
     private int follower;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id",nullable = false)
-    @JsonIgnore
+    @JsonIgnoreProperties(value = "artist")
     private User user;
     @ManyToMany
     @JoinTable(name="followers", joinColumns = @JoinColumn(name="user_id"),inverseJoinColumns = @JoinColumn(name="artist_id"))

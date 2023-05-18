@@ -1,14 +1,11 @@
 package com.dhmusic.DHMusic.Components.Controllers.account.controllers;
-
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
-import com.dhmusic.DHMusic.security.Auth.Services.AuthService;
 import com.dhmusic.DHMusic.Components.services.UserService;
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 

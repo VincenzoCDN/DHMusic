@@ -74,7 +74,7 @@ public class ArtistService {
 
             artistDTO.setUserId(id);
 
-        if( artistDTO.getArtistName() == null && artistDTO.getUserId() == null){
+        if(artistDTO.getArtistName() == null && artistDTO.getUserId() == null){
             logger.error("error creation artist");
             throw new Exception("you didn't put the artist");
 
