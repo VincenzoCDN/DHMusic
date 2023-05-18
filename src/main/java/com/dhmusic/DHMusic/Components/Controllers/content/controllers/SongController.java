@@ -179,7 +179,7 @@ public class SongController {
             return "error";
         }
     }
-    @GetMapping("getTitile/{id}")
+    @GetMapping("/getTitile/{id}")
     public String getTitleByID(@PathVariable Long id) {
         try {
             Song song = songRepository.findSongById(id);
@@ -191,7 +191,7 @@ public class SongController {
         }
 
     }
-    @GetMapping("getArtistName/{id}")
+    @GetMapping("/getArtistName/{id}")
     public String getArtistNameByIDSong(@PathVariable Long id) {
         try {
             Song song = songRepository.findSongById(id);
@@ -203,8 +203,8 @@ public class SongController {
             return "error";
         }
     }
-
-    @GetMapping("getSongsRandomByArtist")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR #id == authentication.principal.id AND hasRole('ROLE_REGISTERED')")  //todo
+    @GetMapping("/getSongsRandomByArtist")
     public Long[] getSongsRandomByArtist(){
        return songService.songs3();
 
