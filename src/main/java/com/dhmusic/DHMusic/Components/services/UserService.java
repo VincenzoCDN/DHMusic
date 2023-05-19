@@ -1,5 +1,12 @@
 package com.dhmusic.DHMusic.Components.services;
 
+
+
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.JWTVerifier;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.dhmusic.DHMusic.email.EmailService;
 import com.dhmusic.DHMusic.Components.entities.account.entities.User;
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
@@ -31,6 +38,7 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder encoder;
+
 
     private String errorMessage = "";
 
@@ -202,33 +210,7 @@ public class UserService {
             return "The code is not correct.\nPlease check end try again.";
         }
     }
-    //---------------------------------------------------------------------------------------
-    //Ritorna lo status dell'account TODO
-    public String accoutStatus(Long id) {
-        User existingUser = userRepository.findUserById(id);
-        List<String> role= Collections.singletonList(existingUser.getRoles().toString());
-        String status = null;
 
-        if (role.contains(Roles.ROLE_BANNED)) {
-          status = "Banned";
-        }
-        else if (role.contains(Roles.ROLE_REGISTERED)) {
-            status = "not Active";
-        }
-        else if (role.contains(Roles.ROLE_ACTIVE)) {
-           return  "Active";
-        }
-       else if (role.contains(Roles.ROLE_ARTIST)) {
-            return  "Artist";
-        }
-        else if (role.contains(Roles.ROLE_ADMIN)) {
-            return  "Admin";
-
-        }
-
-
-        return status;
-    }
 
     //---------------------------------------------------------------------------------------
     //forgotten Password
@@ -263,6 +245,69 @@ public class UserService {
             return "account not create";
         }
     }
+    //---------------------------------------------------------------------------------------
+    //                                                           Front-End Get Element for Account
+    public String accountUsername(Long id){
+     User user= userRepository.findUserById(id);
+     return user.getUsername();
+    }
+
+    //---------------------------------------------------------------------------------------
+    //Ritorna lo status dell'account
+    public String accoutStatus(Long id) {
+
+        List<Roles> role= userRepository.findRolesByUserId(id);
+
+        if (role.contains(Roles.ROLE_BANNED)){
+            return "Banned";
+
+        }if (role.contains(Roles.ROLE_ADMIN)){
+            return "Admin";
+
+        } if (role.contains(Roles.ROLE_ARTIST)){
+            return "Artist";
+
+        } if (role.contains(Roles.ROLE_ACTIVE)){
+            return "Active";
+
+        } if (role.contains(Roles.ROLE_REGISTERED)) {
+            return "not Active";
+        } else {
+            return "error";
+        }
+
+    }
+
+
+    public String decodeJWTForUsername(String jwt) {
+        try {
+            Algorithm algorithm = Algorithm.HMAC512("cavallo");
+            JWTVerifier verifier = JWT.require(algorithm).build();
+            DecodedJWT decodedJWT = verifier.verify(jwt);
+
+            String userId = decodedJWT.getSubject();
+            String username = decodedJWT.getClaim("username").asString();
+            // ... altre informazioni necessarie
+
+            return username;
+
+        } catch (Exception e) {
+            // Gestisci l'eccezione
+            e.printStackTrace();
+        }
+        return "error";
+
+    }
+
+    public Long foundUserByAccountName(String userName) {
+
+        Optional<User> user = userRepository.findUserByUsername(userName);
+        return user.get().getId();
+    }
+
+
+
+
 
 
 
