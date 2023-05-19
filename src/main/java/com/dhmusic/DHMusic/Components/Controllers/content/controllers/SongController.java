@@ -36,6 +36,7 @@ public class SongController {
 
     //---------------------------------------------------------------------------------------
     //mostra lista di canzoni
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping
     public List<Song> getSongs() {           //Funziona
         return songRepository.findAll();
@@ -44,6 +45,7 @@ public class SongController {
 
     //---------------------------------------------------------------------------------------
     //mostrare la singola canzone
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/{id}")
     public Song getSongId(@PathVariable Long id) {             //Funziona
         Song existSong = songRepository.findSongById(id);
@@ -58,6 +60,7 @@ public class SongController {
      * @param title come @PathVariable
      * @return canzone trovata all'interno della repository con lo stesso titolo
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/get/title/{title}")
     public Song getSongTitle(@PathVariable String title) {   //Funziona
         return songRepository.findSongByTitle(title);
@@ -71,6 +74,7 @@ public class SongController {
      * @return salvataggio dell'eliminazione avvenuta.
      * @throws Exception Ok se la canzone è stata eliminata con successo.
      */
+
     @DeleteMapping("/delete/{id}")                                    //Funziona
     public ResponseEntity<Void> deleteSong(@PathVariable Long id) throws Exception {
         songService.deleteSong(id);
@@ -95,7 +99,7 @@ public class SongController {
      * @return lo stato "Created" con messaggio che la canzone è stata creata con successo.
      * @throws Exception Bad Request con messaggio dell'eventuale errore presente.
      */
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @PostMapping("/create")
     public ResponseEntity<?> createSong(@RequestBody SongDTO songDTO) throws Exception {
         try {
@@ -134,6 +138,7 @@ public class SongController {
      * @param id come @PathVariable
      * @return i dati della canzone richiesta o un "Not found" nel caso in cui la canzone non viene trovata
      */
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/get/{id}")
     public ResponseEntity<Song> getSongById(@PathVariable Long id){
         try {
@@ -168,6 +173,7 @@ public class SongController {
     }*/
     //------------------------------------------------------------------------------------------------------
     // FOR THE FRONT END
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/play/{id}")
     public String playSong(@PathVariable Long id) {
         try {
@@ -179,6 +185,7 @@ public class SongController {
             return "error";
         }
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/getTitile/{id}")
     public String getTitleByID(@PathVariable Long id) {
         try {
@@ -191,6 +198,7 @@ public class SongController {
         }
 
     }
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/getArtistName/{id}")
     public String getArtistNameByIDSong(@PathVariable Long id) {
         try {
@@ -203,10 +211,19 @@ public class SongController {
             return "error";
         }
     }
-    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")  //todo
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/getSongsRandomByArtist")
-    public List<Long> getSongsRandomByArtist(){
-       return songService.songs3();
+    public String getSongsRandomByArtist(){
+       return songService.random3SongOfRandomArtist();
 
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
+    @GetMapping("/getSongsByGenre")
+    public String getSongsRandomByGenre(){
+        return songService.getSongsRandomByGenre();
+
+    }
+
+
 }

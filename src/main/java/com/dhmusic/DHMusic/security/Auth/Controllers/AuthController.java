@@ -1,6 +1,7 @@
 package com.dhmusic.DHMusic.security.Auth.Controllers;
 
 import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
+import com.dhmusic.DHMusic.Components.services.SongService;
 import com.dhmusic.DHMusic.Components.services.UserService;
 import com.dhmusic.DHMusic.security.Auth.Entities.LoginDTO;
 import com.dhmusic.DHMusic.security.Auth.Services.AuthService;
@@ -18,6 +19,9 @@ public class AuthController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    SongService songService;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDTO loginDTO) {
@@ -44,4 +48,8 @@ public class AuthController {
             }
 
         }
+
+
+
+
 }

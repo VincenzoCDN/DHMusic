@@ -8,6 +8,7 @@ import com.dhmusic.DHMusic.Components.mapper.SongMapper;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.ArtistRepository;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.AlbumRepository;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.SongRepository;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +16,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
+
 
 @Service
 public class SongService {
@@ -201,23 +204,87 @@ public class SongService {
 
 
     //------------------------------------------------------------------------------------------------------
-    public List<Long> songs3(){
+    public String random3SongOfRandomArtist(){
+        int totArtist= (int) artistRepository.count();
+        Artist[] arrayOfArtist= artistRepository.findAll().toArray(new Artist[0]);
+
         Random random= new Random();
-        Long nArtist = artistRepository.count();
-        Long idArtist = random.nextLong(nArtist);
-        List<Song> nSongOfArtist= (List<Song>) songRepository.findSongByArtistOfSong(idArtist);
+        int d = random.nextInt(totArtist);
 
-        List<Long> idSongs= new ArrayList<>();
 
-        for (int i=0; i>=3; i++){
-            Long sLong= random.nextLong(nSongOfArtist.size());
-            Long id= songRepository.findSongById(sLong).getId();
-            idSongs.add(id);
+        Long idArtistRandom= arrayOfArtist[d].getId();
 
+
+        List<Song> listOfAristSong= songRepository.findSongsByArtistOfSong_id(idArtistRandom);
+        long quantityOfSongArtist= listOfAristSong.size();
+        Song[] arrayOfAristSong= listOfAristSong.toArray(new Song[0]);
+
+
+        Set<Integer> randomIds = new HashSet<>();
+        while (randomIds.size() < 3 ){
+            int randomId= random.nextInt((int) (quantityOfSongArtist - 0));
+            randomIds.add(randomId);
         }
+        Integer[] idRandom= randomIds.toArray(new Integer[3]);
+
+       /* int d1= random.nextInt(quantityOfSongArtist);
+        int d2= random.nextInt(quantityOfSongArtist);
+        int d3= random.nextInt(quantityOfSongArtist);
+
+        Song song1= arrayOfAristSong[d1];
+        Song song2= arrayOfAristSong[d2];
+        Song song3= arrayOfAristSong[d3];*/
+
+        Song song1= arrayOfAristSong[idRandom[0]];
+        Song song2= arrayOfAristSong[idRandom[1]];
+        Song song3= arrayOfAristSong[idRandom[2]];
+
+       /* Long[] finalArray= new Long[3];
+        finalArray[0]= song1.getId();
+        finalArray[1]= song2.getId();
+        finalArray[2]= song3.getId();
+
+        return finalArray;*/
+
+        String stringWithIds= song1.getId() +" "+  song2.getId() +" "+ song3.getId();
+
+        return  stringWithIds;
+
+    }
 
 
-        return idSongs;
+    public String getSongsRandomByGenre(){
+        List<String> listGenre= songRepository.findDistinctGenres();
+        int quantyOfgenre= listGenre.size();
+        String[] arrayGenre= listGenre.toArray(new String[0]);
+
+        Random random= new Random();
+        int randomIdArray= random.nextInt((int) (quantyOfgenre - 0));
+
+
+        String pickGenreRandom= arrayGenre[randomIdArray];
+
+        List<Song> listOfAllTheSongWithGenre= songRepository.findSongByGenre(pickGenreRandom);
+        int quantyOfSongWithGenre= listOfAllTheSongWithGenre.size();
+
+        Song[] arraySongs = listOfAllTheSongWithGenre.toArray(new Song[0]);
+
+        Set<Integer> randomIds = new HashSet<>();
+        while (randomIds.size() < 3 ){
+            int randomId= random.nextInt((int) (quantyOfSongWithGenre - 0));
+            randomIds.add(randomId);
+        }
+        Integer[] idRandom= randomIds.toArray(new Integer[3]);
+
+
+        Song song1= arraySongs[idRandom[0]];
+        Song song2= arraySongs[idRandom[1]];
+        Song song3= arraySongs[idRandom[2]];
+
+        String finalString = pickGenreRandom +" "+ song1.getId() +" "+ song2.getId()+ " "+ song3.getId();
+
+        return finalString;
+
     }
 
 
