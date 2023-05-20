@@ -49,6 +49,19 @@ public class AuthController {
 
         }
 
+    @GetMapping("/get-id")
+    public String getUserId(@RequestHeader("Authorization") String authorizationHeader) {
+
+        String jwt = authorizationHeader.substring(7);
+        String username= userService.decodeJWTForUsername(jwt);
+        Long user= userService.foundUserByAccountName(username);
+
+
+
+        return user.toString();
+    }
+
+
 
 
 
