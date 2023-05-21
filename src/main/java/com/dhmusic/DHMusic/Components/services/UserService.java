@@ -202,6 +202,7 @@ public class UserService {
       if(Objects.equals(existingUser.getVerificationCode(), code)) {
           existingUser.setVerificateEmail(true);
           existingUser.addRoles(Roles.ROLE_ACTIVE);
+          existingUser.setVerificationCode(null);
           userRepository.save(existingUser);
           logger.info("The account has been authenticated");
           return "The code is correct. \nYour Account is validate now!";
@@ -223,6 +224,7 @@ public class UserService {
         existingUser.setVerificationCode(generateCode());
 
         emailService.sendForgottePW(existingUser.getEmail(), existingUser.getVerificationCode());
+        userRepository.save(existingUser);
         return "The code is send in your emailBox.";
 
     }
@@ -315,7 +317,25 @@ public class UserService {
     }
 
 
-
+    public ResponseEntity<?> createUser2(UserDTO newUser) {
+        if (!isValidUser(newUser) || !isValidEmail(newUser.getEmail()) || !isValidPassword(newUser.getPassword())) {
+            logger.error("createUser: " + errorMessage);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorMessage);
+        }
+        User user = userMapper.toUser(newUser);
+        try {
+            user.setVerificationCode(generateCode());
+            emailService.sendCreateCode(user.getEmail(), user.getVerificationCode());
+            userRepository.save(user);
+            return ResponseEntity.status(HttpStatus.CREATED).body("User is create");
+        }catch(DataIntegrityViolationException ex){
+            String response = "";
+            if(userRepository.existsUserByUsernameIgnoreCase(user.getUsername())) response ="Username already token";
+            if(userRepository.existsUserByEmail(user.getEmail())) response ="Account already exist";
+            logger.error("createUser:"+response);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+        }
+    }
 
 
 

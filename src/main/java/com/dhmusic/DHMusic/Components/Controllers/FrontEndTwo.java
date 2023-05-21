@@ -1,11 +1,14 @@
 package com.dhmusic.DHMusic.Components.Controllers;
 
 import com.dhmusic.DHMusic.Components.entities.account.entities.Artist;
+import com.dhmusic.DHMusic.Components.entities.account.entities.UserDTO;
 import com.dhmusic.DHMusic.Components.entities.content.entities.Song;
 import com.dhmusic.DHMusic.Components.repositories.account_repositories.ArtistRepository;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.SongRepository;
 import com.dhmusic.DHMusic.Components.services.SongService;
 import com.dhmusic.DHMusic.Components.services.UserService;
+import com.dhmusic.DHMusic.security.Auth.Entities.LoginDTO;
+import com.dhmusic.DHMusic.security.Auth.Services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,7 @@ public class FrontEndTwo {
     UserService userService;
     @Autowired
     SongService songService;
+
 
 
     @PreAuthorize("hasRole('ROLE_REGISTERED')")
@@ -71,5 +75,9 @@ public class FrontEndTwo {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).body(e.getMessage());
         }
+    }
+    @PostMapping("/register")
+    public ResponseEntity<?> createUser(@RequestBody UserDTO newUser) {
+        return userService.createUser2(newUser);
     }
 }

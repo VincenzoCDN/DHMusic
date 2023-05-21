@@ -31,6 +31,7 @@ public class EmailService {
 
 
         SimpleMailMessage message = new SimpleMailMessage();
+
         message.setTo(email);
         message.setSubject("Welcome in to DHMusic!");
         message.setFrom("dhmusicstreamingsong@gmail.com");
