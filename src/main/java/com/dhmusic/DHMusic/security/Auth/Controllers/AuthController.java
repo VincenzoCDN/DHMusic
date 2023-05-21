@@ -54,7 +54,7 @@ public class AuthController {
 
         String jwt = authorizationHeader.substring(7);
         String username= userService.decodeJWTForUsername(jwt);
-        Long user= userService.foundUserByAccountName(username);
+        Long user= userService.foundUserIDByAccountName(username);
 
 
 

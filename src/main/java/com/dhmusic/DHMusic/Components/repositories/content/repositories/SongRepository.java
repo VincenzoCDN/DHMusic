@@ -32,6 +32,8 @@ public interface SongRepository extends JpaRepository<Song,Long> {
 
     List<Song> findByGenre(String genre);
 
+    List<Song> findTop3ByOrderByCreationDatePlatformDesc();
+
 
 
 

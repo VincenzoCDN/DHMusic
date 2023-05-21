@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Random;
 
-@CrossOrigin(origins = "http://localhost:3000/")
+@CrossOrigin(origins = "http://localhost:3000/**")
 @RestController
 @RequestMapping("/songs")
 public class SongController {
@@ -217,7 +217,7 @@ public class SongController {
        return songService.random3SongOfRandomArtist();
 
     }
-
+    @CrossOrigin(origins = "http://localhost:3000/**")
     @PreAuthorize("hasRole('ROLE_ADMIN') OR hasRole('ROLE_REGISTERED')")
     @GetMapping("/getSongsByGenre")
     public String getSongsRandomByGenre(){

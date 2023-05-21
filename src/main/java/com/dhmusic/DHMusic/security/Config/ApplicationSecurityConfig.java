@@ -37,7 +37,8 @@ public class ApplicationSecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        List<String> excludedPaths = List.of("/auth/login","/auth/register", "/auth/super-admin", "/users/verificate_code");
+        List<String> excludedPaths = List.of("/auth/login","/auth/register", "/auth/super-admin", "/users/verificate_code",
+                "/front/**", "/front2/**");
         http.csrf().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(jwtAuthEntryPoint)
@@ -48,6 +49,9 @@ public class ApplicationSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**").permitAll()
                 .requestMatchers("/users/verificate_code").permitAll()
+                .requestMatchers("/users/**").permitAll()
+                .requestMatchers("/front/**").permitAll()
+                .requestMatchers("/front2/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();

@@ -9,6 +9,7 @@ import com.dhmusic.DHMusic.Components.repositories.account_repositories.ArtistRe
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.AlbumRepository;
 import com.dhmusic.DHMusic.Components.repositories.content.repositories.SongRepository;
 
+import org.hibernate.mapping.Array;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 
 @Service
@@ -211,9 +209,8 @@ public class SongService {
         Random random= new Random();
         int d = random.nextInt(totArtist);
 
-
+        Artist pickArtist= arrayOfArtist[d];
         Long idArtistRandom= arrayOfArtist[d].getId();
-
 
         List<Song> listOfAristSong= songRepository.findSongsByArtistOfSong_id(idArtistRandom);
         long quantityOfSongArtist= listOfAristSong.size();
@@ -227,29 +224,14 @@ public class SongService {
         }
         Integer[] idRandom= randomIds.toArray(new Integer[3]);
 
-       /* int d1= random.nextInt(quantityOfSongArtist);
-        int d2= random.nextInt(quantityOfSongArtist);
-        int d3= random.nextInt(quantityOfSongArtist);
-
-        Song song1= arrayOfAristSong[d1];
-        Song song2= arrayOfAristSong[d2];
-        Song song3= arrayOfAristSong[d3];*/
-
         Song song1= arrayOfAristSong[idRandom[0]];
         Song song2= arrayOfAristSong[idRandom[1]];
         Song song3= arrayOfAristSong[idRandom[2]];
 
-       /* Long[] finalArray= new Long[3];
-        finalArray[0]= song1.getId();
-        finalArray[1]= song2.getId();
-        finalArray[2]= song3.getId();
+        String str;
+        str= pickArtist.getArtistName()+ "," + song1.getId().toString()+ "," +song2.getId().toString()+ "," +song3.getId().toString();
 
-        return finalArray;*/
-
-        String stringWithIds= song1.getId() +" "+  song2.getId() +" "+ song3.getId();
-
-        return  stringWithIds;
-
+        return str;
     }
 
 
@@ -260,7 +242,6 @@ public class SongService {
 
         Random random= new Random();
         int randomIdArray= random.nextInt((int) (quantyOfgenre - 0));
-
 
         String pickGenreRandom= arrayGenre[randomIdArray];
 
@@ -276,16 +257,37 @@ public class SongService {
         }
         Integer[] idRandom= randomIds.toArray(new Integer[3]);
 
-
         Song song1= arraySongs[idRandom[0]];
         Song song2= arraySongs[idRandom[1]];
         Song song3= arraySongs[idRandom[2]];
 
-        String finalString = pickGenreRandom +" "+ song1.getId() +" "+ song2.getId()+ " "+ song3.getId();
+        String str;
+        str=   pickGenreRandom+ "," + song1.getId().toString() + "," + song2.getId().toString() + "," + song3.getId().toString();
 
-        return finalString;
-
+        return str;
     }
+
+
+
+    public String getLast3SongsCreate(){
+        List<Song> listOfSongs= songRepository.findTop3ByOrderByCreationDatePlatformDesc();
+
+
+        Song[] arrayOfSong= listOfSongs.toArray(new Song[0]);
+        String str;
+
+        str= arrayOfSong[0].getId().toString() + "," + arrayOfSong[1].getId().toString() + "," + arrayOfSong[2].getId().toString();
+
+        return str;
+    }
+
+    public String playSong(Long id){
+        Song song= songRepository.findSongById(id);
+        String link= song.getLink();
+        return link;
+    }
+
+
 
 
 

@@ -61,7 +61,8 @@ public class UserController {
     @PreAuthorize("hasRole('ROLE_REGISTERED')")
     @GetMapping("/get-user-role/{id}")
     public String statusAccount(@PathVariable Long id){
-        return userService.accoutStatus(id);
+        return userService.userStatus(id);
+
     }
 
 
@@ -77,11 +78,28 @@ public class UserController {
 
         String jwt = authorizationHeader.substring(7);
         String username= userService.decodeJWTForUsername(jwt);
-        Long user= userService.foundUserByAccountName(username);
+        Long user= userService.foundUserIDByAccountName(username);
 
 
 
         return user.toString();
     }
+
+    @PreAuthorize("hasRole('ROLE_REGISTERED')")
+    @GetMapping("/autoban")
+    public String autoBan(@RequestHeader("Authorization") String authorizationHeader) {
+
+        String jwt = authorizationHeader.substring(7);
+        String username= userService.decodeJWTForUsername(jwt);
+        Long userid= userService.foundUserIDByAccountName(username);
+
+
+
+
+        return  userService.banUser(userid);
+    }
+
+
+
 
 }

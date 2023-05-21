@@ -254,7 +254,7 @@ public class UserService {
 
     //---------------------------------------------------------------------------------------
     //Ritorna lo status dell'account
-    public String accoutStatus(Long id) {
+    public String userStatus(Long id) {
 
         List<Roles> role= userRepository.findRolesByUserId(id);
 
@@ -299,10 +299,19 @@ public class UserService {
 
     }
 
-    public Long foundUserByAccountName(String userName) {
+    public Long foundUserIDByAccountName(String userName) {
 
         Optional<User> user = userRepository.findUserByUsername(userName);
         return user.get().getId();
+
+    }
+
+    public String banUser(Long id){
+      User user=  userRepository.findUserById(id);
+      user.addRoles(Roles.ROLE_BANNED);
+      userRepository.save(user);
+
+      return "now you are banned";
     }
 
 
